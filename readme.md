@@ -33,7 +33,7 @@ RPC Tool is a simple application that allows you to easily communicate with the 
 
 ### How to install 
   
-[<img src="src/img/gumroad.png" class="img-fluid img-thumbnail onerror="removeSRC(this)"">](https://dekitarpg.com/rpc)
+[<img src="src/img/gumroad.png" class="img-fluid img-thumbnail onerror="removeSRC(this)">](https://dekitarpg.com/rpc)
 
 Please note: payment for download is completely optional. 
 
