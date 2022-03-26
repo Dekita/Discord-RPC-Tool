@@ -32,6 +32,7 @@ RPC Tool is a simple application that allows you to easily communicate with the 
 <div class="d-none">
 
 ### How to install 
+  
 [<img src="src/img/gumroad.png" class="img-fluid img-thumbnail onerror="removeSRC(this)"">](https://dekita.gumroad.com/l/rpc-tool)
 
 Please note: payment for download is completely optional. 
