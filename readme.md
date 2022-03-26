@@ -2,10 +2,8 @@
 
 ### Table of Contents
 <div class="d-none">
-
 - [How to install](#how-to-install)  
 </div>
-
 - [What is Discord RPC Tool](#what-is-discord-rpc-tool)  
 - [RPC Tool Features](#rpc-tool-features)  
 - [Launching your first activity](#launching-your-first-activity)  
@@ -25,7 +23,7 @@ RPC Tool is a simple application that allows you to easily communicate with the 
 - Painless installation
 - Multiple activity profiles
 - Modern UI inspired by Discord
-- Optional minimze to system tray
+- Optional minimize to system tray
 - Optional auto start activity on launch
 - Optional auto minimize app on launch
 - Optional auto launch app on system boot
@@ -34,20 +32,28 @@ RPC Tool is a simple application that allows you to easily communicate with the 
 <div class="d-none">
 
 ### How to install 
-- Run the installer
+[<img src="img/gumroad.png" class="img-fluid img-thumbnail">](https://dekita.gumroad.com/l/rpc-tool)
+Please note: payment for download is completely optional. 
+Once downloaded extract and then run the installer.
+Discord RPC Tool is now installed on your pc.
+
 <hr class="mt-1">
 
 ### How to install (development)
-| :exclamation: Node.js is required for development   |
-|-----------------------------------------------------|
-- clone project
-- open command window in cloned project folder
-- run npm install to download node modules
-- run npm start to launch the application
+| :exclamation: Node.js is required for development |
+|---|
+
+```
+git clone https://github.com/Dekita/Discord-RPC-Tool.git
+```
+```
+cd Discord-RPC-Tool
+```
 ```
 npm i; npm start
 ```
 <hr class="mt-1">
+
 </div>
 
 ### Launching your first activity
