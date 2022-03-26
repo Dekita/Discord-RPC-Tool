@@ -1,0 +1,43 @@
+{
+    "name": "dekita-rpc-tool",
+    "productName": "Discord RPC Tool",
+    "version": "0.0.9",
+    "description": "Discord RPC Tool written by DekitaRPG",
+    "main": "src/main.js",
+    "scripts": {
+        "start": "electron src/main.js",
+        "build": "electron-builder"
+    },
+    "keywords": [],
+    "author": {
+        "name": "Dekita (DekitaRPG)",
+        "email": "dekitarpg@gmail.com"
+    },
+    "license": "MIT",   
+    "dependencies": {
+        "bent": "^7.3.12",
+        "discord-rpc": "^4.0.1",
+        "json-stringify-pretty-compact": "^3.0.0"
+    },
+    "devDependencies": {
+        "electron-builder": "^22.14.13",
+        "electron": "17.2.0"
+    },
+    "build": {
+        "appId": "com.dekitarpg.rpc",
+        "productName": "Discord RPC Tool",
+        "directories": {
+            "output": "build"
+        },
+        "win": {
+            "target": [{"target": "nsis","arch": "x64"}],
+            "icon": "src/img/icon.ico"
+        },
+        "nsis": {
+            "allowToChangeInstallationDirectory": true,
+            "perMachine": true,
+            "oneClick": false
+        }
+    }
+
+}

@@ -1,0 +1,387 @@
+/* CSS Styles by dekitarpg@gmail.com */
+.theme-bg {
+    background-color: darkgray;
+    color: #eeeeee;
+}
+.theme-bg.dark1 {
+    background-color: #3C403D;
+    color: #DADED4;
+}
+.theme-bg.light1 {
+    background-color: #DADED4;
+    color: #3C403D;
+}
+.theme-border.dark1 {
+    border-color: #DADED4 !important;
+}
+.theme-border.light1 {
+    border-color: #3C403D !important;
+}
+.theme-bg.dark2 {
+    background-color: #5C5F58;
+    color: #DCE1E3;
+}
+.theme-bg.light2 {
+    background-color: #DCE1E3;
+    color: #5C5F58;
+}
+.theme-border.dark2 {
+    border-color: #DCE1E3 !important;
+}
+.theme-border.light2 {
+    border-color: #5C5F58 !important;
+}
+.theme-bg.dark3 {
+    background-color: #4F4846;
+    color: #FDF8F5;
+}
+.theme-bg.light3 {
+    background-color: #FDF8F5;
+    color: #4F4846;
+}
+.theme-border.dark3 {
+    border-color: #FDF8F5 !important;
+}
+.theme-border.light3 {
+    border-color: #4F4846 !important;
+}
+.darker-bg1 {background-color: rgba(0,0,0,0.1)}
+.darker-bg2 {background-color: rgba(0,0,0,0.2)}
+.darker-bg3 {background-color: rgba(0,0,0,0.3)}
+.lighter-bg1 {background-color: rgba(255,255,255,0.1)}
+.lighter-bg2 {background-color: rgba(255,255,255,0.2)}
+.lighter-bg3 {background-color: rgba(255,255,255,0.3)}
+.trans-bg {background-color: transparent}
+.btn:focus, .form-control:focus {
+    outline: none;
+    box-shadow: none;
+}
+.form-control::placeholder {
+    color: inherit;
+    opacity: 0.5;
+}
+/*############################
+* ■ Dekcheck checkbox core css
+* ##########################*/
+.dekcheckbox ul {
+    float: left !important;
+    list-style-type: none;
+    text-align: left;
+    padding: 0px;
+}
+.dekcheckbox ul li i,
+.dekcheckbox ul li span {
+    cursor: pointer;
+}
+.dekcheckbox ul li i {
+    width: 18px;
+}
+/**
+* [dark]
+*/
+.text-dark{color:inherit}
+.bg-dark{background-color: rgba(0,0,0,0.1) !important}
+.border-dark{border-color: rgba(0,0,0,0.1) !important}
+.border-dark2{border-color: rgba(0,0,0,0.2) !important}
+.hover-dark {color: inherit; opacity: 0.6; cursor: pointer}
+.hover-dark:hover {color: inherit; opacity: 1.0}
+.dekcheckbox.check-dark ul li i {color: inherit; opacity: 0.6}
+.dekcheckbox.check-dark ul li:hover i { color: inherit; opacity: 1.0 }
+.alert-dark { 
+    background-color: rgba(0,0,0,0.1);
+    border-color: rgba(0,0,0,0.2);
+    color: inherit;
+}
+.btn-dark, .form-dark {
+    background-color: rgba(0,0,0,0.1);
+    border-color: rgba(0,0,0,0.2);
+    color: inherit;
+}
+.btn-dark:hover,.btn-dark:focus,.btn-dark:active,.btn-dark.active,
+.form-dark:hover,.form-dark:focus,.form-dark:active,.form-dark.active {
+    background-color: rgba(0,0,0,0.2);
+    border-color: rgba(0,0,0,0.3);
+    color: inherit;
+}
+.btn-dark.disabled:hover,.btn-dark.disabled:focus,
+.btn-dark.disabled:active,.btn-dark.disabled.active,
+.btn-dark[disabled]:hover,.btn-dark[disabled]:focus,
+.btn-dark[disabled]:active,.btn-dark[disabled].active,
+fieldset[disabled] .btn-dark:hover,fieldset[disabled] .btn-dark:focus,
+fieldset[disabled] .btn-dark:active,fieldset[disabled] .btn-dark.active,
+.form-dark.disabled:hover,.form-dark.disabled:focus,
+.form-dark.disabled:active,.form-dark.disabled.active,
+.form-dark[disabled]:hover,.form-dark[disabled]:focus,
+.form-dark[disabled]:active,.form-dark[disabled].active,
+fieldset[disabled] .form-dark:hover,fieldset[disabled] .form-dark:focus,
+fieldset[disabled] .form-dark:active,fieldset[disabled] .form-dark.active {
+    border-color: rgba(0,0,0,0.8);
+}
+/**
+* [info]
+*/
+.pastel .text-info {color: #0093a2 !important}
+.pastel .bg-info{background-color: #0093a2 !important}
+.pastel .border-info{border-color: #0093a2 !important}
+.pastel .border-info2{border-color: #005861 !important}
+.pastel .hover-info {color: inherit; cursor: pointer}
+.pastel .hover-info:hover {color: #0093a2}
+.pastel .dekcheckbox.check-primary ul li:hover i {color: #66bec7}
+.pastel .alert-info { 
+    background-color: #66bec7;
+    border-color: #005861;
+    color: #005861;
+}
+.pastel .btn-info, .pastel .form-info {
+    background-color: #0093a2;
+    border-color: #005861;
+    color: inherit;
+}
+.pastel .btn-info:hover,.pastel .btn-info:focus,
+.pastel .btn-info:active,.pastel .btn-info.active,
+.pastel .form-info:hover,.pastel .form-info:focus,
+.pastel .form-info:active,.pastel .form-info.active {
+    background-color: #008492;
+    border-color: #005861;
+    color: inherit;
+}
+.pastel .btn-info.disabled:hover,.pastel .btn-info.disabled:focus,
+.pastel .btn-info.disabled:active,.pastel .btn-info.disabled.active,
+.pastel .btn-info[disabled]:hover,.pastel .btn-info[disabled]:focus,
+.pastel .btn-info[disabled]:active,.pastel .btn-info[disabled].active,
+fieldset[disabled] .pastel .btn-info:hover,fieldset[disabled] .pastel .btn-info:focus,
+fieldset[disabled] .pastel .btn-info:active,fieldset[disabled] .pastel .btn-info.active,
+.pastel .form-info.disabled:hover,.pastel .form-info.disabled:focus,
+.pastel .form-info.disabled:active,.pastel .form-info.disabled.active,
+.pastel .form-info[disabled]:hover,.pastel .form-info[disabled]:focus,
+.pastel .form-info[disabled]:active,.pastel .form-info[disabled].active,
+fieldset[disabled] .pastel .form-info:hover,fieldset[disabled] .pastel .form-info:focus,
+fieldset[disabled] .pastel .form-info:active,fieldset[disabled] .pastel .form-info.active {
+    border-color: #005861;
+}
+/**
+* [primary]
+*/
+.pastel .text-primary {color: #328cc1 !important}
+.pastel .bg-primary{background-color: #328cc1 !important}
+.pastel .border-primary{border-color: #328cc1 !important}
+.pastel .border-primary2{border-color: #1e5474 !important}
+.pastel .hover-primary {color: inherit; cursor: pointer}
+.pastel .hover-primary:hover {color: #328cc1}
+.pastel .dekcheckbox.check-primary ul li:hover i {color: #84bada}
+.pastel .alert-primary{ 
+    background-color: #84bada;
+    border-color: #1e5474;
+    color: #1e5474;
+}
+
+.pastel .btn-primary, .pastel .form-primary {
+    background-color: #328cc1;
+    border-color: #1e5474;
+    color: inherit;
+}
+.pastel .btn-primary:hover,.pastel .btn-primary:focus,
+.pastel .btn-primary:active,.pastel .btn-primary.active,
+.pastel .form-primary:hover,.pastel .form-primary:focus,
+.pastel .form-primary:active,.pastel .form-primary.active {
+    background-color: #2d7eae;
+    border-color: #1e5474;
+    color: inherit;
+}
+.pastel .btn-primary.disabled:hover,.pastel .btn-primary.disabled:focus,
+.pastel .btn-primary.disabled:active,.pastel .btn-primary.disabled.active,
+.pastel .btn-primary[disabled]:hover,.pastel .btn-primary[disabled]:focus,
+.pastel .btn-primary[disabled]:active,.pastel .btn-primary[disabled].active,
+fieldset[disabled] .pastel .btn-primary:hover,fieldset[disabled] .pastel .btn-primary:focus,
+fieldset[disabled] .pastel .btn-primary:active,fieldset[disabled] .pastel .btn-primary.active,
+.pastel .form-primary.disabled:hover,.pastel .form-primary.disabled:focus,
+.pastel .form-primary.disabled:active,.pastel .form-primary.disabled.active,
+.pastel .form-primary[disabled]:hover,.pastel .form-primary[disabled]:focus,
+.pastel .form-primary[disabled]:active,.pastel .form-primary[disabled].active,
+fieldset[disabled] .pastel .form-primary:hover,fieldset[disabled] .pastel .form-primary:focus,
+fieldset[disabled] .pastel .form-primary:active,fieldset[disabled] .pastel .form-primary.active {
+    border-color: #1e5474;
+}
+/**
+* [secondary]
+*/
+.pastel .text-secondary {color: #7e7ec2 !important}
+.pastel .bg-secondary{background-color: #7e7ec2 !important}
+.pastel .border-secondary{border-color: #7e7ec2 !important}
+.pastel .border-secondary2{border-color: #4c4c74 !important}
+.pastel .hover-secondary {color: inherit; cursor: pointer}
+.pastel .hover-secondary:hover {color: #7e7ec2}
+.pastel .dekcheckbox.check-secondary ul li:hover i {color: #b2b2da}
+.pastel .alert-secondary{ 
+    background-color: #b2b2da;
+    border-color: #4c4c74;
+    color: #4c4c74;
+}
+.pastel .btn-secondary, .pastel .form-secondary {
+    background-color: #7e7ec2;
+    border-color: #4c4c74;
+    color: inherit;
+}
+.pastel .btn-secondary:hover,.pastel .btn-secondary:focus,
+.pastel .btn-secondary:active,.pastel .btn-secondary.active,
+.pastel .form-secondary:hover,.pastel .form-secondary:focus,
+.pastel .form-secondary:active,.pastel .form-secondary.active {
+    background-color: #7171af;
+    border-color: #4c4c74;
+    color: inherit;
+}
+.pastel .btn-secondary.disabled:hover,.pastel .btn-secondary.disabled:focus,
+.pastel .btn-secondary.disabled:active,.pastel .btn-secondary.disabled.active,
+.pastel .btn-secondary[disabled]:hover,.pastel .btn-secondary[disabled]:focus,
+.pastel .btn-secondary[disabled]:active,.pastel .btn-secondary[disabled].active,
+fieldset[disabled] .pastel .btn-secondary:hover,fieldset[disabled] .pastel .btn-secondary:focus,
+fieldset[disabled] .pastel .btn-secondary:active,fieldset[disabled] .pastel .btn-secondary.active,
+.pastel .form-secondary.disabled:hover,.pastel .form-secondary.disabled:focus,
+.pastel .form-secondary.disabled:active,.pastel .form-secondary.disabled.active,
+.pastel .form-secondary[disabled]:hover,.pastel .form-secondary[disabled]:focus,
+.pastel .form-secondary[disabled]:active,.pastel .form-secondary[disabled].active,
+fieldset[disabled] .pastel .form-secondary:hover,fieldset[disabled] .pastel .form-secondary:focus,
+fieldset[disabled] .pastel .form-secondary:active,fieldset[disabled] .pastel .form-secondary.active {
+    border-color: #4c4c74;
+}
+/**
+* [danger]
+*/
+.pastel .text-danger {color: #c1687b !important}
+.pastel .bg-danger{background-color: #c1687b !important}
+.pastel .border-danger{border-color: #c1687b !important}
+.pastel .border-danger2{border-color: #743e4a !important}
+.pastel .hover-danger {color: inherit; cursor: pointer}
+.pastel .hover-danger:hover {color: #c1687b}
+.pastel .dekcheckbox.check-danger ul li:hover i {color: #daa4b0}
+.pastel .alert-danger{ 
+    background-color: #daa4b0;
+    border-color: #743e4a;
+    color: #743e4a;
+}
+.pastel .btn-danger, .pastel .form-danger {
+    background-color: #c1687b;
+    border-color: #743e4a;
+    color: inherit;
+}
+.pastel .btn-danger:hover,.pastel .btn-danger:focus,
+.pastel .btn-danger:active,.pastel .btn-danger.active,
+.pastel .form-danger:hover,.pastel .form-danger:focus,
+.pastel .form-danger:active,.pastel .form-danger.active {
+    background-color: #ae5e6f;
+    border-color: #743e4a;
+    color: inherit;
+}
+.pastel .btn-danger.disabled:hover,.pastel .btn-danger.disabled:focus,
+.pastel .btn-danger.disabled:active,.pastel .btn-danger.disabled.active,
+.pastel .btn-danger[disabled]:hover,.pastel .btn-danger[disabled]:focus,
+.pastel .btn-danger[disabled]:active,.pastel .btn-danger[disabled].active,
+fieldset[disabled] .pastel .btn-danger:hover,fieldset[disabled] .pastel .btn-danger:focus,
+fieldset[disabled] .pastel .btn-danger:active,fieldset[disabled] .pastel .btn-danger.active,
+.pastel .form-danger.disabled:hover,.pastel .form-danger.disabled:focus,
+.pastel .form-danger.disabled:active,.pastel .form-danger.disabled.active,
+.pastel .form-danger[disabled]:hover,.pastel .form-danger[disabled]:focus,
+.pastel .form-danger[disabled]:active,.pastel .form-danger[disabled].active,
+fieldset[disabled] .pastel .form-danger:hover,fieldset[disabled] .pastel .form-danger:focus,
+fieldset[disabled] .pastel .form-danger:active,fieldset[disabled] .pastel .form-danger.active {
+    border-color: #743e4a;
+}
+/**
+* [warning]
+*/
+.pastel .text-warning {color: #b57252 !important}
+.pastel .bg-warning{background-color: #b57252 !important}
+.pastel .border-warning{border-color: #b57252 !important}
+.pastel .border-warning2{border-color: #6d4431 !important}
+.pastel .hover-warning {color: inherit; cursor: pointer}
+.pastel .hover-warning:hover {color: #b57252}
+.pastel .dekcheckbox.check-warning ul li:hover i {color: #d3aa97}
+.pastel .alert-warning{ 
+    background-color: #d3aa97;
+    border-color: #6d4431;
+    color: #6d4431;
+}
+.pastel .btn-warning, .pastel .form-warning {
+    background-color: #b57252;
+    border-color: #6d4431;
+    color: inherit;
+}
+.pastel .btn-warning:hover,.pastel .btn-warning:focus,
+.pastel .btn-warning:active,.pastel .btn-warning.active,
+.pastel .form-warning:hover,.pastel .form-warning:focus,
+.pastel .form-warning:active,.pastel .form-warning.active {
+    background-color: #a3674a;
+    border-color: #6d4431;
+    color: inherit;
+}
+.pastel .btn-warning.disabled:hover,.pastel .btn-warning.disabled:focus,
+.pastel .btn-warning.disabled:active,.pastel .btn-warning.disabled.active,
+.pastel .btn-warning[disabled]:hover,.pastel .btn-warning[disabled]:focus,
+.pastel .btn-warning[disabled]:active,.pastel .btn-warning[disabled].active,
+fieldset[disabled] .pastel .btn-warning:hover,fieldset[disabled] .pastel .btn-warning:focus,
+fieldset[disabled] .pastel .btn-warning:active,fieldset[disabled] .pastel .btn-warning.active,
+.pastel .form-warning.disabled:hover,.pastel .form-warning.disabled:focus,
+.pastel .form-warning.disabled:active,.pastel .form-warning.disabled.active,
+.pastel .form-warning[disabled]:hover,.pastel .form-warning[disabled]:focus,
+.pastel .form-warning[disabled]:active,.pastel .form-warning[disabled].active,
+fieldset[disabled] .pastel .form-warning:hover,fieldset[disabled] .pastel .form-warning:focus,
+fieldset[disabled] .pastel .form-warning:active,fieldset[disabled] .pastel .form-warning.active {
+    border-color: #6d4431;
+}
+/**
+* [success]
+*/
+.pastel .text-success {color: #249475 !important}
+.pastel .bg-success{background-color: #249475 !important}
+.pastel .border-success{border-color: #249475 !important}
+.pastel .border-success2{border-color: #165946 !important}
+.pastel .hover-success {color: inherit; cursor: pointer}
+.pastel .hover-success:hover {color: #249475}
+.pastel .dekcheckbox.check-success ul li:hover i {color: #7cbfac}
+.pastel .alert-success{ 
+    background-color: #7cbfac;
+    border-color: #165946;
+    color: #165946;
+}
+.pastel .btn-success, .pastel .form-success {
+    background-color: #249475;
+    border-color: #165946;
+    color: inherit;
+}
+.pastel .btn-success:hover,.pastel .btn-success:focus,
+.pastel .btn-success:active,.pastel .btn-success.active,
+.pastel .form-success:hover,.pastel .form-success:focus,
+.pastel .form-success:active,.pastel .form-success.active {
+    background-color: #208569;
+    border-color: #165946;
+    color: inherit;
+}
+.pastel .btn-success.disabled:hover,.pastel .btn-success.disabled:focus,
+.pastel .btn-success.disabled:active,.pastel .btn-success.disabled.active,
+.pastel .btn-success[disabled]:hover,.pastel .btn-success[disabled]:focus,
+.pastel .btn-success[disabled]:active,.pastel .btn-success[disabled].active,
+fieldset[disabled] .pastel .btn-success:hover,fieldset[disabled] .pastel .btn-success:focus,
+fieldset[disabled] .pastel .btn-success:active,fieldset[disabled] .pastel .btn-success.active,
+.pastel .form-success.disabled:hover,.pastel .form-success.disabled:focus,
+.pastel .form-success.disabled:active,.pastel .form-success.disabled.active,
+.pastel .form-success[disabled]:hover,.pastel .form-success[disabled]:focus,
+.pastel .form-success[disabled]:active,.pastel .form-success[disabled].active,
+fieldset[disabled] .pastel .form-success:hover,fieldset[disabled] .pastel .form-success:focus,
+fieldset[disabled] .pastel .form-success:active,fieldset[disabled] .pastel .form-success.active {
+    border-color: #165946;
+}
+/* selected text highlighting: */
+::selection {background: rgba(0,0,0,0.1)}
+::-moz-selection {background: rgba(0,0,0,0.1)}
+.list-group-item {background-color: transparent}
+.badge {color: inherit}
+/* .dekcheckbox ul li:hover i {} */
+.dekcheckbox.check-red ul li:hover i        { color: #C81616; }
+.dekcheckbox.check-drk-red ul li:hover i    { color: #6D0C0C; }
+.dekcheckbox.check-blue ul li:hover i,
+.dekcheckbox.check-blue ul li.checked i     { color: #16B5C8; }
+.dekcheckbox.check-drk-blue ul li:hover i   { color: #0C636D; }
+.dekcheckbox.check-green ul li:hover i      { color: #3AC816; }
+.dekcheckbox.check-drk-green ul li:hover i  { color: #206D0C; }
+.dekcheckbox.check-yellow ul li:hover i     { color: #C8BF16; }
+.dekcheckbox.check-drk-yellow ul li:hover i { color: #6D680C; }
