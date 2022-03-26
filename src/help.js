@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', async (event) => {
         const mark_area = document.getElementById('mark-area');
         mark_area.innerHTML = converter.makeHtml(markdown);
         const links = [].slice.call(mark_area.querySelectorAll('a'));
-        console.log(links)
         for (const link of links) {
             link.classList.add('hover-dark','hover-secondary')
             if (link.id.startsWith('how-to-install')) {
