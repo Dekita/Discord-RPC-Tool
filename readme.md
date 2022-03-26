@@ -15,9 +15,9 @@
 
 ### What is Discord RPC Tool
 RPC Tool is a simple application that allows you to easily communicate with the Discord `Rich Presence Client`. RPC is a service that the Discord application installed on your machine enables. The RPC allows other applications, like this one, to communicate with the running Discord app. RPC Tool uses this feature to set the user currently logged into Discord's `Now Playing` activity.
-<hr class="mt-1">
 
 <img src="src/img/app.png" class="img-fluid img-thumbnail">
+<hr class="mt-1">
 
 ### RPC Tool Features
 - Painless installation
