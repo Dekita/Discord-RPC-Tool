@@ -30,7 +30,12 @@ RPC Tool is a simple application that allows you to easily communicate with the 
 <hr class="mt-1">
 
 ### How to install 
+<<<<<<< HEAD
 [<img src="src/img/gumroad.png" class="img-fluid img-thumbnail" onerror="removeSRC(this)">](https://dekita.gumroad.com/l/rpc-tool)
+=======
+  
+[<img src="src/img/gumroad.png" class="img-fluid img-thumbnail onerror="removeSRC(this)">](https://dekitarpg.com/rpc)
+>>>>>>> 107c8e72b8d46f82cb99b59da83928ac33c8a485
 
 Please note: payment for download is completely optional. 
 
