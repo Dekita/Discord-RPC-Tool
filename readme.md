@@ -4,8 +4,7 @@
 <div class="d-none">
 
 - [How to install](#how-to-install)  
-</div>
-
+</div> 
 - [What is Discord RPC Tool](#what-is-discord-rpc-tool)  
 - [RPC Tool Features](#rpc-tool-features)  
 - [Launching your first activity](#launching-your-first-activity)  
