@@ -29,10 +29,8 @@ RPC Tool is a simple application that allows you to easily communicate with the 
 - Optional auto launch app on system boot
 <hr class="mt-1">
 
-<div class="d-none">
-
 ### How to install 
-[<img src="src/img/gumroad.png" class="img-fluid img-thumbnail onerror="removeSRC(this)"">](https://dekita.gumroad.com/l/rpc-tool)
+[<img src="src/img/gumroad.png" class="img-fluid img-thumbnail" onerror="removeSRC(this)">](https://dekita.gumroad.com/l/rpc-tool)
 
 Please note: payment for download is completely optional. 
 
@@ -56,8 +54,6 @@ cd Discord-RPC-Tool
 npm i; npm start
 ```
 <hr class="mt-1">
-
-</div>
 
 ### Launching your first activity
 Once the application is installed and running on your machine, click on the purple `Dev Portal` button. This will open the discord developer portal. Once logged into the dev portal, create a new application and name it whatever you want. This is the name that will be shown for your activity.
