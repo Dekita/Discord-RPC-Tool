@@ -1,6 +1,6 @@
-
 <!doctype html>
 <html lang="en" class="h-100">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,6 +14,7 @@
     <link href="libs/dek-style.css" rel="stylesheet">
     <link href="app.css" rel="stylesheet">
 </head>
+
 <body class="d-flex h-100 text-center text-white bg-1 pastel">
     <div class="h-100 px-2 thin-scroller" id="button-container" style="">
         <button class="btn btn-lg btn-secondary fw-bold border-white bg-white px-5">+</button>
@@ -24,29 +25,32 @@
                 <img src="img/logo.png" class="img-fluid">
             </div>
             <nav class="nav nav-masthead justify-content-center float-md-end">
-                <a class="hover-secondary me-3" href="https://www.patreon.com/DekitaRPG"  data-bs-toggle="tooltip" title="Support Development on Patreon">
+                <a class="hover-secondary me-3" href="https://www.patreon.com/DekitaRPG" data-bs-toggle="tooltip" title="Support Development on Patreon">
                     <i class="fab fa-2x fa-fw fa-patreon"></i>
                 </a>
-                <a class="hover-secondary me-3" href="https://discord.gg/Gyb8r9Ghuu"  data-bs-toggle="tooltip" title="Support Server">
+                <!-- @TODO update Discord invite ;) -->
+                <a class="hover-secondary me-3" href="https://discord.gg/Gyb8r9Ghuu" data-bs-toggle="tooltip" title="Support Server">
                     <i class="fab fa-2x fa-fw fa-discord"></i>
                 </a>
-                <a class="hover-secondary me-3" href="https://github.com/dekita/discord-rpc-tool"  data-bs-toggle="tooltip" title="Project Github">
+                <a class="hover-secondary me-3" href="https://github.com/dekita/discord-rpc-tool" data-bs-toggle="tooltip" title="Project Github">
                     <i class="fab fa-2x fa-fw fa-github"></i>
                 </a>
                 <a class="hover-secondary me-3" href="https://dekitarpg.com" data-bs-toggle="tooltip" title="Visit Developer Website">
                     <i class="fas fa-2x fa-fw fa-globe"></i>
                 </a>
-                <a class="btn border-0 me-3 no-shadow hover-secondary"  data-bs-toggle="tooltip" title="App Information" id="app-info-btn">
+                <a class="btn border-0 me-3 no-shadow hover-secondary" data-bs-toggle="tooltip" title="App Information" id="app-info-btn">
                     <i class="fas fa-2x fa-fw fa-info-circle"></i>
                 </a>
-                <a class="btn border-0 no-shadow hover-secondary"  data-bs-toggle="tooltip" title="Settings" id="app-settings-btn">
+                <a class="btn border-0 no-shadow hover-secondary" data-bs-toggle="tooltip" title="Settings" id="app-settings-btn">
                     <i class="fas fa-2x fa-fw fa-cogs"></i>
                 </a>
             </nav>
         </header>
         <main class="px-0">
             <div class="row">
-                <div class="w-100 pt-1 pb-0"><div id="alert-area"></div></div>
+                <div class="w-100 pt-1 pb-0">
+                    <div id="alert-area"></div>
+                </div>
             </div>
             <div class="row">
                 <div class="col">
@@ -91,7 +95,9 @@
                         </div>
                         <div class="col-2" data-bs-toggle="tooltip" title="Enable/Disable large image">
                             <div class="dekcheckbox multicheck pt-1 pb-0 check-dark" id="app-rpc-img1-enabled">
-                                <ul class="m-0"><li class="m-0 p-0" id="app-rpc-img1-enabled-text">--</li></ul>
+                                <ul class="m-0">
+                                    <li class="m-0 p-0" id="app-rpc-img1-enabled-text">--</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -104,7 +110,9 @@
                         </div>
                         <div class="col-2" data-bs-toggle="tooltip" title="Enable/Disable small image">
                             <div class="dekcheckbox multicheck pt-1 pb-0 check-dark" id="app-rpc-img2-enabled">
-                                <ul class="m-0"><li class="m-0 p-0" id="app-rpc-img2-enabled-text">--</li></ul>
+                                <ul class="m-0">
+                                    <li class="m-0 p-0" id="app-rpc-img2-enabled-text">--</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -118,7 +126,9 @@
                         </div>
                         <div class="col-2" data-bs-toggle="tooltip" title="Enable/Disable Button 1">
                             <div class="dekcheckbox multicheck pt-1 pb-0 check-dark" id="app-rpc-btn1-enabled">
-                                <ul class="m-0"><li class="m-0 p-0" id="app-rpc-btn1-enabled-text">--</li></ul>
+                                <ul class="m-0">
+                                    <li class="m-0 p-0" id="app-rpc-btn1-enabled-text">--</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -131,14 +141,18 @@
                         </div>
                         <div class="col-2" data-bs-toggle="tooltip" title="Enable/Disable Button 2">
                             <div class="dekcheckbox multicheck pt-1 pb-0 check-dark" id="app-rpc-btn2-enabled">
-                                <ul class="m-0"><li class="m-0 p-0" id="app-rpc-btn2-enabled-text">--</li></ul>
+                                <ul class="m-0">
+                                    <li class="m-0 p-0" id="app-rpc-btn2-enabled-text">--</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                     <div class="row mb-1">
                         <div class="col-4" data-bs-toggle="tooltip" title="Enable/Disable Activity Timestamp">
                             <div class="dekcheckbox multicheck pt-1 pb-0 check-dark" id="app-rpc-timestamp-enabled">
-                                <ul class="m-0"><li class="m-0 p-0" id="app-rpc-timestamp-enabled-text">--</li></ul>
+                                <ul class="m-0">
+                                    <li class="m-0 p-0" id="app-rpc-timestamp-enabled-text">--</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -176,11 +190,11 @@
                                 <h4 class="mb-0">Username<span style="opacity: 0.5;">#0690</span></h4>
                                 <small class="card-text">I'm a status example!</small>
                                 <hr class="m-1 mt-2">
-                                <small class="card-text">PLAYING A GAME</small>
+                                <small class="card-text fw-bold">PLAYING A GAME</small>
                                 <div class="mb-2 mt-1">
-                                    <div class="row">
+                                    <div class="row mb-2">
                                         <div class="col-4 pt-1">
-                                            <img src="img/icon.png" class="img-fluid rounded-circle" id="app-preview-image">
+                                            <img src="img/icon.png" class="img-fluid" id="app-preview-image">
                                         </div>
                                         <div class="col-8 ps-0 mb-2">
                                             <div class="row">
@@ -194,8 +208,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="#" class="btn w-100 mt-1" id="preview-btn1">--</a>
-                                    <a href="#" class="btn w-100 mt-1" id="preview-btn2">--</a>
+                                    <a href="#" class="btn w-100 mt-1 preview-btn" id="preview-btn1">--</a>
+                                    <a href="#" class="btn w-100 mt-1 preview-btn" id="preview-btn2">--</a>
                                 </div>
                             </div>
                         </div>
@@ -212,84 +226,93 @@
     <div class="modal fade" tabindex="-1" id="stop-activity-modal">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="stop-activity-title">Caution</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p id="stop-activity-message"></p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" id="confirm-change-activity">Change Activity</button>
-                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancel Change</button>
-            </div>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="stop-activity-title">Caution</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="stop-activity-message"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="confirm-change-activity">Change Activity</button>
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancel Change</button>
+                </div>
             </div>
         </div>
     </div>
     <div class="modal fade" tabindex="-1" id="delete-activity-modal">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Confirm Deletion</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>Please confirm that you wish to delete this activity.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" id="confirm-delete-activity">Confirm</button>
-                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancel</button>
-            </div>
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm Deletion</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Please confirm that you wish to delete this activity.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="confirm-delete-activity">Confirm</button>
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancel</button>
+                </div>
             </div>
         </div>
-    </div>    
+    </div>
     <div class="modal fade" tabindex="-1" id="settings-modal">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-            <div class="modal-header p-4">
-                <h5 class="modal-title">App Settings</h5>
-                <button type="button" class="btn p-0 hover-dark no-shadow me-2 mt-1" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="left" title="Close Settings">
+                <div class="modal-header p-4">
+                    <h5 class="modal-title">App Settings</h5>
+                    <button type="button" class="btn p-0 hover-dark no-shadow me-2 mt-1" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="left" title="Close Settings">
                     <i class="far fa-2x fa-fw fa-window-close"></i>
                 </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col">
-                        <div class="dekcheckbox check-dark multicheck" id="appopts-auto-boot">
-                            <ul class="mb-0"><li>Start after system boot</li></ul>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <div class="dekcheckbox check-dark multicheck" id="appopts-auto-boot">
+                                <ul class="mb-0">
+                                    <li>Start after system boot</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="dekcheckbox check-dark multicheck" id="appopts-tiny-tray">
+                                <ul class="mb-0">
+                                    <li>Minimize to system tray</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="dekcheckbox check-dark multicheck" id="appopts-tiny-tray">
-                            <ul class="mb-0"><li>Minimize to system tray</li></ul>
+                    <div class="row">
+                        <div class="col">
+                            <div class="dekcheckbox check-dark multicheck" id="appopts-auto-play">
+                                <ul class="mb-0">
+                                    <li>Launch activity on load</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="dekcheckbox check-dark multicheck" id="appopts-auto-tiny">
+                                <ul class="mb-0">
+                                    <li>Minimize on load</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <div class="dekcheckbox check-dark multicheck" id="appopts-auto-play">
-                            <ul class="mb-0"><li>Launch activity on load</li></ul>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="dekcheckbox check-dark multicheck" id="appopts-auto-tiny">
-                            <ul class="mb-0"><li>Minimize on load</li></ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <small class="m-0"><b>
+                <div class="modal-footer">
+                    <small class="m-0"><b>
                     <a href="https://dekitarpg.com/" class="hover-dark">
                         Created By @DekitaRPG
                     </a>
                 </b></small>
-            </div>
+                </div>
             </div>
         </div>
-    </div>    
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="libs/dek-style.js"></script>
     <script src="app.js"></script>
 </body>
+
 </html>
