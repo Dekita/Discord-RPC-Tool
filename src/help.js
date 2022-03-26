@@ -21,7 +21,6 @@ document.addEventListener('DOMContentLoaded', async (event) => {
                 link.classList.add('d-none');
             }
         }
-
     } catch (error) {
         console.error(error);
     }
