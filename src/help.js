@@ -36,3 +36,7 @@ document.addEventListener('click', e => {
         e.preventDefault();
     }
 });
+
+function removeSRC(element) {
+    element.src = element.src.replace('/src','');
+}

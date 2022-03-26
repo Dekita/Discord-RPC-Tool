@@ -1,4 +1,4 @@
-[<img src="src/img/banner.png" class="img-fluid img-thumbnail mx-auto d-block">](https://dekitarpg.com/rpc)
+[<img src="src/img/banner.png" class="img-fluid img-thumbnail mx-auto d-block" onerror="removeSRC(this)">](https://dekitarpg.com/rpc)
 
 ### Table of Contents
 - [How to install](#how-to-install)  
@@ -16,7 +16,7 @@
 ### What is Discord RPC Tool
 RPC Tool is a simple application that allows you to easily communicate with the Discord `Rich Presence Client`. RPC is a service that the Discord application installed on your machine enables. The RPC allows other applications, like this one, to communicate with the running Discord app. RPC Tool uses this feature to set the user currently logged into Discord's `Now Playing` activity.
 
-<img src="src/img/app.png" class="img-fluid img-thumbnail">
+<img src="src/img/app.png" class="img-fluid img-thumbnail" onerror="removeSRC(this)">
 <hr class="mt-1">
 
 ### RPC Tool Features
@@ -32,7 +32,7 @@ RPC Tool is a simple application that allows you to easily communicate with the 
 <div class="d-none">
 
 ### How to install 
-[<img src="src/img/gumroad.png" class="img-fluid img-thumbnail">](https://dekita.gumroad.com/l/rpc-tool)
+[<img src="src/img/gumroad.png" class="img-fluid img-thumbnail onerror="removeSRC(this)"">](https://dekita.gumroad.com/l/rpc-tool)
 
 Please note: payment for download is completely optional. 
 
@@ -66,11 +66,11 @@ While on the `General Information` tab, after naming your application, copy the 
 
 After entering your unique app id, press the `Save`, then `Launch` buttons. After a second or so, your user profile card on Discord should now look similar to this:
 
-<img src="src/img/discord-profile-card.png" class="img-fluid img-thumbnail mt-2">
+<img src="src/img/discord-profile-card.png" class="img-fluid img-thumbnail mt-2" onerror="removeSRC(this)">
 
 :exclamation: If the activity is not showing on your user profile card, make sure that you are not showing as invisible/offline, and that you have enabled `Activity Status` within the discord application's user settings. 
 
-<img src="src/img/discord-activity-status.png" class="img-fluid img-thumbnail mt-2">
+<img src="src/img/discord-activity-status.png" class="img-fluid img-thumbnail mt-2" onerror="removeSRC(this)">
 
 <hr class="mt-1">
 
@@ -113,7 +113,7 @@ Text shown for the activity details and state (the first and second line of text
 
 ### Activity Image Customization
 Each activity can display upto two images, one large and one small. But before RPC Tool can display them properly, the image files must be uploaded onto the Discord developer portal's `Rich Presence => Art Assets` tab shown below. 
-<img src="src/img/discord-asset-page.png" class="img-fluid img-thumbnail mt-2">
+<img src="src/img/discord-asset-page.png" class="img-fluid img-thumbnail mt-2" onerror="removeSRC(this)">
 The image key that you enter on the developer portal should match the image key you enter into the RPC Tool application. Note that the key is also case sensitive! 
 
 Activity images can be freely disabled/enabled within the RPC Tool application, where you can also define the text displayed when hovering over the image.
