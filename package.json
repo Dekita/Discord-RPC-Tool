@@ -13,7 +13,6 @@
         "name": "Dekita (DekitaRPG)",
         "email": "dekitarpg@gmail.com"
     },
-    "license": "MIT",   
     "dependencies": {
         "bent": "^7.3.12",
         "discord-rpc": "^4.0.1",
