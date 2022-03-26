@@ -37,7 +37,9 @@ RPC Tool is a simple application that allows you to easily communicate with the 
 [<img src="src/img/gumroad.png" class="img-fluid img-thumbnail">](https://dekita.gumroad.com/l/rpc-tool)
 
 Please note: payment for download is completely optional. 
+
 Once downloaded extract and then run the installer.
+
 Discord RPC Tool is now installed on your pc.
 
 <hr class="mt-1">
