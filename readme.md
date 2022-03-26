@@ -35,6 +35,7 @@ RPC Tool is a simple application that allows you to easily communicate with the 
 
 ### How to install 
 [<img src="src/img/gumroad.png" class="img-fluid img-thumbnail">](https://dekita.gumroad.com/l/rpc-tool)
+
 Please note: payment for download is completely optional. 
 Once downloaded extract and then run the installer.
 Discord RPC Tool is now installed on your pc.
@@ -64,9 +65,11 @@ Once the application is installed and running on your machine, click on the purp
 While on the `General Information` tab, after naming your application, copy the  `Application ID` and paste it into the `Discord Application ID` input field in RPC Tool's general configuration area.
 
 After entering your unique app id, press the `Save`, then `Launch` buttons. After a second or so, your user profile card on Discord should now look similar to this:
+
 <img src="src/img/discord-profile-card.png" class="img-fluid img-thumbnail mt-2">
 
 :exclamation: If the activity is not showing on your user profile card, make sure that you are not showing as invisible/offline, and that you have enabled `Activity Status` within the discord application's user settings. 
+
 <img src="src/img/discord-activity-status.png" class="img-fluid img-thumbnail mt-2">
 
 <hr class="mt-1">
