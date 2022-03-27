@@ -13,15 +13,19 @@
         "name": "Dekita (DekitaRPG)",
         "email": "dekitarpg@gmail.com"
     },
-    "license": "SEE LICENSE IN LICENSE",   
+    "license": "SEE LICENSE IN LICENSE",
     "dependencies": {
         "bent": "^7.3.12",
         "discord-rpc": "^4.0.1",
-        "json-stringify-pretty-compact": "^3.0.0"
+        "json-stringify-pretty-compact": "^3.0.0",
+        "node-gyp": "^9.0.0",
+        "sass": "^1.49.9"
     },
     "devDependencies": {
+        "electron": "17.2.0",
         "electron-builder": "^22.14.13",
-        "electron": "17.2.0"
+        "electron-reload": "^2.0.0-alpha.1",
+        "electron-reloader": "^1.2.3"
     },
     "build": {
         "appId": "com.dekitarpg.rpc",
@@ -30,7 +34,12 @@
             "output": "build"
         },
         "win": {
-            "target": [{"target": "nsis","arch": "x64"}],
+            "target": [
+                {
+                    "target": "nsis",
+                    "arch": "x64"
+                }
+            ],
             "icon": "src/img/icon.ico"
         },
         "nsis": {
@@ -39,5 +48,4 @@
             "oneClick": false
         }
     }
-
 }
