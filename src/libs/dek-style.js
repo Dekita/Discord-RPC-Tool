@@ -38,117 +38,259 @@
 * Visit www.dekitarpg.com for more!
 * ============================================================================
 */ 
-(async $ => {"use strict";
 
-    const DEKCHECKICONS = {
-        check:{ on: ["far","fa-check-square"], off: ["far","fa-square"] },
-        radio:{ on: ["far","fa-times-circle"], off: ["far","fa-circle"] },
-    };
+const DEKCHECKICONS = {
+    check:{ on: ["far","fa-check-square"], off: ["far","fa-square"] },
+    radio:{ on: ["far","fa-times-circle"], off: ["far","fa-circle"] },
+};
 
-    class DekCheckBox {
-        constructor(html_id, on_click_handler) {
-            this.id = html_id;
-            this.element = document.getElementById(this.id);
-            this.checkul = this.element.getElementsByTagName("UL")[0];
-            this.chinput = this.element.getElementsByTagName("INPUT")[0];
-            if (!this.chinput) this.chinput = document.createElement('input');
-            this.options = this.element.getElementsByTagName("LI");
-            this.idcheck = this.element.classList.contains('idcheck');
-            this.ismulti = this.element.classList.contains('multicheck');
-            this.isradio = this.checkul.classList.contains("radio");
-            this.handler = on_click_handler;
-            for (const li of this.options) {
-                const icon = document.createElement("i");
-                const span = document.createElement("span");
-                span.innerHTML = li.innerHTML;
-                li.innerHTML = "";
-                li.appendChild(icon);
-                li.appendChild(span);
-                li.onclick = click_event => {
-                    this.updateSyblings(li);
-                    this.updateValue();
-                    this.updateIcon(li);
-                    if (this.handler) {
-                        this.handler(this.getValue());
-                    }
-                }
+class DekCheckBox {
+    constructor(html_id, on_click_handler) {
+        this.id = html_id;
+        this.element = document.getElementById(this.id);
+        this.checkul = this.element.getElementsByTagName("UL")[0];
+        this.chinput = this.element.getElementsByTagName("INPUT")[0];
+        if (!this.chinput) this.chinput = document.createElement('input');
+        this.options = this.element.getElementsByTagName("LI");
+        this.idcheck = this.element.classList.contains('idcheck');
+        this.ismulti = this.element.classList.contains('multicheck');
+        this.isradio = this.checkul.classList.contains("radio");
+        this.handler = on_click_handler;
+        for (const li of this.options) {
+            const icon = document.createElement("i");
+            const span = document.createElement("span");
+            span.innerHTML = li.innerHTML;
+            li.innerHTML = "";
+            li.appendChild(icon);
+            li.appendChild(span);
+            li.onclick = click_event => {
+                this.updateSyblings(li);
+                this.updateValue();
                 this.updateIcon(li);
+                if (this.handler) {
+                    this.handler(this.getValue());
+                }
             }
-            this.updateValue();
+            this.updateIcon(li);
         }
-        updateSyblings(li) {
-            if (this.ismulti && li) {
-                if (li.classList.contains('checked')){
-                    li.classList.remove('checked');
-                } else {
-                    li.classList.add('checked');
-                }
-                this.updateIcon(li);
-            } else {
-                for (const sibling of this.options) {
-                    if (sibling !== li) {
-                        sibling.classList.remove("checked");
-                        this.updateIcon(sibling);
-                    }
-                }
-                if (li) li.classList.add('checked');
-            }
-        };
-        updateIcon(li) {
-            li = li || this.options[0];
-            const icon = li.getElementsByTagName("i")[0];
-            const icon_type = this.isradio ? "radio" : "check";
-            const icon_data = DEKCHECKICONS[icon_type];
+        this.updateValue();
+    }
+    updateSyblings(li) {
+        if (this.ismulti && li) {
             if (li.classList.contains('checked')){
-                icon.classList.remove(...icon_data.off);
-                icon.classList.add(...icon_data.on);
+                li.classList.remove('checked');
             } else {
-                icon.classList.remove(...icon_data.on);
-                icon.classList.add(...icon_data.off);
-            };
-        };
-        updateValue(){
-            this.chinput.value = this.getLiNumVal(); 
-            if (!this.ismulti && !this.idcheck){
-                const checked_val = this.checkul.getElementsByClassName('checked')[0];
-                const checked_span = checked_val.getElementsByTagName("span")[0];
-                this.chinput.value = checked_span.innerHTML;
-            };
-        };
-        getLiNumVal() {
-            let value = [];
-            for (var i = this.options.length - 1; i >= 0; i--) {
-                if (this.options[i].classList.contains('checked')){
-                    this.ismulti ? value.push(i) : value = i;
-                };
+                li.classList.add('checked');
             }
-            return this.ismulti ? value.reverse().join(',') : value;
-        };
-        setActive(index) {
-            this.updateSyblings();
-            this.updateValue();
-            this.updateIcon();
-            if (this.options[index]) {
-                this.options[index].click();
-            } else if (this.handler) {
-                this.handler(this.getValue());
+            this.updateIcon(li);
+        } else {
+            for (const sibling of this.options) {
+                if (sibling !== li) {
+                    sibling.classList.remove("checked");
+                    this.updateIcon(sibling);
+                }
             }
+            if (li) li.classList.add('checked');
         }
-        getValue() {
-            let handler_value = this.chinput.value;
-            if (this.ismulti) return handler_value.split(',');
-            else if (this.idcheck) return Number(handler_value);
-            return handler_value;
+    };
+    updateIcon(li) {
+        li = li || this.options[0];
+        const icon = li.getElementsByTagName("i")[0];
+        const icon_type = this.isradio ? "radio" : "check";
+        const icon_data = DEKCHECKICONS[icon_type];
+        if (li.classList.contains('checked')){
+            icon.classList.remove(...icon_data.off);
+            icon.classList.add(...icon_data.on);
+        } else {
+            icon.classList.remove(...icon_data.on);
+            icon.classList.add(...icon_data.off);
+        };
+    };
+    updateValue(){
+        this.chinput.value = this.getLiNumVal(); 
+        if (!this.ismulti && !this.idcheck){
+            const checked_val = this.checkul.getElementsByClassName('checked')[0];
+            console.log('checked_val:', this.id, checked_val, this.chinput.value)
+            const checked_span = checked_val.getElementsByTagName("span")[0];
+            this.chinput.value = checked_span.innerHTML;
+        };
+    };
+    getLiNumVal() {
+        let value = [];
+        for (var i = this.options.length - 1; i >= 0; i--) {
+            if (this.options[i].classList.contains('checked')){
+                this.ismulti ? value.push(i) : value = i;
+            };
         }
-        get enabled() {
-            return this.ismulti && this.getValue()[0] === '0';
+        return this.ismulti ? value.reverse().join(',') : value;
+    };
+    setActive(index) {
+        console.log(this.id, 'setting active to:', index)
+        this.updateSyblings();
+        this.updateValue();
+        this.updateIcon();
+        if (this.options[index]) {
+            this.options[index].click();
+        } else if (this.handler) {
+            this.handler(this.getValue());
         }
     }
-    $.DekCheckBox = DekCheckBox;
-    // $.setupDekCheckBox = (id, handler) => {
-    //     return new DekCheckBox(id, handler);
-    // };
-})(window);
+    getValue() {
+        let handler_value = this.chinput.value;
+        if (this.ismulti) return handler_value.split(',');
+        else if (this.idcheck) return Number(handler_value);
+        return handler_value;
+    }
+    get enabled() {
+        return this.ismulti && this.getValue()[0] === '0';
+    }
+}
+
+/**
+// Syntax: 
+<select class="dekselect sel-blue" id="image-select-one">
+    <option> Option 1 </option>
+    <option> Option 2 </option>
+    <option> Option 3 </option>
+</select>
+
+// Creates: (and hides select element)
+<a class="btn btn-select sel-blue">
+  <span class="btn-select-value"></span>
+  <span class="btn-select-arrow"></span>
+  <ul>
+    <li>Option 1</li>
+    <li>Option 2</li>
+    <li>Option 3</li>
+  </ul>
+</a>
+
+*/
+class DekSelect extends EventTarget {
+    constructor() { super(); this.initialize(...arguments) };
+    get visible() { return this._ul?.classList.contains('d-block') };
+    get value() { return this._value?.value };
+    get area() { return this._a };
+
+    initialize(element) {
+        this._element = element;//document.getElementById(id);
+        this._id = this._element.id;
+        const klass_filter = klass => !['dekselect'].includes(klass);
+        const classlist = [...this._element.classList].filter(klass_filter);
+        this._element.classList.add('d-none');
+        this._a = document.createElement('a');
+        this._a.classList.add('form-control', 'form-control-sm', 'theme-border', 'btn-select', ...classlist);
+        this._value = document.createElement('input');
+        this._value.classList.add('form-control', 'btn-select-value');
+        this._value.setAttribute('disabled', true);
+        
+        this._arrow = document.createElement('span');
+        this._arrow.classList.add('btn-select-arrow');
+
+        this._i = document.createElement('i');
+        this._i.classList.add('fas', 'fa-fw', 'fa-arrow-down');
+        this._arrow.append(this._i);
+        this._ul = document.createElement('ul');
+        this._ul.classList.add('theme-bg', 'theme-border')
+        this._a.append(this._value, this._arrow, this._ul);
+        this._element.parentElement.append(this._a);
+        // set initial options:
+        const options = [].slice.call(this._element.options);
+        this.setOptions(options.map(e=>e.text));
+        this._initListener();
+    }
+    _initListener(){
+        this._a.addEventListener('click', async event => {
+            this._ul.classList.contains('d-block') ? this.hide() : this.show();
+            if (event.target.nodeName === 'LI') this.set(event.target.innerText);
+        });
+    }
+    set(value) {
+        this._value.value = value;
+        this.dispatchEvent(new Event('change'));
+    }
+    hide() {
+        this._a.classList.remove('active');
+        this._ul.classList.remove('d-block');
+        this._ul.classList.add('d-none');
+        this.dispatchEvent(new Event('hide'));
+    }
+    show() {
+        this._a.classList.add('active');
+        this._ul.classList.remove('d-none');
+        this._ul.classList.add('d-block');
+        this.dispatchEvent(new Event('show'));
+    }
+    clearOptions(){
+        while (this._ul.firstChild) {
+            this._ul.removeChild(this._ul.firstChild);
+        }
+    }
+    setOptions(options, id=0) {
+        this.clearOptions();
+        for (const option of options) {
+            this.addOption(option);
+        }
+        this.setToID(id);
+    }
+    addOption(option) {
+        const item = document.createElement('li');
+        item.innerText = option;
+        this._ul.append(item);
+    }
+    setToID(option_id) {
+        const elements = this._ul.querySelectorAll('li');
+        const item = [].slice.call(elements)[option_id];
+        if (item) this.set(item.innerText);
+    }
+}
+
+DekSelect.cache = {};
+
+/**
+* Helper functions:
+*/
+function toggleElementClass(element, oldclass, newclass){
+    if (element.classList.contains(oldclass)){
+        element.classList.remove(oldclass);
+    }
+    element.classList.add(newclass);
+};
+function toggleAllElementsByClass(classname, oldclass, newclass){
+    for (const element of document.getElementsByClassName(classname)) {
+        toggleElementClass(element, oldclass, newclass)
+    }
+};
+async function updateTheme(theme_name) {
+    const old_theme = await app_config.get('gui-theme');
+    toggleAllElementsByClass('theme-bg', old_theme, theme_name);
+    toggleAllElementsByClass('theme-border', old_theme, theme_name);
+    toggleAllElementsByClass('theme-btn', old_theme, theme_name);
+    await app_config.set('gui-theme', theme_name);
+};
+async function updateThemeColors(color_name) {
+    const old_color = await app_config.get('gui-color');
+    toggleAllElementsByClass('theme-color', old_color, color_name);
+    await app_config.set('gui-color', color_name);
+};
+
+/**
+* Events:
+*/
+document.addEventListener('DOMContentLoaded', async event => {
+    const selectors = document.getElementsByClassName('dekselect');
+    for (const element of [].slice.call(selectors)) {
+        DekSelect.cache[element.id] = new DekSelect(element);
+    };
+});
+// listen for, and intercept clicks out of dekselect areas
+// and then hide any area currently showing;
+document.addEventListener('click', async event => {   
+    for (const dekselect of Object.values(DekSelect.cache)) {
+        const in_area = dekselect.area.contains(event.target);
+        if (!in_area && dekselect.visible) dekselect.hide();
+    }
+});
 /**
 * ■ ENDOF: dek-style.js
 */

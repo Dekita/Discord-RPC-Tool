@@ -34,7 +34,8 @@ const settings_modal = getModal('settings-modal');
 const app_info_btn = getElement('app-info-btn');
 const app_preview_details = getElement('app-preview-details');
 const app_preview_state = getElement('app-preview-state');
-const app_preview_image = getElement('app-preview-image');
+const app_preview_image_large = getElement('app-preview-image');
+const app_preview_image_small = getElement('app-preview-image-sm');
 const app_preview_btn1 = getElement('preview-btn1');
 const app_preview_btn2 = getElement('preview-btn2');
 const STOP_MESSAGES = {
@@ -45,6 +46,14 @@ const DEFAULT_IMAGE_TEXTS = {
     image1: "Created by Discord RPC Tool",
     image2: "Get it today at dekitarpg.com/rpc",
 }
+
+const API_URL = {
+    assets: `https://discord.com/api/oauth2/applications/APP_ID/assets`,
+    asset: `https://cdn.discordapp.com/app-assets/APP_ID/ASSET_ID.png`,
+    icon: `https://cdn.discordapp.com/app-icons/APP_ID/ICON_ID.png`,
+    rpc: `https://discord.com/api/oauth2/applications/APP_ID/rpc`,
+}
+
 /**
 * ■ System Database:
 */
@@ -184,7 +193,6 @@ class RPCTool {
     }
     static async updateActivity() {
         const activity = DB.getActivityData();
-        const app_name = getValue('app-name');
         const app_image = getValue('app-image');
         const rpc_frequency = parseInt(getValue('app-rpc-frequency'));
         const app_id = getValue('app-id');
@@ -205,7 +213,6 @@ class RPCTool {
         const btn2_url = getValue('app-btn2-url');
         const btn2_enabled = checkBoxEnabled('app-rpc-btn2-enabled');
         activity.timestamp = checkBoxEnabled('app-rpc-timestamp-enabled');
-        activity.name = app_name;
         activity.image = app_image;
         activity.rpc_freq = rpc_frequency;
         activity.app_id = app_id;
@@ -258,7 +265,7 @@ class RPCTool {
         return return_stats;
     }
     static async updateLoop(){
-        const activity = {};
+        const activity = {type:3};
         const db_activity = DB.getActivityData();
         const return_stats = await this.updateAPI(db_activity);
         activity.instance = db_activity.instance;
@@ -308,6 +315,7 @@ class RPCTool {
 */
 class RPCGUI {
     static async setupDekcheckBoxes() {
+        if (this.dekcheckboxes) return;
         this.dekcheckboxes = {};
         const activity_boxes = [
             'app-rpc-timestamp-enabled',
@@ -336,6 +344,29 @@ class RPCGUI {
             const enabled = await app_config.get(id);
             this.dekcheckboxes[id].setActive(enabled ? 0 : null);
         }
+
+        // theme stuff:
+        const ENABLED_THEMES = [
+            'darkcord1','darkcord2',
+            'lightcord1','lightcord2',
+            // 'dark1','dark2','dark3',
+            // 'light1','light2','light3'
+        ];
+        const ENABLED_COLORS = [
+            'default', 'pastel'
+        ];
+        const theme = await app_config.get('gui-theme');
+        const color = await app_config.get('gui-color');
+        // remove all classes before setting
+        document.body.classList.remove(...ENABLED_THEMES.filter(e => e !== theme));
+        document.body.classList.remove(...ENABLED_COLORS.filter(e => e !== color));
+
+        (new DekCheckBox('appopts-theme', async value => {
+            await updateTheme(ENABLED_THEMES[!ENABLED_THEMES[value] ? 0 : value]);
+        })).setActive(ENABLED_THEMES.indexOf(theme));
+        (new DekCheckBox('appopts-color', async value => {
+            await updateThemeColors(ENABLED_COLORS[!ENABLED_COLORS[value] ? 0 : value]);
+        })).setActive(ENABLED_COLORS.indexOf(color));
     }
     static async updateCheckboxText(id, enabled) {
         let element = getElement(`${id}-text`);
@@ -358,8 +389,7 @@ class RPCGUI {
         tooltips.map(e => new bootstrap.Tooltip(e, options));
     }
     static async setupChangeListeners() {
-        [   'app-name', 
-            'app-image',
+        [   'app-image',
             'app-rpc-frequency', 
             'app-id',
             'app-api-url', 
@@ -376,11 +406,94 @@ class RPCGUI {
             'app-btn2-url',
         ].forEach(id => {
             const element = getElement(id);
-            element.addEventListener('input', ()=>{
+            element.addEventListener('input', async ()=>{
                 RPCTool.flagUnsaved();
                 this.updatePreview();
             });
         });
+        DekSelect.cache['image-select-one'].addEventListener('change', event => {
+            setValue('app-img1-key', event.target.value);
+            RPCTool.flagUnsaved();
+        });
+        DekSelect.cache['image-select-two'].addEventListener('change', event => {
+            setValue('app-img2-key', event.target.value);
+            RPCTool.flagUnsaved();
+        });
+        const app_id = getElement('app-id');
+        app_id.addEventListener('change', async ()=>{
+            // fetch app informations: 
+            this.validateAppData();
+        });
+        this.validateAppData();
+    }
+    static async validateAppData(forced=false) {
+        const app_id = getValue('app-id');
+        const activity = DB.getActivityData();
+        if (activity.discord_details !== null && !forced) {
+            await this.refreshAppDetails(app_id, activity);
+            await this.refreshAppAssets(app_id, activity);
+        }
+    }
+    static async refreshAppDetails(app_id, activity) {
+        const details = await this.fetchAppDetails();
+        if (!details.error) {
+            const {name, icon, description, summary} = details;
+            const argz = {APP_ID: app_id, ICON_ID: icon};
+            activity.discord_details = {
+                name, description, summary,
+                icon: dekita_rpc.format(API_URL.icon, argz)
+            };
+            console.log('details:', details);
+            console.log('activity.discord_details:', activity.discord_details);
+        } else {
+            activity.discord_details = null;
+            console.log('details:',details);
+        }
+    }
+    static async refreshAppAssets(app_id, activity) {
+        const assets = await this.fetchAppAssets();
+        if (!assets.error) {
+            const asset_names = assets.map(e => e.name);
+            const img_1_id = asset_names.indexOf(getValue('app-img1-key'));
+            const img_2_id = asset_names.indexOf(getValue('app-img2-key'));
+            DekSelect.cache['image-select-one'].setOptions(asset_names, img_1_id);
+            DekSelect.cache['image-select-two'].setOptions(asset_names, img_2_id);
+            activity.discord_assets = {};
+            for (const asset of assets) {
+                const argz = {APP_ID: app_id, ASSET_ID: asset.id};
+                const data = dekita_rpc.format(API_URL.asset, argz);
+                activity.discord_assets[asset.name] = data;
+            }
+            console.log('activity.discord_assets:', activity.discord_assets);
+        } else {
+            activity.discord_assets = null;
+            console.log('assets:', assets);
+        }
+    }
+    static async fetchAppDetails() {
+        const APP_ID = getValue('app-id');
+        const argz = [API_URL.rpc, {APP_ID}];
+        return await this.fetchJSON(...argz);
+    }
+    static async fetchAppAssets() {
+        const APP_ID = getValue('app-id');
+        const argz = [API_URL.assets, {APP_ID}];
+        return await this.fetchJSON(...argz);
+    }
+    static async fetchJSON(url, obj) {
+        try {
+            const api = dekita_rpc.format(url, obj);
+            const result = await fetch(api);
+            if (!result.ok || result.status !== 200) {
+                throw new Error("BAD FETCH REPLY!");
+            }
+            return await result.json();
+        } catch (error) {
+            return {error};
+        }
+    }
+    static _checkResponseOK(response) {
+        return response && response.ok && response.status === 200;
     }
     static async updateDisabledElements() {
         await this.updateSaveButton();
@@ -488,7 +601,6 @@ class RPCGUI {
     }
     static async setInputsFromActivity() {
         const activity = DB.getActivityData();
-        setValue('app-name', activity.name);
         setValue('app-image', activity.image);
         setValue('app-rpc-frequency', activity.rpc_freq);
         setValue('app-id', activity.app_id);
@@ -527,21 +639,51 @@ class RPCGUI {
         const temp_stats = {'{p}':'??', '{players}':'??', '{s}':'??', '{servers}':'??'};
         app_preview_details.innerText = dekita_rpc.format(activity.details, temp_stats);
         app_preview_state.innerText = dekita_rpc.format(activity.state, temp_stats);
-        app_preview_image.src = activity.image;
         app_preview_btn1.classList.add('d-none');
         const url1valid = dekita_rpc.isValidURL(activity.buttons[0].url);
         app_preview_btn1.href = url1valid ? activity.buttons[0].url : null;
-        app_preview_btn1.innerText = activity.buttons[0].label;
+        app_preview_btn1.innerHTML = activity.buttons[0].label;
         app_preview_btn1.classList.remove('disabled')
         if (!url1valid) app_preview_btn1.classList.add('disabled');
         if (activity.buttons[0].enabled) app_preview_btn1.classList.remove('d-none');
         app_preview_btn2.classList.add('d-none')
         const url2valid = dekita_rpc.isValidURL(activity.buttons[1].url);
         app_preview_btn2.href = url2valid ? activity.buttons[1].url : null;
-        app_preview_btn2.innerText = activity.buttons[1].label;
+        app_preview_btn2.innerHTML = activity.buttons[1].label;
         app_preview_btn2.classList.remove('disabled')
         if (!url2valid) app_preview_btn2.classList.add('disabled');
         if (activity.buttons[1].enabled) app_preview_btn2.classList.remove('d-none');
+        const container = getElement('preview-image-container');
+        const textrow = getElement('preview-image-textrow');
+        textrow.classList.remove('ps-0');
+        container.classList.add('d-none');
+        container.classList.remove('fix-w');
+        if (activity.images[0].enabled || activity.images[1].enabled) {
+            container.classList.remove('d-none');
+            textrow.classList.add('ps-0');
+        }
+        if (activity.images[0].enabled) {
+            app_preview_image_large.src = activity.discord_assets[activity.images[0].key];
+            app_preview_image_large.classList.remove('d-none');
+            app_preview_image_large.classList.remove('img-48');
+        } else {
+            app_preview_image_large.classList.add('d-none');
+        }
+        if (activity.images[1].enabled) {
+            if (!activity.images[0].enabled) {
+                app_preview_image_large.src = activity.discord_assets[activity.images[1].key];
+                app_preview_image_large.classList.remove('d-none');
+                app_preview_image_large.classList.add('img-48');
+                app_preview_image_small.classList.add('d-none');
+                container.classList.add('fix-w');
+            } else {
+                app_preview_image_small.src = activity.discord_assets[activity.images[1].key];
+                app_preview_image_small.classList.remove('d-none');
+            }
+        } else {
+            app_preview_image_small.classList.add('d-none');
+        }
+        getElement("app-preview-name").innerText = activity.discord_details.name;
     }
     static async makeAngry(element_or_id) {
         if (!element_or_id.id) {
@@ -562,12 +704,13 @@ class RPCGUI {
 class RPCActivity {
     constructor() {
         // rpc tool activity data:
-        this.name = "Activity Name/ID";
+        this.app_id = "Discord Application ID";
         this.image = "img/rpc-icon.png";
         this.rpc_freq = 60;
-        this.app_id = "Discord Application ID";
         this.api_url = "API URL";
         this.api_freq = 300;
+        this.discord_details=null;
+        this.discord_assets=null;
         // actual rpc activity: 
         this.details = "Discord RPC Tool";
         this.state = "By DekitaRPG";
@@ -588,6 +731,7 @@ class RPCActivity {
 * ■ Various Event Listeners:
 */
 document.addEventListener('DOMContentLoaded', async event => {
+    dekita_rpc.sendReadyEvent('main');
     dekita_rpc.renderer.on('no-internet', (event, arg) => {
         RPCGUI.showAlert("Internet connection was lost!", 'danger', true);
         RPCTool.stopLoop();
@@ -595,7 +739,7 @@ document.addEventListener('DOMContentLoaded', async event => {
     DB.loadOrInit();
     if (!DB.length) { // first time app is accessed: 
         RPCTool.createNewActivity();
-        dekita_rpc.openChildWindow('help.html');
+        dekita_rpc.openChildWindow('help');
     }
     await RPCTool.initialize();
 });
@@ -665,6 +809,6 @@ app_settings_btn.addEventListener('click', event => {
     app_settings_btn.blur();
 });
 app_info_btn.addEventListener('click', event => {
-    dekita_rpc.openChildWindow('help.html');
+    dekita_rpc.openChildWindow('help');
     app_info_btn.blur();
 });

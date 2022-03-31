@@ -3,32 +3,40 @@
 * author: dekitarpg@gmail.com
 */
 
-// set true to show dev consoles
-const SHOW_DEBUG = false; 
-
 /**
 * ■ Various Requirements:
 */
 const {app, dialog, ipcMain, BrowserWindow, Menu, Tray} = require('electron');
-const DataStore = require('./libs/data-store');
 const path = require('path');
-const HTML_PATH = path.join(__dirname, 'app.html');
+const config = require('./config');
+const EJS = require('ejs-electron');
+const DataStore = require('./libs/data-store');
+const HTML_PATH = path.join(__dirname, 'main.ejs');
 const ICON_PATH = path.join(__dirname, 'img/rpc-icon.ico');
 const PRELOAD_PATH = path.join(__dirname, 'preload.js');
 const MAIN_WINDOW_SIZE = {w: 1024, h: 574};
 const CHILD_WINDOW_SIZE = {w: 640, h: 420};
 // DEKRPC stores the running app windows/tray:
 const DEKRPC = {tray:null, main:null, child:null};
-// Application variable configuration 
-const app_config = new DataStore({  // DONT REMOVE!
-    filename: "[dekita.rpc.data]",  // DONT REMOVE!
-    defaults: {                     // DONT REMOVE!
-        'auto-boot': false,     // DONT REMOVE!
-        'auto-play': false,     // DONT REMOVE!
-        'auto-tiny': false,     // DONT REMOVE!
-        'tiny-tray': true,      // DONT REMOVE!
-    }                     // DONT REMOVE!
-});                       // DONT REMOVE!
+
+// app_config:
+// Stores application configuration that can be 
+// manually changed by app users. DONT REMOVE!
+const app_config = new DataStore({
+    filename: "[dekita.rpc.data]",
+    defaults: config.defaults,
+});
+
+// set default ejs data:
+EJS.data('devmode', config.dev_mode);
+EJS.data('appname', (() => {
+    if (!config.dev_mode) app.getName();
+    return require('../package.json').build.productName;
+})());
+EJS.data('version', (() => {
+    if (!config.dev_mode) app.getVersion();
+    return require('../package.json').version;
+})());
 
 /**
 * ■ ipc handlers:
@@ -61,13 +69,16 @@ ipcMain.handle("open-child-window", async (event, ...args) => {
 ipcMain.handle("reload-child-window", async (event) => {
     return DEKRPC.child ? (DEKRPC.child.reload() || true) : false;
 });
+ipcMain.handle("window-fully-rendered", async (event, windowname) => {
+    DEKRPC[windowname].emit('window-fully-rendered');
+});
 
 /**
 * ■ App/Windows Functions:
 */
 
 // Create the main browser window.
-function createMainWindow() {
+async function createMainWindow() {
     if (DEKRPC.main) return DEKRPC.main.reload();
     DEKRPC.tray = null;
     let reloading = false;
@@ -88,7 +99,6 @@ function createMainWindow() {
         },
     });
     DEKRPC.main.setMenu(null);
-    DEKRPC.main.loadFile(HTML_PATH);
     DEKRPC.main.on('minimize', event => {
         if (app_config.get('tiny-tray')) {
             DEKRPC.main.setSkipTaskbar(true);
@@ -103,29 +113,35 @@ function createMainWindow() {
             DEKRPC.tray = null;
         }
         event.preventDefault();
-        // main_window.reload();
         reloading = true;
     });  
     DEKRPC.main.on('closed', event => {
         if (DEKRPC.child) DEKRPC.child.close();
     });
-    DEKRPC.main.webContents.on('dom-ready', ()=>{
+    DEKRPC.main.on('window-fully-rendered', ()=>{
         if (!reloading && app_config.get('auto-tiny')) {
             DEKRPC.main.minimize();
         } else {
             DEKRPC.main.show();
         }
-        if (SHOW_DEBUG){
+        if (config.dev_mode){
             DEKRPC.main.webContents.openDevTools();
         }
         reloading = false;
     });
+    DEKRPC.main.webContents.on('before-input-event', (event, input) => {
+        if (input.control && input.key.toUpperCase() === 'R') {
+            loadFileToWindow('app', DEKRPC.main);
+            event.preventDefault();
+        }
+    });
+    await loadFileToWindow('app', DEKRPC.main);
 };
 
 // Creates a child window (not a true child) and accepts an html file path
 // to allow for easily opening additional windows/pages.
 // This is used for creating the app help guide window.
-function createChildWindow(html_path, width=null, height=null, debug=SHOW_DEBUG){
+async function createChildWindow(html_path, width=null, height=null, debug=config.dev_mode){
     if (!width) width = CHILD_WINDOW_SIZE.w;
     if (!height) height = CHILD_WINDOW_SIZE.h;
     if (DEKRPC.child) return DEKRPC.child.reload();
@@ -150,10 +166,17 @@ function createChildWindow(html_path, width=null, height=null, debug=SHOW_DEBUG)
         },
     });
     DEKRPC.child.setMenu(null);
-    DEKRPC.child.loadURL(path.join(__dirname, html_path));
-    if (debug) DEKRPC.child.webContents.openDevTools();
     DEKRPC.child.on('closed', () => DEKRPC.child = null);
-    DEKRPC.child.webContents.on('dom-ready', () => DEKRPC.child.show());
+    DEKRPC.child.on('window-fully-rendered', () => DEKRPC.child.show());
+    DEKRPC.child.webContents.on('before-input-event', (event, input) => {
+        if (input.control && input.key.toUpperCase() === 'R') {
+            loadFileToWindow(page, DEKRPC.child);
+            event.preventDefault();
+        }
+    });
+    const page = html_path.split('.').shift();
+    await loadFileToWindow(page, DEKRPC.child);
+    if (debug) DEKRPC.child.webContents.openDevTools();
 };
 
 // creates a system tray icon and defines its options
@@ -180,6 +203,19 @@ function updateAutoBootMode(){
     app.setLoginItemSettings({openAtLogin});    
 }
 
+function capitalize([char1, ...rest]) {
+    return char1.toUpperCase() + rest.join("");
+}
+
+async function loadFileToWindow(page, windoe) {
+    EJS.data('theme', await app_config.get('gui-theme'));
+    EJS.data('color', await app_config.get('gui-color'));
+    EJS.data('title',page !== 'app'?capitalize(page):'');
+    EJS.data('page', page);
+    if (windoe.isVisible()) windoe.reload();
+    else windoe.loadFile(HTML_PATH);
+}
+
 // create window when electron has initialized.
 app.on('ready', createMainWindow);
 
@@ -197,3 +233,13 @@ app.on('activate', () => {
 
 // Keep running even if we hit unhandled rejections
 process.on('unhandledRejection', console.error);
+
+// Hot reloading
+if (config.enable_reloader) {
+    require('electron-reloader')(module, {
+        watchRenderer: true,
+        debug: config.dev_mode,
+    });
+}
+
+// Whitney, Ginto,"Helvetica Neue",Helvetica,Arial,sans-serif

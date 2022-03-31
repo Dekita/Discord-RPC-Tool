@@ -1,15 +1,16 @@
 [<img src="src/img/banner.png" class="img-fluid img-thumbnail mx-auto d-block" onerror="removeSRC(this)">](https://dekitarpg.com/rpc)
 
 ### Table of Contents
-- [How to install](#how-to-install)  
-- [What is Discord RPC Tool](#what-is-discord-rpc-tool)  
-- [RPC Tool Features](#rpc-tool-features)  
-- [Launching your first activity](#launching-your-first-activity)  
-- [Main Activity Customization](#main-activity-customization)  
-- [Activity Image Customization](#activity-image-customization)  
-- [Activity Button Customization](#activity-button-customization)  
-- [Advanced Activity Text](#advanced-activity-text)  
-- [Important Notes](#important-notes)  
+- [How to install](#how-to-install) 
+- [What is Discord RPC Tool](#what-is-discord-rpc-tool) 
+- [RPC Tool Features](#rpc-tool-features) 
+- [Latest Changelog](#changelog-v0091) 
+- [Launching your first activity](#launching-your-first-activity) 
+- [Main Activity Customization](#main-activity-customization) 
+- [Activity Image Customization](#activity-image-customization) 
+- [Activity Button Customization](#activity-button-customization) 
+- [Advanced Activity Text](#advanced-activity-text) 
+- [Important Notes](#important-notes) 
 
 <hr class="mt-1">
 
@@ -27,6 +28,23 @@ RPC Tool is a simple application that allows you to easily communicate with the 
 - Optional auto start activity on launch
 - Optional auto minimize app on launch
 - Optional auto launch app on system boot
+<hr class="mt-1">
+
+### Changelog (v0.0.91)
+- Load application name and assets from app id
+- Image key input area changed to asset dropdown
+- Added theme options based on discord (x2 dark, x2 light)
+- Altered gui elements to be more in line with discord.
+- Removed activity name (was only used in the RPC Tool app)
+- Moved API URL and Frequency settings into advanced section
+- Updated preview display to use image assets
+<hr class="mt-1">
+
+### Coming Soon
+- Change logic to allow for 'real-time' preview
+- Better implementation of themes
+- Configurable auto-save option
+- Auto updater?
 <hr class="mt-1">
 
 ### How to install 
@@ -74,33 +92,12 @@ After entering your unique app id, press the `Save`, then `Launch` buttons. Afte
 Once you have launched your first activity, you are ready to begin properly customizing things. See the details below for each customizable option.
 <hr class="mt-1">
 
-###### Activity Name/ID
-This used only for the RPC Tool application. You can set this value to whatever you want. The name does not have to be unique. This does not affect the name of your activity on Discord. 
+###### Application ID 
+Should be set to your discord application id. You can get this from the Discord developer portal after you create your application.
 <hr class="mt-1">
 
 ###### Activity Image [default=`src/img/icon.png`]
 This used only for the RPC Tool application. The selected image is used only for the Activity icon within the application interface. 
-<hr class="mt-1">
-
-###### RPC Update Frequency [default=`15`]
-The frequency in seconds for how often the application should send data to the Discord Rich Presence Client.
-<hr class="mt-1">
-
-###### Application ID 
-Should be set to your discord application id.
-<hr class="mt-1">
-
-###### Custom API URL
-
-| :exclamation: This feature is optional. Don't know what it does? You dont need it! |
-|---|
-
-Set this to a url that returns valid json data, then you can use the returned json object properties when setting your activity text. [[see here for details]](#advanced-activity-text)
-
-<hr class="mt-1">
-
-###### API Update Frequency [default=`300`]
-The frequency in seconds for how often the application should poll the `Custom API URL` for its json data.
 <hr class="mt-1">
 
 ###### Activity Text: Line 1 + 2
@@ -121,6 +118,27 @@ Activity images can be freely disabled/enabled within the RPC Tool application, 
 |---|
 
 Each activity can also display upto two customizable buttons. Each enabled button must have a valid url and name or discord will not be able to process it correctly. Similar to activity images, buttons can easily be enabled and disabled.
+<hr class="mt-1">
+
+###### Custom API URL
+
+| :exclamation: This feature is optional. Don't know what it does? You dont need it! |
+|---|
+
+Set this to a url that returns valid json data, then you can use the returned json object properties when setting your activity text. [[see here for details]](#advanced-activity-text)
+
+<hr class="mt-1">
+
+###### API Update Frequency [default=`300`]
+The frequency in seconds for how often the application should poll the `Custom API URL` for its json data.
+<hr class="mt-1">
+
+###### RPC Update Frequency [default=`15`]
+The frequency in seconds for how often the application should send data to the Discord Rich Presence Client.
+<hr class="mt-1">
+
+###### Activity Timestamps
+Shows the duration that the current activity has been active.
 <hr class="mt-1">
 
 ### Advanced Activity Text

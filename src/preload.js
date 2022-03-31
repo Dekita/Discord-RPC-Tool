@@ -81,6 +81,9 @@ class drpc {
     static async reloadChildWindow() {
         return await electron.ipcRenderer.invoke('reload-child-window');
     }
+    static sendReadyEvent(windowname) {
+        electron.ipcRenderer.invoke('window-fully-rendered', windowname);
+    }    
     static async tryReadFile(filename) {
         try {
             const file = path.join(__dirname, filename);
@@ -105,7 +108,11 @@ class drpc {
     }
     // returns true if given string is a valid url
     static isValidURL(string) {
-        return /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g.test(String(string));
+        let url;
+        try{url = new URL(string);
+        } catch { return false };
+        return url.protocol.startsWith('http');
+        // return /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g.test(String(string));
     }
     // returns true if given string is a valid image url
     static isImageURL(string) {
@@ -116,10 +123,8 @@ class drpc {
     // eg: format("hi NAME!", {NAME: 'mr hankey'});
     static format(str, objekt) {
         const regstr = Object.keys(objekt).join("|");
-        const regexp = new RegExp(regstr,"gi");
-        return str.replace(regexp, matched => {
-            return objekt[matched.toLowerCase()];
-        });
+        const regexp = new RegExp(regstr, "gi");
+        return str.replace(regexp, matched => objekt[matched]);
     }
 }
 

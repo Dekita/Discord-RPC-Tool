@@ -3,6 +3,9 @@
     background-color: darkgray;
     color: #eeeeee;
 }
+body, theme-bg, .theme-border, .btn, .form-control {
+    transition: color 1s, background-color 1s, border-color 1s;
+}
 .theme-bg.dark1 {
     background-color: #3C403D;
     color: #DADED4;
@@ -385,3 +388,104 @@ fieldset[disabled] .pastel .form-success:active,fieldset[disabled] .pastel .form
 .dekcheckbox.check-drk-green ul li:hover i  { color: #206D0C; }
 .dekcheckbox.check-yellow ul li:hover i     { color: #C8BF16; }
 .dekcheckbox.check-drk-yellow ul li:hover i { color: #6D680C; }
+
+
+
+
+
+
+
+/*########################
+* ■ Bootstrap button select:
+* http://bootsnipp.com/snippets/GXagX
+* ######################*/
+.btn-select {
+    position: relative;
+    /* padding: 0; */
+    min-width: 80px;
+    width: 100%;
+    border-radius: 9px;
+    /* min-height: 28px; */
+
+    min-height: calc(1.5em + 0.5rem + 2px);
+    padding: 0;
+    /* font-size: inherit;
+    font-weight: inherit;
+    font-family: inherit;
+    */
+    line-height: 1.5; 
+    border-color: inherit;
+
+    /* background-color: #fff; */
+    cursor: pointer;
+}
+.btn-select .btn-select-value {
+  padding: 0.25rem 0.5rem;
+  display: block;
+  position: absolute;
+  /* left: 0;
+  right: 34px; */
+  font-size: inherit;
+  font-weight: inherit;
+  font-family: inherit;
+  width: 80%;
+  float: left;
+  /* text-align: left; */
+  text-overflow: ellipsis;
+  overflow: hidden;
+  border: none !important;
+  border-top-left-radius: inherit;
+  border-bottom-left-radius: inherit;
+  box-shadow: none !important;
+  cursor: inherit;
+}
+.btn-select .btn-select-arrow {
+  border-top-right-radius: inherit;
+  border-bottom-right-radius: inherit;
+  border-left: 1px solid;  
+  border-color: inherit;
+  float: right;
+  padding: 0.25rem 0.5rem;
+  top: 0;
+}
+.btn-select ul {
+  display: none;
+  background-color: #E4E4E4;
+  color: black;
+  clear: both;
+  list-style: none;
+  padding: 0;
+  margin-top: .1em;
+  border-radius: inherit;
+  /* border-top: none !important; */
+  position: absolute;
+  left: -1px;
+  right: -1px;
+  top: 37px;
+  z-index: 9999;
+}
+.btn-select ul li {
+  border-radius: 0;
+  padding: 0.25rem 0.75rem;
+  text-align: left;
+}
+
+.btn-select ul li:first-child {
+  border-top-right-radius: inherit;
+  border-top-left-radius: inherit;
+}
+.btn-select ul li:last-child {
+  border-bottom-right-radius: inherit;
+  border-bottom-left-radius: inherit;
+}
+/* .btn-select ul li :not(:first-child),
+.btn-select ul li :not(:last-child) {
+  border-radius: 0;
+} */
+
+.btn-select ul li:hover {
+  background-color: #f4f4f410;
+}
+.btn-select ul li.selected {
+  color: #E4E4E4;
+}
