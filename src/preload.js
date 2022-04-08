@@ -1,5 +1,5 @@
 /**
-* system: Discord RPCTool
+* system: Discord RPC Tool
 * author: dekitarpg@gmail.com
 */
 
@@ -35,10 +35,17 @@ class config {
 * such as opening external urls, and rpc communications
 */
 class drpc {
-    static get version(){ return 'beta' }
     static get renderer(){ return electron.ipcRenderer}
+    static get colors(){ return require('color-convert')}
+    static get chroma(){ return require('chroma-js')}
+    static async getAppName(){ 
+        return await this.renderer.invoke('get-name');
+    }
+    static async getAppVersion(){ 
+        return await this.renderer.invoke('get-version');
+    }
     static async openExternal(path, options) {
-        return electron.shell.openExternal(path, options)
+        return electron.shell.openExternal(path, options);
     }
     static async login(clientId, callback){
         try {
@@ -53,7 +60,8 @@ class drpc {
         }
     }
     static async logout(){
-        if (rpc) await rpc.destroy();
+        if (rpc) rpc.destroy();
+        rpc = null;
     }
     static async updateStats(url, cache_time = 1000 * 60 * 5) {
         try {
@@ -67,23 +75,39 @@ class drpc {
         return stats;
     }
     static async updateActivity(activity) {
-        return await rpc.setActivity(activity);
+        return await this.raceTimeout(rpc.setActivity(activity));
     }
     static async getAppPath(key='app') {
-        return await electron.ipcRenderer.invoke('get-path', key);
+        return await this.renderer.invoke('get-path', key);
     }
     static async openFileDialog() {
-        return await electron.ipcRenderer.invoke('openFileDialog');
+        return await this.renderer.invoke('openFileDialog');
+    }
+    static async saveFileForCSS(css_string) {
+        const filename = await this.renderer.invoke('saveFileDialog', ['css']);
+        if (filename.canceled) return;
+        this.trySaveFile(filename.filePath, css_string);
     }
     static async openChildWindow() {
-        return await electron.ipcRenderer.invoke('open-child-window', ...arguments);
+        return await this.renderer.invoke('open-child-window', ...arguments);
     }
     static async reloadChildWindow() {
-        return await electron.ipcRenderer.invoke('reload-child-window');
+        return await this.renderer.invoke('reload-child-window');
     }
     static sendReadyEvent(windowname) {
-        electron.ipcRenderer.invoke('window-fully-rendered', windowname);
-    }    
+        this.renderer.invoke('window-fully-rendered', windowname);
+    }
+    static performApplicationUpdate() {
+        this.renderer.invoke('install-update');
+    }
+    static async trySaveFile(filepath, data) {
+        try {
+            return await fs.promises.writeFile(filepath, data, 'utf8');
+        } catch (error) {
+            console.error(error)
+            return error.message;
+        }
+    }
     static async tryReadFile(filename) {
         try {
             const file = path.join(__dirname, filename);
@@ -125,6 +149,12 @@ class drpc {
         const regstr = Object.keys(objekt).join("|");
         const regexp = new RegExp(regstr, "gi");
         return str.replace(regexp, matched => objekt[matched]);
+    }
+    // race some promise against a timeout.
+    static raceTimeout(promise, timeout = 5000) {
+        return Promise.race([promise, new Promise((_, reject) => {
+            setTimeout(() => reject("timeout"), timeout);
+        })]);
     }
 }
 

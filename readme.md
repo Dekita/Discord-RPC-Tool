@@ -4,7 +4,7 @@
 - [How to install](#how-to-install) 
 - [What is Discord RPC Tool](#what-is-discord-rpc-tool) 
 - [RPC Tool Features](#rpc-tool-features) 
-- [Latest Changelog](#changelog-v0091) 
+- [Latest Changelog](#changelog-v0092) 
 - [Launching your first activity](#launching-your-first-activity) 
 - [Main Activity Customization](#main-activity-customization) 
 - [Activity Image Customization](#activity-image-customization) 
@@ -30,6 +30,13 @@ RPC Tool is a simple application that allows you to easily communicate with the 
 - Optional auto launch app on system boot
 <hr class="mt-1">
 
+### Changelog (v0.0.92)
+- Automatic Updater - make sure your always on the latest version
+- New theme creator - make the app look how you want it
+- System Notifications - if your activity stops, now you know
+- App now hosted on github, no more gumroad.  
+<hr class="mt-1">
+
 ### Changelog (v0.0.91)
 - Load application name and assets from app id
 - Image key input area changed to asset dropdown
@@ -42,9 +49,9 @@ RPC Tool is a simple application that allows you to easily communicate with the 
 
 ### Coming Soon
 - Change logic to allow for 'real-time' preview
-- Better implementation of themes
+- Various improvements to the underlying code
 - Configurable auto-save option
-- Auto updater?
+- More awesome themes
 <hr class="mt-1">
 
 ### How to install 
@@ -107,6 +114,10 @@ Text shown for the activity details and state (the first and second line of text
 ### Activity Image Customization
 Each activity can display upto two images, one large and one small. But before RPC Tool can display them properly, the image files must be uploaded onto the Discord developer portal's `Rich Presence => Art Assets` tab shown below. 
 <img src="src/img/discord-asset-page.png" class="img-fluid img-thumbnail mt-2" onerror="removeSRC(this)">
+
+| :exclamation: Refresh the Discord dev portal after adding images to make sure they are still there! |
+|---|
+
 The image key that you enter on the developer portal should match the image key you enter into the RPC Tool application. Note that the key is also case sensitive! 
 
 Activity images can be freely disabled/enabled within the RPC Tool application, where you can also define the text displayed when hovering over the image.

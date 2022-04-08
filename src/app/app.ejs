@@ -1,5 +1,5 @@
 
-<div class="h-100 px-2 thin-scroller" id="button-container" style="">
+<div class="h-100 px-2 thin-scroller darker-bg1" id="button-container" style="">
     <button class="btn btn-lg btn-secondary fw-bold border-white bg-white px-5">+</button>
 </div>
 <div class="d-flex w-100 h-100 p-3 pb-2 mx-auto flex-column" style="overflow-y:auto;">
@@ -8,23 +8,25 @@
             <img src="img/logo.png" class="img-fluid">
         </div>
         <nav class="nav nav-masthead justify-content-center float-md-end">
-            <a class="hover-secondary me-3" href="https://www.patreon.com/DekitaRPG"  data-bs-toggle="tooltip" title="Support Development on Patreon">
-                <i class="fab fa-2x fa-fw fa-patreon"></i>
+            <a class="hover-secondary me-2" href="https://www.patreon.com/DekitaRPG"  data-bs-toggle="tooltip" title="Support Development on Patreon">
+                <i class="fab fa-2x fa-fw fa-patreon"></i><br><strong>PATREON</strong>
             </a>
-            <a class="hover-secondary me-3" href="https://discord.gg/Gyb8r9Ghuu"  data-bs-toggle="tooltip" title="Support Server">
-                <i class="fab fa-2x fa-fw fa-discord"></i>
+            <a class="hover-secondary me-2" href="https://github.com/dekita/discord-rpc-tool"  data-bs-toggle="tooltip" title="Project Github">
+                <i class="fab fa-2x fa-fw fa-github"></i><br><strong>GITHUB</strong>
             </a>
-            <a class="hover-secondary me-3" href="https://github.com/dekita/discord-rpc-tool"  data-bs-toggle="tooltip" title="Project Github">
-                <i class="fab fa-2x fa-fw fa-github"></i>
+            <a class="hover-secondary me-2" href="https://dekitarpg.com" data-bs-toggle="tooltip" title="Visit Developer Website">
+                <i class="fas fa-2x fa-fw fa-globe"></i><br><strong>WEBSITE</strong>
             </a>
-            <a class="hover-secondary me-3" href="https://dekitarpg.com" data-bs-toggle="tooltip" title="Visit Developer Website">
-                <i class="fas fa-2x fa-fw fa-globe"></i>
+
+
+            <a class="hover-secondary me-2" href="https://discord.gg/Gyb8r9Ghuu"  data-bs-toggle="tooltip" title="Support Server">
+                <i class="fab fa-2x fa-fw fa-discord"></i><br><strong>SUPPORT</strong>
             </a>
-            <a class="btn border-0 me-3 no-shadow hover-secondary"  data-bs-toggle="tooltip" title="App Information" id="app-info-btn">
-                <i class="fas fa-2x fa-fw fa-info-circle"></i>
+            <a class="hover-secondary me-2"  data-bs-toggle="tooltip" title="App Information" id="app-info-btn">
+                <i class="fas fa-2x fa-fw fa-info-circle"></i><br><strong>INFO</strong>
             </a>
-            <a class="btn border-0 no-shadow hover-secondary"  data-bs-toggle="tooltip" title="Settings" id="app-settings-btn">
-                <i class="fas fa-2x fa-fw fa-cogs"></i>
+            <a class="hover-secondary"  data-bs-toggle="tooltip" title="Settings" id="app-settings-btn">
+                <i class="fas fa-2x fa-fw fa-cog"></i><br><strong>SETTINGS</strong>
             </a>
         </nav>
     </header>
@@ -37,32 +39,32 @@
                 <div class="row mb-1">
                     <small class="text-start m-1">General</small>
                     <div class="col pe-1" data-bs-toggle="tooltip" title="YOUR Discord Application ID">
-                        <input type="text" class="form-control form-control-sm theme-border" id="app-id" placeholder="Discord Application ID">
+                        <input type="text" class="form-control form-control-sm form-secondary" id="app-id" placeholder="Discord Application ID">
                     </div>
                     <div class="col ps-1" data-bs-toggle="tooltip" title="Activity image (only used for this app)">
-                        <input type="text" class="form-control form-control-sm theme-border" id="app-image" placeholder="img/icon.png">
+                        <input type="text" class="form-control form-control-sm form-secondary" id="app-image" placeholder="img/icon.png">
                     </div>
                 </div>
                 <div class="row mb-1">
                     <div class="col pe-1" data-bs-toggle="tooltip" title="Activity text: Line 1">
-                        <input type="text" class="form-control form-control-sm theme-border" id="app-details" placeholder="DiscordRPC by DekitaRPG">
+                        <input type="text" class="form-control form-control-sm form-secondary" id="app-details" placeholder="DiscordRPC by DekitaRPG">
                     </div>
                     <div class="col ps-1" data-bs-toggle="tooltip" title="Activity text: Line 2">
-                        <input type="text" class="form-control form-control-sm theme-border" id="app-state" placeholder="{servers} Servers | {players} Players">
+                        <input type="text" class="form-control form-control-sm form-secondary" id="app-state" placeholder="{servers} Servers | {players} Players">
                     </div>
                 </div>
                 <div class="row mb-1">
                     <small class="text-start m-1">Images</small>
                     <div class="col pe-1 d-none"> <!-- removed display: todo: remove fully -->
-                        <input type="text" class="form-control form-control-sm theme-border" id="app-img1-key" placeholder="large-image">
+                        <input type="text" class="form-control form-control-sm form-secondary" id="app-img1-key" placeholder="large-image">
                     </div>
                     <div class="col pe-1" data-bs-toggle="tooltip" title="Large image asset key">
-                        <select class="dekselect" id="image-select-one">
+                        <select class="dekselect dekselect-secondary" id="image-select-one">
                             <option>large-image</option>
                         </select>
                     </div>
                     <div class="col px-1" data-bs-toggle="tooltip" title="Text shown for large image">
-                        <input type="text" class="form-control form-control-sm theme-border" id="app-img1-text" placeholder="Some Text...">
+                        <input type="text" class="form-control form-control-sm form-secondary" id="app-img1-text" placeholder="Some Text...">
                     </div>
                     <div class="col-2" data-bs-toggle="tooltip" title="Enable/Disable large image">
                         <div class="dekcheckbox multicheck pt-1 pb-0 check-dark" id="app-rpc-img1-enabled">
@@ -72,15 +74,15 @@
                 </div>
                 <div class="row mb-1">
                     <div class="col pe-1 d-none"> <!-- removed display: todo: remove fully -->
-                        <input type="text" class="form-control form-control-sm theme-border" id="app-img2-key" placeholder="small-image">
+                        <input type="text" class="form-control form-control-sm form-secondary" id="app-img2-key" placeholder="small-image">
                     </div>
                     <div class="col pe-1" data-bs-toggle="tooltip" title="Small image asset key">
-                        <select class="dekselect" id="image-select-two">
+                        <select class="dekselect dekselect-secondary" id="image-select-two">
                             <option>small-image</option>
                         </select>
                     </div>
                     <div class="col px-1" data-bs-toggle="tooltip" title="Text shown for small image">
-                        <input type="text" class="form-control form-control-sm theme-border" id="app-img2-text" placeholder="Some Text...">
+                        <input type="text" class="form-control form-control-sm form-secondary" id="app-img2-text" placeholder="Some Text...">
                     </div>
                     <div class="col-2" data-bs-toggle="tooltip" title="Enable/Disable small image">
                         <div class="dekcheckbox multicheck pt-1 pb-0 check-dark" id="app-rpc-img2-enabled">
@@ -91,10 +93,10 @@
                 <div class="row mb-1">
                     <small class="text-start m-1">Buttons</small>
                     <div class="col pe-1" data-bs-toggle="tooltip" title="Text shown for Button 1">
-                        <input type="text" class="form-control form-control-sm theme-border" id="app-btn1-text" placeholder="Invite">
+                        <input type="text" class="form-control form-control-sm form-secondary" id="app-btn1-text" placeholder="Invite">
                     </div>
                     <div class="col px-1" data-bs-toggle="tooltip" title="URL when click Button 1">
-                        <input type="text" class="form-control form-control-sm theme-border" id="app-btn1-url" placeholder="https://dekitarpg.com">
+                        <input type="text" class="form-control form-control-sm form-secondary" id="app-btn1-url" placeholder="https://dekitarpg.com">
                     </div>
                     <div class="col-2" data-bs-toggle="tooltip" title="Enable/Disable Button 1">
                         <div class="dekcheckbox multicheck pt-1 pb-0 check-dark" id="app-rpc-btn1-enabled">
@@ -104,10 +106,10 @@
                 </div>
                 <div class="row mb-1">
                     <div class="col pe-1" data-bs-toggle="tooltip" title="Text shown for Button 2">
-                        <input type="text" class="form-control form-control-sm theme-border" id="app-btn2-text" placeholder="Website">
+                        <input type="text" class="form-control form-control-sm form-secondary" id="app-btn2-text" placeholder="Website">
                     </div>
                     <div class="col px-1" data-bs-toggle="tooltip" title="URL when click Button 2">
-                        <input type="text" class="form-control form-control-sm theme-border" id="app-btn2-url" placeholder="https://dekitarpg.com">
+                        <input type="text" class="form-control form-control-sm form-secondary" id="app-btn2-url" placeholder="https://dekitarpg.com">
                     </div>
                     <div class="col-2" data-bs-toggle="tooltip" title="Enable/Disable Button 2">
                         <div class="dekcheckbox multicheck pt-1 pb-0 check-dark" id="app-rpc-btn2-enabled">
@@ -118,13 +120,13 @@
                 <div class="row mb-3">
                     <small class="text-start m-1">Advanced</small>
                     <div class="col-4 pe-1" data-bs-toggle="tooltip" title="Custom URL to poll. Should return JSON data">
-                        <input type="text" class="form-control form-control-sm theme-border" id="app-api-url" placeholder="http://localhost/bot-stats">
+                        <input type="text" class="form-control form-control-sm form-secondary" id="app-api-url" placeholder="http://localhost/bot-stats">
                     </div>
                     <div class="col-2 px-1" data-bs-toggle="tooltip" title="URL Poll Frequency (seconds)">
-                        <input type="number" step="1" min="60" class="form-control form-control-sm theme-border" id="app-api-frequency" placeholder="300">
+                        <input type="number" step="1" min="60" class="form-control form-control-sm form-secondary" id="app-api-frequency" placeholder="300">
                     </div>
                     <div class="col-2 ps-1" data-bs-toggle="tooltip" title="RPC Update Frequency (seconds)">
-                        <input type="number" step="1" min="15" class="form-control form-control-sm theme-border" id="app-rpc-frequency" placeholder="15">
+                        <input type="number" step="1" min="15" class="form-control form-control-sm form-secondary" id="app-rpc-frequency" placeholder="15">
                     </div>
                     <div class="col-4" data-bs-toggle="tooltip" title="Enable/Disable Activity Timestamp">
                         <div class="dekcheckbox multicheck pt-1 pb-0 check-dark" id="app-rpc-timestamp-enabled">
@@ -172,7 +174,7 @@
                                     <div class="col-4 position-relative" id="preview-image-container">
                                         <img src="img/icon.png" class="img-fluid rounded-circle" id="app-preview-image">
                                         <div class="position-absolute end-0 pe-1" style="bottom: -2px;">
-                                            <img src="img/icon.png" class="img-fluid img-thumbnail rounded-circle" id="app-preview-image-sm"  style="height: 28px;">
+                                            <img src="img/icon.png" class="img-fluid img-thumbnail rounded-circle" id="app-preview-image-sm"  style="height: 26px; padding: 2px;">
                                         </div>
                                     </div>
                                     <div class="col mb-2" id="preview-image-textrow">
@@ -244,30 +246,29 @@
                 <i class="far fa-2x fa-fw fa-window-close"></i>
             </button>
         </div>
-        <div class="modal-body">
-            <div class="row text-start">
-                <div class="col-2"></div>
+        <div class="modal-body text-start">
+            <div class="row px-5">
                 <div class="col-3">
-                    <strong>Theme</strong>
-                    <div class="dekcheckbox check-dark idcheck" id="appopts-theme">
-                        <ul class="mb-0">
-                            <li class="checked">Darkcord1</li>
-                            <li class="">Darkcord2</li>
-                            <li class="">Lightcord1</li>
-                            <li class="">Lightcord2</li>
-                            <!-- 
-                            <li class="">Dark1</li>
-                            <li class="">Dark2</li>
-                            <li class="">Dark3</li>
-                            <li class="">Light1</li>
-                            <li class="">Light2</li>
-                            <li class="">Light3</li> 
-                            -->
-                        </ul>
-                    </div>
+                    <strong>Theme:</strong>
                 </div>
-                <div class="col">
-                    <strong>System</strong>
+                <div class="col-6">
+                    <select class="dekselect dekselect-secondary" id="appopts-theme-select">
+                    <% for (const theme of themes) { %>
+                        <option><%= theme %></option>
+                    <% } %>
+                    </select>
+                </div>
+                <div class="col-3 pt-1 text-end">
+                    <a class="hover-secondary"  data-bs-toggle="tooltip" title="Theme Customization" id="app-themes-btn">
+                        <i class="fas fa-paint-roller"></i> <strong>custom</strong>
+                    </a>
+                </div>
+            </div>
+            <div class="row pt-3 px-5">
+                <div class="col-3">
+                    <strong>System:</strong>
+                </div>
+                <div class="col-7">
                     <div class="dekcheckbox check-dark multicheck" id="appopts-auto-boot">
                         <ul class="mb-0"><li>Start after system boot</li></ul>
                     </div>
@@ -282,10 +283,9 @@
                     </div>
                 </div>
             </div>
-            <div class="row pt-2">
-                <div class="col-12">
 
-                </div>
+
+            <div class="row pt-2">
                 <div class="col d-none">
                     <b>Colors</b>
                     <div class="dekcheckbox check-dark idcheck" id="appopts-color">
@@ -293,7 +293,7 @@
                             <li class="checked">Default</li>
                             <li class="">Pastel</li>
                         </ul>
-                        </div>
+                    </div>
                 </div>
             </div>
         </div>

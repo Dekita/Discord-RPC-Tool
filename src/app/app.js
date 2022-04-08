@@ -1,5 +1,5 @@
 /**
-* system: Discord RPCTool
+* system: Discord RPC Tool
 * author: dekitarpg@gmail.com
 */
 
@@ -16,9 +16,36 @@ async function setCheckboxEnabled(id, enabled=false) {
     await RPCGUI.dekcheckboxes[id].setActive(enabled ? 0 : null);
 }
 
+// System Notifications:
+async function getNotifyPermission() {
+    if (Notification.permission === "denied") return false;
+    if (Notification.permission === "granted") return true;
+    const permission = await Notification.requestPermission();
+    return permission === "granted";
+}
+async function popNotification(title, body, icon='img/icon.png') {
+    if (!(await getNotifyPermission())) return;
+    const note = new Notification(title, {body, icon});
+    note.addEventListener('click', async () => {
+        console.log('clicked notificator!');
+    });
+    note.addEventListener('close', async () => {
+        console.log('closed notificator!');
+    });
+    note.addEventListener('error', async (error) => {
+        console.log('notificator error:', error);
+    });
+    note.addEventListener('show', async () => {
+        console.log('notificator shown!');
+    });
+    RPCGUI.showAlert(body, 'danger', true);
+    setTimeout(note.close(), 10 * 1000);
+}
+
 /**
-* ■ Page Elements:
+* ■ Common Page Elements:
 */
+const app_id = getElement('app-id');
 const alert_notification_area = getElement('alert-area');
 const confirm_change_activity = getElement('confirm-change-activity');
 const save_activity_btn = getElement('save-activity');
@@ -32,6 +59,7 @@ const delete_activity_modal = getModal('delete-activity-modal');
 const app_settings_btn = getElement('app-settings-btn');
 const settings_modal = getModal('settings-modal');
 const app_info_btn = getElement('app-info-btn');
+const app_theme_btn = getElement('app-themes-btn');
 const app_preview_details = getElement('app-preview-details');
 const app_preview_state = getElement('app-preview-state');
 const app_preview_image_large = getElement('app-preview-image');
@@ -104,7 +132,7 @@ class RPCTool {
         await RPCGUI.setupDekcheckBoxes();
         await RPCGUI.setupTooltips();
         await RPCGUI.setInputsFromActivity();
-        await RPCGUI.setupChangeListeners();
+        await RPCGUI.validateAppData();
         await RPCGUI.updatePreview();
         this.flagSaved();
         if (await app_config.get('auto-play')) {
@@ -292,15 +320,28 @@ class RPCTool {
         if (db_activity.timestamp) {
             activity.startTimestamp = this._running_since;
         }
-        const timeout = () => this.updateLoop();
-        const freq = db_activity.rpc_freq * 1000;
-        await dekita_rpc.updateActivity(activity);
-        this._loop_handle = setTimeout(timeout, freq);
-        const thistime = (new Date()).toLocaleString();
-        RPCGUI.showAlert(`Last RPC Update: ${thistime}`, 'success', true);
+        
+        try {
+            if (!navigator.onLine) throw new Error("offline");
+            await dekita_rpc.updateActivity(activity);
+            const timeout = () => this.updateLoop();
+            const freq = db_activity.rpc_freq * 1000;
+            this._loop_handle = setTimeout(timeout, freq);
+            const thistime = (new Date()).toLocaleString();
+            RPCGUI.showAlert(`Last RPC Update: ${thistime}`, 'success', true);
+        } catch (error) {
+            let message;
+            switch (error) {
+                case 'timeout': message = `RPC Disconnected because of ${error}!`; break;
+                case 'offline': message = `Internet connection was lost!`; break;
+                default: message = `RPC Error: ${error}!`; break;
+            }
+            popNotification('Oh Noes!', message);
+            this.stopLoop(true);
+        }
     }
-    static async stopLoop() {
-        if (!this._is_running) return;
+    static async stopLoop(forced) {
+        if (!forced && !this._is_running) return;
         if (this._loop_handle) clearTimeout(this._loop_handle);
         await dekita_rpc.logout();
         this.flagStopped();
@@ -344,29 +385,6 @@ class RPCGUI {
             const enabled = await app_config.get(id);
             this.dekcheckboxes[id].setActive(enabled ? 0 : null);
         }
-
-        // theme stuff:
-        const ENABLED_THEMES = [
-            'darkcord1','darkcord2',
-            'lightcord1','lightcord2',
-            // 'dark1','dark2','dark3',
-            // 'light1','light2','light3'
-        ];
-        const ENABLED_COLORS = [
-            'default', 'pastel'
-        ];
-        const theme = await app_config.get('gui-theme');
-        const color = await app_config.get('gui-color');
-        // remove all classes before setting
-        document.body.classList.remove(...ENABLED_THEMES.filter(e => e !== theme));
-        document.body.classList.remove(...ENABLED_COLORS.filter(e => e !== color));
-
-        (new DekCheckBox('appopts-theme', async value => {
-            await updateTheme(ENABLED_THEMES[!ENABLED_THEMES[value] ? 0 : value]);
-        })).setActive(ENABLED_THEMES.indexOf(theme));
-        (new DekCheckBox('appopts-color', async value => {
-            await updateThemeColors(ENABLED_COLORS[!ENABLED_COLORS[value] ? 0 : value]);
-        })).setActive(ENABLED_COLORS.indexOf(color));
     }
     static async updateCheckboxText(id, enabled) {
         let element = getElement(`${id}-text`);
@@ -384,47 +402,9 @@ class RPCGUI {
     } 
     static async setupTooltips() {
         const query = '[data-bs-toggle="tooltip"]';
-        const options = {placement: 'bottom', trigger: 'hover focus'};
+        const options = {placement: 'bottom', trigger: 'hover focus', delay: 50};
         const tooltips = [].slice.call(document.querySelectorAll(query));
         tooltips.map(e => new bootstrap.Tooltip(e, options));
-    }
-    static async setupChangeListeners() {
-        [   'app-image',
-            'app-rpc-frequency', 
-            'app-id',
-            'app-api-url', 
-            'app-api-frequency',
-            'app-details', 
-            'app-state',
-            'app-img1-key', 
-            'app-img1-text',
-            'app-img2-key', 
-            'app-img2-text',
-            'app-btn1-text', 
-            'app-btn1-url',
-            'app-btn2-text', 
-            'app-btn2-url',
-        ].forEach(id => {
-            const element = getElement(id);
-            element.addEventListener('input', async ()=>{
-                RPCTool.flagUnsaved();
-                this.updatePreview();
-            });
-        });
-        DekSelect.cache['image-select-one'].addEventListener('change', event => {
-            setValue('app-img1-key', event.target.value);
-            RPCTool.flagUnsaved();
-        });
-        DekSelect.cache['image-select-two'].addEventListener('change', event => {
-            setValue('app-img2-key', event.target.value);
-            RPCTool.flagUnsaved();
-        });
-        const app_id = getElement('app-id');
-        app_id.addEventListener('change', async ()=>{
-            // fetch app informations: 
-            this.validateAppData();
-        });
-        this.validateAppData();
     }
     static async validateAppData(forced=false) {
         const app_id = getValue('app-id');
@@ -443,11 +423,8 @@ class RPCGUI {
                 name, description, summary,
                 icon: dekita_rpc.format(API_URL.icon, argz)
             };
-            console.log('details:', details);
-            console.log('activity.discord_details:', activity.discord_details);
         } else {
             activity.discord_details = null;
-            console.log('details:',details);
         }
     }
     static async refreshAppAssets(app_id, activity) {
@@ -585,9 +562,7 @@ class RPCGUI {
     }
     static createProfileButton(options) {
         const btn = document.createElement('button');
-        btn.classList.add('btn', 'btn-lg', 'btn-bg', 'fw-bold', 'mt-3', 'p-0');
-        btn.style.height = '58px';
-        btn.style.width = '58px';
+        btn.classList.add('btn', 'btn-lg', 'btn-bg', 'fw-bold', 'mt-3', 'p-0', 'btn-58');
         if (options.image) {
             const image = document.createElement('img');
             image.src = options.image;
@@ -683,7 +658,7 @@ class RPCGUI {
         } else {
             app_preview_image_small.classList.add('d-none');
         }
-        getElement("app-preview-name").innerText = activity.discord_details.name;
+        getElement("app-preview-name").innerText = activity?.discord_details?.name || "App Name";
     }
     static async makeAngry(element_or_id) {
         if (!element_or_id.id) {
@@ -730,19 +705,54 @@ class RPCActivity {
 /**
 * ■ Various Event Listeners:
 */
-document.addEventListener('DOMContentLoaded', async event => {
-    dekita_rpc.sendReadyEvent('main');
-    dekita_rpc.renderer.on('no-internet', (event, arg) => {
-        RPCGUI.showAlert("Internet connection was lost!", 'danger', true);
-        RPCTool.stopLoop();
+
+function onDomLoaded() {
+    [   'app-image',
+        'app-rpc-frequency', 
+        'app-id',
+        'app-api-url', 
+        'app-api-frequency',
+        'app-details', 
+        'app-state',
+        'app-img1-key', 
+        'app-img1-text',
+        'app-img2-key', 
+        'app-img2-text',
+        'app-btn1-text', 
+        'app-btn1-url',
+        'app-btn2-text', 
+        'app-btn2-url',
+    ].forEach(id => {
+        const element = getElement(id);
+        element.addEventListener('input', async ()=>{
+            RPCTool.flagUnsaved();
+            this.updatePreview();
+        });
     });
-    DB.loadOrInit();
-    if (!DB.length) { // first time app is accessed: 
-        RPCTool.createNewActivity();
-        dekita_rpc.openChildWindow('help');
-    }
-    await RPCTool.initialize();
-});
+    DekSelect.cache['image-select-one'].addEventListener('change', event => {
+        setValue('app-img1-key', event.target.value);
+        RPCTool.flagUnsaved();
+    });
+    DekSelect.cache['image-select-two'].addEventListener('change', event => {
+        setValue('app-img2-key', event.target.value);
+        RPCTool.flagUnsaved();
+    });
+    const link = getElement('theme-style-css');
+    DekSelect.cache['appopts-theme-select'].addEventListener('change', async event => {
+        await app_config.set('gui-theme', event.target.value);
+        const theme_file = `themes/${event.target.value}.css`;
+        link.setAttribute('href', theme_file);
+        // link.setAttribute('loading', 'lazy');
+        console.log('set theme to:', theme_file);
+    });
+    // const default_theme_path = link.getAttribute('href');
+    // const theme = default_theme_path.match(/themes\/(.*).css/i)[1];
+
+    // DekSelect.cache['appopts-theme-select'].setToID(2)
+    app_id.addEventListener('change', ()=>{
+        RPCGUI.validateAppData()
+    });
+}
 document.addEventListener('click', e => {
     let href;  const tag = e.target.tagName.toUpperCase();
     if (tag === 'A') href = e.target.getAttribute('href');
@@ -812,3 +822,50 @@ app_info_btn.addEventListener('click', event => {
     dekita_rpc.openChildWindow('help');
     app_info_btn.blur();
 });
+app_theme_btn.addEventListener('click', event => {
+    dekita_rpc.openChildWindow('themes');
+    app_theme_btn.blur();
+});
+
+document.addEventListener('DOMContentLoaded', async event => {
+    onDomLoaded();
+    DB.loadOrInit();
+    if (!DB.length) { // first time app is accessed: 
+        RPCTool.createNewActivity();
+        dekita_rpc.openChildWindow('help');
+    }
+    await RPCTool.initialize();
+    dekita_rpc.sendReadyEvent('main');
+});
+
+dekita_rpc.renderer.on('updater', (event, type, info) => {
+    switch (type) {
+        case 'checking-for-updates':
+            RPCGUI.showAlert('Checking for latest updates...', 'success', true);
+        break;
+        case 'update-available':
+            RPCGUI.showAlert('Update Found!', 'success', true);
+        break;
+        case 'update-not-available':
+            RPCGUI.showAlert('No Update Available!', 'warning', true);
+        break;
+        case 'download-progress':
+            RPCGUI.showAlert('Downloading Update...', 'info', true);
+        break;
+        case 'update-downloaded':
+            RPCGUI.showAlert('Restarting to apply update!', 'danger', true);
+            setTimeout(()=>{ dekita_rpc.performApplicationUpdate() }, 2500);
+        break;
+        case 'before-quit-for-update':
+            RPCGUI.showAlert('App quitting to apply update! woah!')
+        break;
+        case 'error':
+            RPCGUI.showAlert('Update Error!');
+            console.error(info);
+        break;
+    }
+});
+
+// todo: add the below listeners:
+// window.addEventListener('online', ()=> navigator.onLine);
+// window.addEventListener('offline', ()=> navigator.onLine);

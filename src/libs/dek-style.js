@@ -179,7 +179,7 @@ class DekSelect extends EventTarget {
         const classlist = [...this._element.classList].filter(klass_filter);
         this._element.classList.add('d-none');
         this._a = document.createElement('a');
-        this._a.classList.add('form-control', 'form-control-sm', 'theme-border', 'btn-select', ...classlist);
+        this._a.classList.add('form-control', 'form-control-sm', 'btn-select', ...classlist);
         this._value = document.createElement('input');
         this._value.classList.add('form-control', 'btn-select-value');
         this._value.setAttribute('disabled', true);
@@ -191,11 +191,14 @@ class DekSelect extends EventTarget {
         this._i.classList.add('fas', 'fa-fw', 'fa-arrow-down');
         this._arrow.append(this._i);
         this._ul = document.createElement('ul');
-        this._ul.classList.add('theme-bg', 'theme-border')
+        this._ul.classList.add('thin-scroller', 'primary-scroller');
         this._a.append(this._value, this._arrow, this._ul);
-        this._element.parentElement.append(this._a);
+        
+        
+        this._element.parentElement.insertBefore(this._a, this._element.nextSibling);
+        
         // set initial options:
-        const options = [].slice.call(this._element.options);
+        const options = [...this._element.options];
         this.setOptions(options.map(e=>e.text));
         this._initListener();
     }
@@ -246,33 +249,6 @@ class DekSelect extends EventTarget {
 }
 
 DekSelect.cache = {};
-
-/**
-* Helper functions:
-*/
-function toggleElementClass(element, oldclass, newclass){
-    if (element.classList.contains(oldclass)){
-        element.classList.remove(oldclass);
-    }
-    element.classList.add(newclass);
-};
-function toggleAllElementsByClass(classname, oldclass, newclass){
-    for (const element of document.getElementsByClassName(classname)) {
-        toggleElementClass(element, oldclass, newclass)
-    }
-};
-async function updateTheme(theme_name) {
-    const old_theme = await app_config.get('gui-theme');
-    toggleAllElementsByClass('theme-bg', old_theme, theme_name);
-    toggleAllElementsByClass('theme-border', old_theme, theme_name);
-    toggleAllElementsByClass('theme-btn', old_theme, theme_name);
-    await app_config.set('gui-theme', theme_name);
-};
-async function updateThemeColors(color_name) {
-    const old_color = await app_config.get('gui-color');
-    toggleAllElementsByClass('theme-color', old_color, color_name);
-    await app_config.set('gui-color', color_name);
-};
 
 /**
 * Events:

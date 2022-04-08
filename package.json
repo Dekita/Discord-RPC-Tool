@@ -1,11 +1,14 @@
 {
     "name": "dekita-rpc-tool",
-    "version": "0.0.91",
+    "version": "0.0.92",
     "description": "Discord RPC Tool written by DekitaRPG",
     "main": "src/main.js",
+    "repository": "git@github.com:dekita/discord-rpc-tool",
     "scripts": {
         "start": "electron src/main.js",
-        "build": "electron-builder"
+        "build": "electron-builder",
+        "pack": "electron-builder --dir",
+        "release": "electron-builder --publish always"
     },
     "keywords": [],
     "author": {
@@ -15,13 +18,15 @@
     "license": "SEE LICENSE IN LICENSE",
     "dependencies": {
         "bent": "^7.3.12",
+        "chroma-js": "^2.4.2",
         "discord-rpc": "^4.0.1",
         "ejs-electron": "^2.1.1",
+        "electron-updater": "^4.6.5",
         "json-stringify-pretty-compact": "^3.0.0",
         "node-gyp": "^9.0.0"
     },
     "devDependencies": {
-        "electron": "17.2.0",
+        "electron": "^17.2.0",
         "electron-builder": "^22.14.13",
         "electron-reloader": "^1.2.3"
     },
@@ -32,11 +37,16 @@
             "output": "build"
         },
         "win": {
-            "target": ["nsis", "zip"],
+            "target": [
+                "nsis"
+            ],
             "icon": "src/img/icon.ico"
         },
         "nsis": {
             "allowToChangeInstallationDirectory": true,
+            "uninstallerIcon": "src/img/icon.ico",
+            "installerIcon": "src/img/icon.ico",
+            "license": "LICENSE",
             "perMachine": true,
             "oneClick": false
         }

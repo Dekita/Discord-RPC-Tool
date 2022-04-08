@@ -1,11 +1,8 @@
 /**
-* system: Discord RPCTool
+* system: Discord RPC Tool
 * author: dekitarpg@gmail.com
 */
 document.addEventListener('DOMContentLoaded', async (event) => {
-    updateTheme(await app_config.get('gui-theme'));
-    updateThemeColors(await app_config.get('gui-color'));
-
     const options = {delay: 150, trigger: 'hover', container: 'body'};
     const tooltips = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
     tooltips_list = tooltips.map(e => new bootstrap.Tooltip(e, options));
@@ -23,10 +20,10 @@ document.addEventListener('DOMContentLoaded', async (event) => {
                 link.classList.add('d-none');
             }
         }
-        dekita_rpc.sendReadyEvent('child');
     } catch (error) {
         console.error(error);
     }
+    dekita_rpc.sendReadyEvent('child');
 });
 document.addEventListener('click', e => {
     let href;  const tag = e.target.tagName.toUpperCase();

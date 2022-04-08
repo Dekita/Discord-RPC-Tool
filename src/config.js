@@ -1,13 +1,20 @@
 /**
-* system: Discord RPCTool
+* system: Discord RPC Tool
 * author: dekitarpg@gmail.com
 */
 module.exports = {
     // enable debugger (console window)
-    dev_mode: false, 
+    dev_mode: true, 
     
     // enable electron-reloader module:
     enable_reloader: false,
+
+    // app window sizes
+    window_sizes: {
+        main:   {w: 1024,h: 574},
+        help:   {w: 640, h: 420},
+        themes: {w: 1280,h: 640},
+    },
 
     // default values for app datastore properties
     data_store: {
@@ -15,7 +22,7 @@ module.exports = {
         'auto-play': false,
         'auto-tiny': false,
         'tiny-tray': true,
-        'gui-theme': 'darkcord1',
+        'gui-theme': 'dek-dark',
         'gui-color': 'pastel',
     },
 }

@@ -1,436 +1,197 @@
 /* CSS Styles by dekitarpg@gmail.com */
-.theme-bg {
-    background-color: darkgray;
-    color: #eeeeee;
+
+/*###################################
+* 
+* CSS Styles by dekitarpg@gmail.com
+* 
+* 
+*/
+
+@font-face {
+	font-family: Whitney;
+	src: url(../fonts/Whitney-Book.ttf);
 }
-body, theme-bg, .theme-border, .btn, .form-control {
-    transition: color 1s, background-color 1s, border-color 1s;
+@font-face {
+	font-family: WhitneyThick;
+	src: url(../fonts/Whitney-Medium.ttf);
 }
-.theme-bg.dark1 {
-    background-color: #3C403D;
-    color: #DADED4;
+@font-face {
+	font-family: WhitneyBold;
+	src: url(../fonts/Whitney-Bold.ttf);
 }
-.theme-bg.light1 {
-    background-color: #DADED4;
-    color: #3C403D;
+
+/*###################################
+* 
+* ■ Main CSS Variables
+* 
+*/
+:root {
+  /* font settings */
+  --dek-font-family-1: Whitney, var(--bs-body-font-family);
+  --dek-font-family-2: WhitneyThick, var(--bs-body-font-family);
+  --dek-font-family-3: WhitneyBold, var(--bs-body-font-family);
+  /* darker shades */
+  --dek-darker-1: rgba(0,0,0,.05);
+  --dek-darker-2: rgba(0,0,0,0.1);
+  --dek-darker-3: rgba(0,0,0,0.2);
+  --dek-darker-4: rgba(0,0,0,0.3);
+  /* lighter shades */
+  --dek-lighter-1: rgba(255,255,255,.05);
+  --dek-lighter-2: rgba(255,255,255,0.2);
+  --dek-lighter-3: rgba(255,255,255,0.3);
+  --dek-lighter-4: rgba(255,255,255,0.3);
+  /* input/dropdown area bg colorings */
+  --dek-area-default: var(--dek-darker-1);
+  --dek-area-active: var(--dek-darker-2);
 }
-.theme-border.dark1 {
-    border-color: #DADED4 !important;
+
+
+/*###################################
+* 
+* Main element changes: (also includes bootstrap/helper classes)
+* 
+*/
+body, .font {
+  font-family: var(--dek-font-family-1);
 }
-.theme-border.light1 {
-    border-color: #3C403D !important;
+button, .tooltip, .font-thick {
+	font-family: var(--dek-font-family-2);
 }
-.theme-bg.dark2 {
-    background-color: #5C5F58;
-    color: #DCE1E3;
+b, strong, .font-bold {
+	font-family: var(--dek-font-family-3);
 }
-.theme-bg.light2 {
-    background-color: #DCE1E3;
-    color: #5C5F58;
+a {
+  text-decoration: none;
 }
-.theme-border.dark2 {
-    border-color: #DCE1E3 !important;
+body, .theme-border, .btn, .form-control {
+  transition: color 1s, background-color 1s, border-color 1s;
 }
-.theme-border.light2 {
-    border-color: #5C5F58 !important;
+small {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.theme-bg.dark3 {
-    background-color: #4F4846;
-    color: #FDF8F5;
+code {
+  background-color: rgba(0, 0, 0, 0.05);
+  padding-right:.25em;
+  padding-left: .25em;
+  color: var(--dek-danger-normal);
 }
-.theme-bg.light3 {
-    background-color: #FDF8F5;
-    color: #4F4846;
+pre {
+  padding: .5em;
+  border-radius: 9px;
+  background-color: var(--dek-lighter-1);
 }
-.theme-border.dark3 {
-    border-color: #FDF8F5 !important;
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
-.theme-border.light3 {
-    border-color: #4F4846 !important;
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
-.darker-bg1 {background-color: rgba(0,0,0,0.1)}
-.darker-bg2 {background-color: rgba(0,0,0,0.2)}
-.darker-bg3 {background-color: rgba(0,0,0,0.3)}
-.lighter-bg1 {background-color: rgba(255,255,255,0.1)}
-.lighter-bg2 {background-color: rgba(255,255,255,0.2)}
-.lighter-bg3 {background-color: rgba(255,255,255,0.3)}
-.trans-bg {background-color: transparent}
-.btn:focus, .form-control:focus {
-    outline: none;
-    box-shadow: none;
+::selection {background: #7e7ec2}
+::-moz-selection {background: #7e7ec2}
+
+::-webkit-scrollbar {width: 12px}
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+}
+::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+.thin-scroller::-webkit-scrollbar {width: 8px}
+.thin-scroller::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.2); 
+}
+.thin-scroller::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.4); 
+}
+.form-control {
+	background-color: var(--dek-area-default); 
+	border-color: var(--dek-darker-3); 
+	color: var(--dek-text-color);
+}
+.form-control:focus {
+	background-color: var(--dek-area-active);
+	color: var(--dek-text-color);
 }
 .form-control::placeholder {
-    color: inherit;
-    opacity: 0.5;
+  color: inherit;
+  opacity: 0.5;
 }
-/*############################
+.btn:focus, .btn-close:focus, .form-control:focus {
+  outline: none;
+  box-shadow: none;
+}
+.btn[disabled], .form-control[disabled], .form-control[disabled]:hover {
+  background-color: var(--dek-darker-3);
+  border-color: var(--dek-darker-4);
+  color: var(--dek-text-color);
+  opacity: 0.5;
+  transition: all 1s;
+}
+.badge {
+  color: var(--dek-text-color);
+}
+
+
+
+
+
+
+
+
+/*###################################
+* 
 * ■ Dekcheck checkbox core css
-* ##########################*/
+* 
+*/
 .dekcheckbox ul {
-    float: left !important;
-    list-style-type: none;
-    text-align: left;
-    padding: 0px;
+  float: left !important;
+  list-style-type: none;
+  text-align: left;
+  cursor: pointer;
+  padding: 0px;
 }
+/* 
 .dekcheckbox ul li i,
 .dekcheckbox ul li span {
-    cursor: pointer;
-}
+  cursor: pointer;
+} 
+*/
 .dekcheckbox ul li i {
-    width: 18px;
-}
-/**
-* [dark]
-*/
-.text-dark{color:inherit}
-.bg-dark{background-color: rgba(0,0,0,0.1) !important}
-.border-dark{border-color: rgba(0,0,0,0.1) !important}
-.border-dark2{border-color: rgba(0,0,0,0.2) !important}
-.hover-dark {color: inherit; opacity: 0.6; cursor: pointer}
-.hover-dark:hover {color: inherit; opacity: 1.0}
-.dekcheckbox.check-dark ul li i {color: inherit; opacity: 0.6}
-.dekcheckbox.check-dark ul li:hover i { color: inherit; opacity: 1.0 }
-.alert-dark { 
-    background-color: rgba(0,0,0,0.1);
-    border-color: rgba(0,0,0,0.2);
-    color: inherit;
-}
-.btn-dark, .form-dark {
-    background-color: rgba(0,0,0,0.1);
-    border-color: rgba(0,0,0,0.2);
-    color: inherit;
-}
-.btn-dark:hover,.btn-dark:focus,.btn-dark:active,.btn-dark.active,
-.form-dark:hover,.form-dark:focus,.form-dark:active,.form-dark.active {
-    background-color: rgba(0,0,0,0.2);
-    border-color: rgba(0,0,0,0.3);
-    color: inherit;
-}
-.btn-dark.disabled:hover,.btn-dark.disabled:focus,
-.btn-dark.disabled:active,.btn-dark.disabled.active,
-.btn-dark[disabled]:hover,.btn-dark[disabled]:focus,
-.btn-dark[disabled]:active,.btn-dark[disabled].active,
-fieldset[disabled] .btn-dark:hover,fieldset[disabled] .btn-dark:focus,
-fieldset[disabled] .btn-dark:active,fieldset[disabled] .btn-dark.active,
-.form-dark.disabled:hover,.form-dark.disabled:focus,
-.form-dark.disabled:active,.form-dark.disabled.active,
-.form-dark[disabled]:hover,.form-dark[disabled]:focus,
-.form-dark[disabled]:active,.form-dark[disabled].active,
-fieldset[disabled] .form-dark:hover,fieldset[disabled] .form-dark:focus,
-fieldset[disabled] .form-dark:active,fieldset[disabled] .form-dark.active {
-    border-color: rgba(0,0,0,0.8);
-}
-/**
-* [info]
-*/
-.pastel .text-info {color: #0093a2 !important}
-.pastel .bg-info{background-color: #0093a2 !important}
-.pastel .border-info{border-color: #0093a2 !important}
-.pastel .border-info2{border-color: #005861 !important}
-.pastel .hover-info {color: inherit; cursor: pointer}
-.pastel .hover-info:hover {color: #0093a2}
-.pastel .dekcheckbox.check-primary ul li:hover i {color: #66bec7}
-.pastel .alert-info { 
-    background-color: #66bec7;
-    border-color: #005861;
-    color: #005861;
-}
-.pastel .btn-info, .pastel .form-info {
-    background-color: #0093a2;
-    border-color: #005861;
-    color: inherit;
-}
-.pastel .btn-info:hover,.pastel .btn-info:focus,
-.pastel .btn-info:active,.pastel .btn-info.active,
-.pastel .form-info:hover,.pastel .form-info:focus,
-.pastel .form-info:active,.pastel .form-info.active {
-    background-color: #008492;
-    border-color: #005861;
-    color: inherit;
-}
-.pastel .btn-info.disabled:hover,.pastel .btn-info.disabled:focus,
-.pastel .btn-info.disabled:active,.pastel .btn-info.disabled.active,
-.pastel .btn-info[disabled]:hover,.pastel .btn-info[disabled]:focus,
-.pastel .btn-info[disabled]:active,.pastel .btn-info[disabled].active,
-fieldset[disabled] .pastel .btn-info:hover,fieldset[disabled] .pastel .btn-info:focus,
-fieldset[disabled] .pastel .btn-info:active,fieldset[disabled] .pastel .btn-info.active,
-.pastel .form-info.disabled:hover,.pastel .form-info.disabled:focus,
-.pastel .form-info.disabled:active,.pastel .form-info.disabled.active,
-.pastel .form-info[disabled]:hover,.pastel .form-info[disabled]:focus,
-.pastel .form-info[disabled]:active,.pastel .form-info[disabled].active,
-fieldset[disabled] .pastel .form-info:hover,fieldset[disabled] .pastel .form-info:focus,
-fieldset[disabled] .pastel .form-info:active,fieldset[disabled] .pastel .form-info.active {
-    border-color: #005861;
-}
-/**
-* [primary]
-*/
-.pastel .text-primary {color: #328cc1 !important}
-.pastel .bg-primary{background-color: #328cc1 !important}
-.pastel .border-primary{border-color: #328cc1 !important}
-.pastel .border-primary2{border-color: #1e5474 !important}
-.pastel .hover-primary {color: inherit; cursor: pointer}
-.pastel .hover-primary:hover {color: #328cc1}
-.pastel .dekcheckbox.check-primary ul li:hover i {color: #84bada}
-.pastel .alert-primary{ 
-    background-color: #84bada;
-    border-color: #1e5474;
-    color: #1e5474;
+  width: 18px;
 }
 
-.pastel .btn-primary, .pastel .form-primary {
-    background-color: #328cc1;
-    border-color: #1e5474;
-    color: inherit;
-}
-.pastel .btn-primary:hover,.pastel .btn-primary:focus,
-.pastel .btn-primary:active,.pastel .btn-primary.active,
-.pastel .form-primary:hover,.pastel .form-primary:focus,
-.pastel .form-primary:active,.pastel .form-primary.active {
-    background-color: #2d7eae;
-    border-color: #1e5474;
-    color: inherit;
-}
-.pastel .btn-primary.disabled:hover,.pastel .btn-primary.disabled:focus,
-.pastel .btn-primary.disabled:active,.pastel .btn-primary.disabled.active,
-.pastel .btn-primary[disabled]:hover,.pastel .btn-primary[disabled]:focus,
-.pastel .btn-primary[disabled]:active,.pastel .btn-primary[disabled].active,
-fieldset[disabled] .pastel .btn-primary:hover,fieldset[disabled] .pastel .btn-primary:focus,
-fieldset[disabled] .pastel .btn-primary:active,fieldset[disabled] .pastel .btn-primary.active,
-.pastel .form-primary.disabled:hover,.pastel .form-primary.disabled:focus,
-.pastel .form-primary.disabled:active,.pastel .form-primary.disabled.active,
-.pastel .form-primary[disabled]:hover,.pastel .form-primary[disabled]:focus,
-.pastel .form-primary[disabled]:active,.pastel .form-primary[disabled].active,
-fieldset[disabled] .pastel .form-primary:hover,fieldset[disabled] .pastel .form-primary:focus,
-fieldset[disabled] .pastel .form-primary:active,fieldset[disabled] .pastel .form-primary.active {
-    border-color: #1e5474;
-}
-/**
-* [secondary]
-*/
-.pastel .text-secondary {color: #7e7ec2 !important}
-.pastel .bg-secondary{background-color: #7e7ec2 !important}
-.pastel .border-secondary{border-color: #7e7ec2 !important}
-.pastel .border-secondary2{border-color: #4c4c74 !important}
-.pastel .hover-secondary {color: inherit; cursor: pointer}
-.pastel .hover-secondary:hover {color: #7e7ec2}
-.pastel .dekcheckbox.check-secondary ul li:hover i {color: #b2b2da}
-.pastel .alert-secondary{ 
-    background-color: #b2b2da;
-    border-color: #4c4c74;
-    color: #4c4c74;
-}
-.pastel .btn-secondary, .pastel .form-secondary {
-    background-color: #7e7ec2;
-    border-color: #4c4c74;
-    color: inherit;
-}
-.pastel .btn-secondary:hover,.pastel .btn-secondary:focus,
-.pastel .btn-secondary:active,.pastel .btn-secondary.active,
-.pastel .form-secondary:hover,.pastel .form-secondary:focus,
-.pastel .form-secondary:active,.pastel .form-secondary.active {
-    background-color: #7171af;
-    border-color: #4c4c74;
-    color: inherit;
-}
-.pastel .btn-secondary.disabled:hover,.pastel .btn-secondary.disabled:focus,
-.pastel .btn-secondary.disabled:active,.pastel .btn-secondary.disabled.active,
-.pastel .btn-secondary[disabled]:hover,.pastel .btn-secondary[disabled]:focus,
-.pastel .btn-secondary[disabled]:active,.pastel .btn-secondary[disabled].active,
-fieldset[disabled] .pastel .btn-secondary:hover,fieldset[disabled] .pastel .btn-secondary:focus,
-fieldset[disabled] .pastel .btn-secondary:active,fieldset[disabled] .pastel .btn-secondary.active,
-.pastel .form-secondary.disabled:hover,.pastel .form-secondary.disabled:focus,
-.pastel .form-secondary.disabled:active,.pastel .form-secondary.disabled.active,
-.pastel .form-secondary[disabled]:hover,.pastel .form-secondary[disabled]:focus,
-.pastel .form-secondary[disabled]:active,.pastel .form-secondary[disabled].active,
-fieldset[disabled] .pastel .form-secondary:hover,fieldset[disabled] .pastel .form-secondary:focus,
-fieldset[disabled] .pastel .form-secondary:active,fieldset[disabled] .pastel .form-secondary.active {
-    border-color: #4c4c74;
-}
-/**
-* [danger]
-*/
-.pastel .text-danger {color: #c1687b !important}
-.pastel .bg-danger{background-color: #c1687b !important}
-.pastel .border-danger{border-color: #c1687b !important}
-.pastel .border-danger2{border-color: #743e4a !important}
-.pastel .hover-danger {color: inherit; cursor: pointer}
-.pastel .hover-danger:hover {color: #c1687b}
-.pastel .dekcheckbox.check-danger ul li:hover i {color: #daa4b0}
-.pastel .alert-danger{ 
-    background-color: #daa4b0;
-    border-color: #743e4a;
-    color: #743e4a;
-}
-.pastel .btn-danger, .pastel .form-danger {
-    background-color: #c1687b;
-    border-color: #743e4a;
-    color: inherit;
-}
-.pastel .btn-danger:hover,.pastel .btn-danger:focus,
-.pastel .btn-danger:active,.pastel .btn-danger.active,
-.pastel .form-danger:hover,.pastel .form-danger:focus,
-.pastel .form-danger:active,.pastel .form-danger.active {
-    background-color: #ae5e6f;
-    border-color: #743e4a;
-    color: inherit;
-}
-.pastel .btn-danger.disabled:hover,.pastel .btn-danger.disabled:focus,
-.pastel .btn-danger.disabled:active,.pastel .btn-danger.disabled.active,
-.pastel .btn-danger[disabled]:hover,.pastel .btn-danger[disabled]:focus,
-.pastel .btn-danger[disabled]:active,.pastel .btn-danger[disabled].active,
-fieldset[disabled] .pastel .btn-danger:hover,fieldset[disabled] .pastel .btn-danger:focus,
-fieldset[disabled] .pastel .btn-danger:active,fieldset[disabled] .pastel .btn-danger.active,
-.pastel .form-danger.disabled:hover,.pastel .form-danger.disabled:focus,
-.pastel .form-danger.disabled:active,.pastel .form-danger.disabled.active,
-.pastel .form-danger[disabled]:hover,.pastel .form-danger[disabled]:focus,
-.pastel .form-danger[disabled]:active,.pastel .form-danger[disabled].active,
-fieldset[disabled] .pastel .form-danger:hover,fieldset[disabled] .pastel .form-danger:focus,
-fieldset[disabled] .pastel .form-danger:active,fieldset[disabled] .pastel .form-danger.active {
-    border-color: #743e4a;
-}
-/**
-* [warning]
-*/
-.pastel .text-warning {color: #b57252 !important}
-.pastel .bg-warning{background-color: #b57252 !important}
-.pastel .border-warning{border-color: #b57252 !important}
-.pastel .border-warning2{border-color: #6d4431 !important}
-.pastel .hover-warning {color: inherit; cursor: pointer}
-.pastel .hover-warning:hover {color: #b57252}
-.pastel .dekcheckbox.check-warning ul li:hover i {color: #d3aa97}
-.pastel .alert-warning{ 
-    background-color: #d3aa97;
-    border-color: #6d4431;
-    color: #6d4431;
-}
-.pastel .btn-warning, .pastel .form-warning {
-    background-color: #b57252;
-    border-color: #6d4431;
-    color: inherit;
-}
-.pastel .btn-warning:hover,.pastel .btn-warning:focus,
-.pastel .btn-warning:active,.pastel .btn-warning.active,
-.pastel .form-warning:hover,.pastel .form-warning:focus,
-.pastel .form-warning:active,.pastel .form-warning.active {
-    background-color: #a3674a;
-    border-color: #6d4431;
-    color: inherit;
-}
-.pastel .btn-warning.disabled:hover,.pastel .btn-warning.disabled:focus,
-.pastel .btn-warning.disabled:active,.pastel .btn-warning.disabled.active,
-.pastel .btn-warning[disabled]:hover,.pastel .btn-warning[disabled]:focus,
-.pastel .btn-warning[disabled]:active,.pastel .btn-warning[disabled].active,
-fieldset[disabled] .pastel .btn-warning:hover,fieldset[disabled] .pastel .btn-warning:focus,
-fieldset[disabled] .pastel .btn-warning:active,fieldset[disabled] .pastel .btn-warning.active,
-.pastel .form-warning.disabled:hover,.pastel .form-warning.disabled:focus,
-.pastel .form-warning.disabled:active,.pastel .form-warning.disabled.active,
-.pastel .form-warning[disabled]:hover,.pastel .form-warning[disabled]:focus,
-.pastel .form-warning[disabled]:active,.pastel .form-warning[disabled].active,
-fieldset[disabled] .pastel .form-warning:hover,fieldset[disabled] .pastel .form-warning:focus,
-fieldset[disabled] .pastel .form-warning:active,fieldset[disabled] .pastel .form-warning.active {
-    border-color: #6d4431;
-}
-/**
-* [success]
-*/
-.pastel .text-success {color: #249475 !important}
-.pastel .bg-success{background-color: #249475 !important}
-.pastel .border-success{border-color: #249475 !important}
-.pastel .border-success2{border-color: #165946 !important}
-.pastel .hover-success {color: inherit; cursor: pointer}
-.pastel .hover-success:hover {color: #249475}
-.pastel .dekcheckbox.check-success ul li:hover i {color: #7cbfac}
-.pastel .alert-success{ 
-    background-color: #7cbfac;
-    border-color: #165946;
-    color: #165946;
-}
-.pastel .btn-success, .pastel .form-success {
-    background-color: #249475;
-    border-color: #165946;
-    color: inherit;
-}
-.pastel .btn-success:hover,.pastel .btn-success:focus,
-.pastel .btn-success:active,.pastel .btn-success.active,
-.pastel .form-success:hover,.pastel .form-success:focus,
-.pastel .form-success:active,.pastel .form-success.active {
-    background-color: #208569;
-    border-color: #165946;
-    color: inherit;
-}
-.pastel .btn-success.disabled:hover,.pastel .btn-success.disabled:focus,
-.pastel .btn-success.disabled:active,.pastel .btn-success.disabled.active,
-.pastel .btn-success[disabled]:hover,.pastel .btn-success[disabled]:focus,
-.pastel .btn-success[disabled]:active,.pastel .btn-success[disabled].active,
-fieldset[disabled] .pastel .btn-success:hover,fieldset[disabled] .pastel .btn-success:focus,
-fieldset[disabled] .pastel .btn-success:active,fieldset[disabled] .pastel .btn-success.active,
-.pastel .form-success.disabled:hover,.pastel .form-success.disabled:focus,
-.pastel .form-success.disabled:active,.pastel .form-success.disabled.active,
-.pastel .form-success[disabled]:hover,.pastel .form-success[disabled]:focus,
-.pastel .form-success[disabled]:active,.pastel .form-success[disabled].active,
-fieldset[disabled] .pastel .form-success:hover,fieldset[disabled] .pastel .form-success:focus,
-fieldset[disabled] .pastel .form-success:active,fieldset[disabled] .pastel .form-success.active {
-    border-color: #165946;
-}
-/* selected text highlighting: */
-::selection {background: rgba(0,0,0,0.1)}
-::-moz-selection {background: rgba(0,0,0,0.1)}
-.list-group-item {background-color: transparent}
-.badge {color: inherit}
-/* .dekcheckbox ul li:hover i {} */
-.dekcheckbox.check-red ul li:hover i        { color: #C81616; }
-.dekcheckbox.check-drk-red ul li:hover i    { color: #6D0C0C; }
-.dekcheckbox.check-blue ul li:hover i,
-.dekcheckbox.check-blue ul li.checked i     { color: #16B5C8; }
-.dekcheckbox.check-drk-blue ul li:hover i   { color: #0C636D; }
-.dekcheckbox.check-green ul li:hover i      { color: #3AC816; }
-.dekcheckbox.check-drk-green ul li:hover i  { color: #206D0C; }
-.dekcheckbox.check-yellow ul li:hover i     { color: #C8BF16; }
-.dekcheckbox.check-drk-yellow ul li:hover i { color: #6D680C; }
-
-
-
-
-
-
-
-/*########################
-* ■ Bootstrap button select:
+/*###################################
+* 
+* ■ Bootstrap style button select loosely based on:
 * http://bootsnipp.com/snippets/GXagX
-* ######################*/
+* 
+*/
 .btn-select {
-    position: relative;
-    /* padding: 0; */
-    min-width: 80px;
-    width: 100%;
-    border-radius: 9px;
-    /* min-height: 28px; */
-
-    min-height: calc(1.5em + 0.5rem + 2px);
-    padding: 0;
-    /* font-size: inherit;
-    font-weight: inherit;
-    font-family: inherit;
-    */
-    line-height: 1.5; 
-    border-color: inherit;
-
-    /* background-color: #fff; */
-    cursor: pointer;
+  position: relative;
+  min-width: 80px;
+  width: 100%;
+  min-height: calc(1.5em + 0.5rem + 2px);
+  padding: 0;
+  line-height: 1.5; 
+  background-color: var(--dek-body-color);
+  border-color: var(--dek-darker-3);
+  cursor: pointer;
+  color: var(--dek-text-color);
 }
 .btn-select .btn-select-value {
   padding: 0.25rem 0.5rem;
   display: block;
   position: absolute;
-  /* left: 0;
-  right: 34px; */
   font-size: inherit;
   font-weight: inherit;
   font-family: inherit;
-  width: 80%;
   float: left;
-  /* text-align: left; */
   text-overflow: ellipsis;
   overflow: hidden;
   border: none !important;
@@ -438,38 +199,56 @@ fieldset[disabled] .pastel .form-success:active,fieldset[disabled] .pastel .form
   border-bottom-left-radius: inherit;
   box-shadow: none !important;
   cursor: inherit;
+	background-color: var(--dek-area-default);
+  border-color: transparent;
+  width: calc(100% - 34px);
+  opacity: 1.0;
+}
+.btn-select .btn-select-value:hover {
+  background-color: transparent;
+	background-color: rgba(0, 0, 0, .05);
+	background-color: var(--dek-area-default);
+  opacity: 1.0;
 }
 .btn-select .btn-select-arrow {
+  transition: color 1s, opacity 1s;
+	background-color: var(--dek-area-default);
   border-top-right-radius: inherit;
   border-bottom-right-radius: inherit;
   border-left: 1px solid;  
   border-color: inherit;
+  color: var(--dek-text-color);
   float: right;
   padding: 0.25rem 0.5rem;
   top: 0;
 }
 .btn-select ul {
   display: none;
-  background-color: #E4E4E4;
-  color: black;
+  background-color: inherit;
+  border-color: inherit !important;
+  transition: border-color 1ms;
+  color: inherit;
   clear: both;
   list-style: none;
   padding: 0;
   margin-top: .1em;
   border-radius: inherit;
-  /* border-top: none !important; */
+  border: 1px solid var(--dek-darker-2);
   position: absolute;
   left: -1px;
   right: -1px;
-  top: 37px;
+  top: 32px;
   z-index: 9999;
+  max-height: 118px;
+  overflow-y: auto;
 }
 .btn-select ul li {
   border-radius: 0;
   padding: 0.25rem 0.75rem;
   text-align: left;
+	background-color: var(--dek-area-active);
+  color: var(--dek-text-color);
 }
-
 .btn-select ul li:first-child {
   border-top-right-radius: inherit;
   border-top-left-radius: inherit;
@@ -478,14 +257,436 @@ fieldset[disabled] .pastel .form-success:active,fieldset[disabled] .pastel .form
   border-bottom-right-radius: inherit;
   border-bottom-left-radius: inherit;
 }
-/* .btn-select ul li :not(:first-child),
-.btn-select ul li :not(:last-child) {
-  border-radius: 0;
-} */
-
 .btn-select ul li:hover {
-  background-color: #f4f4f410;
+	background-color: var(--dek-area-active);
 }
 .btn-select ul li.selected {
   color: #E4E4E4;
 }
+
+.btn-select.active .btn-select-value,
+.btn-select.active .btn-select-arrow {
+	background-color: var(--dek-darker-2);
+	background-color: var(--dek-area-default);
+}
+.btn-select.active ul li {
+	background-color: var(--dek-darker-3);
+	background-color: var(--dek-area-default);
+}
+
+/*###################################
+* 
+* ■ Various colorings
+* 
+*/
+.trans-bg {background-color: transparent !important}
+.darker-bg1 {background-color: var(--dek-darker-2)}
+.darker-bg2 {background-color: var(--dek-darker-3)}
+.darker-bg3 {background-color: var(--dek-darker-4)}
+.lighter-bg1 {background-color: var(--dek-lighter-1)}
+.lighter-bg2 {background-color: var(--dek-lighter-2)}
+.lighter-bg3 {background-color: var(--dek-lighter-3)}
+
+.theme-bg {
+  background-color: var(--dek-body-color);
+  color: var(--dek-text-color);
+}
+
+/** [xxx-dark] elements */
+.text-dark{color:inherit}
+.bg-dark{background-color: var(--dek-darker-2) !important}
+.border-dark{border-color: var(--dek-darker-2) !important}
+.border-dark2{border-color: var(--dek-darker-3) !important}
+.hover-dark {color: inherit; opacity: 0.6; cursor: pointer}
+.hover-dark:hover {color: inherit; opacity: 1.0}
+.dekcheckbox.check-dark ul li i {color: inherit; opacity: 0.6}
+.dekcheckbox.check-dark ul li:hover i { color: inherit; opacity: 1.0 }
+.btn-select.dekselect-dark .btn-select-arrow {
+  opacity: 0.6;
+}
+.btn-select.dekselect-dark:hover .btn-select-arrow,
+.btn-select.dekselect-dark .btn-select-arrow:hover, 
+.btn-select.dekselect-dark.active .btn-select-arrow {
+  opacity: 1.0;
+}
+.alert-dark { 
+  background-color: var(--dek-darker-2);
+  border-color: var(--dek-darker-3);
+  color: inherit;
+}
+.btn-dark, .form-dark {
+  background-color: var(--dek-darker-2);
+  border-color: var(--dek-darker-3);
+  color: inherit;
+}
+.btn-dark:hover,.btn-dark:focus,.btn-dark:active,.btn-dark.active,
+.form-dark:hover,.form-dark:focus,.form-dark:active,.form-dark.active {
+  background-color: var(--dek-darker-3);
+  border-color: var(--dek-darker-4);
+  color: inherit;
+}
+.selection-dark ::selection {
+  background-color: var(--dek-darker-3);
+}
+.selection-dark ::-moz-selection {
+  background-color: var(--dek-darker-3);
+}
+/** [xxx-primary] elements */
+.text-primary {color: var(--dek-primary-normal) !important}
+.bg-primary {background-color: var(--dek-primary-normal) !important}
+.border-primary {border-color: var(--dek-primary-normal) !important}
+.border-primary2 {border-color: var(--dek-primary-darkest) !important}
+.hover-primary {color: inherit; cursor: pointer}
+.hover-primary:hover {color: var(--dek-primary-normal) !important}
+.alert-primary { 
+  background-color: var(--dek-primary-light);
+  border-color: var(--dek-primary-normal);
+  color: var(--dek-primary-darkest);
+}
+.form-primary {border-color: var(--dek-darker-3)}
+.form-primary:hover {border-color: var(--dek-primary-darkest)}
+.form-primary:focus,.form-primary:active,.form-primary.active {
+  border-color: var(--dek-primary-normal);
+}
+.btn-primary {
+  background-color: var(--dek-primary-normal);
+  border-color: var(--dek-primary-darker);
+  color: inherit;
+}
+.btn-primary:hover,.btn-primary:focus,.btn-primary:active,.btn-primary.active {
+  background-color: var(--dek-primary-darker);
+  border-color: var(--dek-primary-darkest);
+  color: inherit;
+}
+.btn-primary[disabled] {
+  background-color: var(--dek-primary-darker);
+  border-color: var(--dek-primary-darkest);
+}
+.dekcheckbox.check-primary ul li:hover i {
+  color: var(--dek-primary-light)
+}
+.btn-select.dekselect-primary:hover {
+  border-color: var(--dek-primary-darkest);
+}
+.btn-select.dekselect-primary:hover .btn-select-arrow{
+  color: var(--dek-primary-darker);
+}
+.btn-select.dekselect-primary ul, .btn-select.dekselect-primary.active {
+  border-color: var(--dek-primary-darker);
+}
+.btn-select.dekselect-primary.active .btn-select-arrow {
+  color: var(--dek-primary-light);
+}
+.btn-select.dekselect-primary ul li:hover {
+  background-color: var(--dek-primary-darkest);
+}
+.selection-primary ::selection {
+  background: var(--dek-primary-darker);
+  color: #e4e4e4;
+}
+.selection-primary ::-moz-selection {
+  background: var(--dek-primary-darkest);
+  color: #e4e4e4;
+}
+/** [xxx-secondary] elements */
+.text-secondary {color: var(--dek-secondary-normal) !important}
+.bg-secondary {background-color: var(--dek-secondary-normal) !important}
+.border-secondary {border-color: var(--dek-secondary-normal) !important}
+.border-secondary2 {border-color: var(--dek-secondary-darkest) !important}
+.hover-secondary {color: inherit; cursor: pointer}
+.hover-secondary:hover {color: var(--dek-secondary-normal) !important}
+.alert-secondary { 
+  background-color: var(--dek-secondary-light);
+  border-color: var(--dek-secondary-normal);
+  color: var(--dek-secondary-darkest);
+}
+.form-secondary {border-color: var(--dek-darker-3)}
+.form-secondary:hover {border-color: var(--dek-secondary-darkest)}
+.form-secondary:focus,.form-secondary:active,.form-secondary.active {
+  border-color: var(--dek-secondary-normal);
+}
+.btn-secondary {
+  background-color: var(--dek-secondary-normal);
+  border-color: var(--dek-secondary-darker);
+  color: inherit;
+}
+.btn-secondary:hover,.btn-secondary:focus,.btn-secondary:active,.btn-secondary.active {
+  background-color: var(--dek-secondary-darker);
+  border-color: var(--dek-secondary-darkest);
+  color: inherit;
+}
+.btn-secondary[disabled] {
+  background-color: var(--dek-secondary-darker);
+  border-color: var(--dek-secondary-darkest);
+}
+.dekcheckbox.check-secondary ul li:hover i {
+  color: var(--dek-secondary-light)
+}
+.btn-select.dekselect-secondary:hover {
+  border-color: var(--dek-secondary-darkest);
+}
+.btn-select.dekselect-secondary:hover .btn-select-arrow{
+  color: var(--dek-secondary-darker);
+}
+.btn-select.dekselect-secondary ul, .btn-select.dekselect-secondary.active {
+  border-color: var(--dek-secondary-darker);
+}
+.btn-select.dekselect-secondary.active .btn-select-arrow {
+  color: var(--dek-secondary-light);
+}
+.btn-select.dekselect-secondary ul li:hover {
+  background-color: var(--dek-secondary-darkest);
+}
+.selection-secondary ::selection {
+  background: var(--dek-secondary-darker);
+  color: #e4e4e4;
+}
+.selection-secondary ::-moz-selection {
+  background: var(--dek-secondary-darkest);
+  color: #e4e4e4;
+}
+/** [xxx-info] elements */
+.text-info {color: var(--dek-info-normal) !important}
+.bg-info {background-color: var(--dek-info-normal) !important}
+.border-info {border-color: var(--dek-info-normal) !important}
+.border-info2 {border-color: var(--dek-info-darkest) !important}
+.hover-info {color: inherit; cursor: pointer}
+.hover-info:hover {color: var(--dek-info-normal) !important}
+.alert-info { 
+  background-color: var(--dek-info-light);
+  border-color: var(--dek-info-normal);
+  color: var(--dek-info-darkest);
+}
+.form-info {border-color: var(--dek-darker-3)}
+.form-info:hover {border-color: var(--dek-info-darkest)}
+.form-info:focus,.form-info:active,.form-info.active {
+  border-color: var(--dek-info-normal);
+}
+.btn-info {
+  background-color: var(--dek-info-normal);
+  border-color: var(--dek-info-darker);
+  color: inherit;
+}
+.btn-info:hover,.btn-info:focus,.btn-info:active,.btn-info.active {
+  background-color: var(--dek-info-darker);
+  border-color: var(--dek-info-darkest);
+  color: inherit;
+}
+.btn-info[disabled] {
+  background-color: var(--dek-info-darker);
+  border-color: var(--dek-info-darkest);
+}
+.dekcheckbox.check-info ul li:hover i {
+  color: var(--dek-info-light)
+}
+.btn-select.dekselect-info:hover {
+  border-color: var(--dek-info-darkest);
+}
+.btn-select.dekselect-info:hover .btn-select-arrow{
+  color: var(--dek-info-darker);
+}
+.btn-select.dekselect-info ul, .btn-select.dekselect-info.active {
+  border-color: var(--dek-info-darker);
+}
+.btn-select.dekselect-info.active .btn-select-arrow {
+  color: var(--dek-info-light);
+}
+.btn-select.dekselect-info ul li:hover {
+  background-color: var(--dek-info-darkest);
+}
+.selection-info ::selection {
+  background: var(--dek-info-darker);
+  color: #e4e4e4;
+}
+.selection-info ::-moz-selection {
+  background: var(--dek-info-darkest);
+  color: #e4e4e4;
+}
+/** [xxx-success] elements */
+.text-success {color: var(--dek-success-normal) !important}
+.bg-success {background-color: var(--dek-success-normal) !important}
+.border-success {border-color: var(--dek-success-normal) !important}
+.border-success2 {border-color: var(--dek-success-darkest) !important}
+.hover-success {color: inherit; cursor: pointer}
+.hover-success:hover {color: var(--dek-success-normal) !important}
+.alert-success { 
+  background-color: var(--dek-success-light);
+  border-color: var(--dek-success-normal);
+  color: var(--dek-success-darkest);
+}
+.form-success {border-color: var(--dek-darker-3)}
+.form-success:hover {border-color: var(--dek-success-darkest)}
+.form-success:focus,.form-success:active,.form-success.active {
+  border-color: var(--dek-success-normal);
+}
+.btn-success {
+  background-color: var(--dek-success-normal);
+  border-color: var(--dek-success-darker);
+  color: inherit;
+}
+.btn-success:hover,.btn-success:focus,.btn-success:active,.btn-success.active {
+  background-color: var(--dek-success-darker);
+  border-color: var(--dek-success-darkest);
+  color: inherit;
+}
+.btn-success[disabled] {
+  background-color: var(--dek-success-darker);
+  border-color: var(--dek-success-darkest);
+}
+.dekcheckbox.check-success ul li:hover i {
+  color: var(--dek-success-light)
+}
+.btn-select.dekselect-success:hover {
+  border-color: var(--dek-success-darkest);
+}
+.btn-select.dekselect-success:hover .btn-select-arrow{
+  color: var(--dek-success-darker);
+}
+.btn-select.dekselect-success ul, .btn-select.dekselect-success.active {
+  border-color: var(--dek-success-darker);
+}
+.btn-select.dekselect-success.active .btn-select-arrow {
+  color: var(--dek-success-light);
+}
+.btn-select.dekselect-success ul li:hover {
+  background-color: var(--dek-success-darkest);
+}
+.selection-success ::selection {
+  background: var(--dek-success-darker);
+  color: #e4e4e4;
+}
+.selection-success ::-moz-selection {
+  background: var(--dek-success-darkest);
+  color: #e4e4e4;
+}
+/** [xxx-warning] elements */
+.text-warning {color: var(--dek-warning-normal) !important}
+.bg-warning {background-color: var(--dek-warning-normal) !important}
+.border-warning {border-color: var(--dek-warning-normal) !important}
+.border-warning2 {border-color: var(--dek-warning-darkest) !important}
+.hover-warning {color: inherit; cursor: pointer}
+.hover-warning:hover {color: var(--dek-warning-normal) !important}
+.alert-warning { 
+  background-color: var(--dek-warning-light);
+  border-color: var(--dek-warning-normal);
+  color: var(--dek-warning-darkest);
+}
+.form-warning {border-color: var(--dek-darker-3)}
+.form-warning:hover {border-color: var(--dek-warning-darkest)}
+.form-warning:focus,.form-warning:active,.form-warning.active {
+  border-color: var(--dek-warning-normal);
+}
+.btn-warning {
+  background-color: var(--dek-warning-normal);
+  border-color: var(--dek-warning-darker);
+  color: inherit;
+}
+.btn-warning:hover,.btn-warning:focus,.btn-warning:active,.btn-warning.active {
+  background-color: var(--dek-warning-darker);
+  border-color: var(--dek-warning-darkest);
+  color: inherit;
+}
+.btn-warning[disabled] {
+  background-color: var(--dek-warning-darker);
+  border-color: var(--dek-warning-darkest);
+}
+.dekcheckbox.check-warning ul li:hover i {
+  color: var(--dek-warning-light)
+}
+.btn-select.dekselect-warning:hover {
+  border-color: var(--dek-warning-darkest);
+}
+.btn-select.dekselect-warning:hover .btn-select-arrow{
+  color: var(--dek-warning-darker);
+}
+.btn-select.dekselect-warning ul, .btn-select.dekselect-warning.active {
+  border-color: var(--dek-warning-darker);
+}
+.btn-select.dekselect-warning.active .btn-select-arrow {
+  color: var(--dek-warning-light);
+}
+.btn-select.dekselect-warning ul li:hover {
+  background-color: var(--dek-warning-darkest);
+}
+.selection-warning ::selection {
+  background: var(--dek-warning-darker);
+  color: #e4e4e4;
+}
+.selection-warning ::-moz-selection {
+  background: var(--dek-warning-darkest);
+  color: #e4e4e4;
+}
+/** [xxx-danger] elements */
+.text-danger {color: var(--dek-danger-normal) !important}
+.bg-danger {background-color: var(--dek-danger-normal) !important}
+.border-danger {border-color: var(--dek-danger-normal) !important}
+.border-danger2 {border-color: var(--dek-danger-darkest) !important}
+.hover-danger {color: inherit; cursor: pointer}
+.hover-danger:hover {color: var(--dek-danger-normal) !important}
+.alert-danger { 
+  background-color: var(--dek-danger-light);
+  border-color: var(--dek-danger-normal);
+  color: var(--dek-danger-darkest);
+}
+.form-danger {border-color: var(--dek-darker-3)}
+.form-danger:hover {border-color: var(--dek-danger-darkest)}
+.form-danger:focus,.form-danger:active,.form-danger.active {
+  border-color: var(--dek-danger-normal);
+}
+.btn-danger {
+  background-color: var(--dek-danger-normal);
+  border-color: var(--dek-danger-darker);
+  color: inherit;
+}
+.btn-danger:hover,.btn-danger:focus,.btn-danger:active,.btn-danger.active {
+  background-color: var(--dek-danger-darker);
+  border-color: var(--dek-danger-darkest);
+  color: inherit;
+}
+.btn-danger[disabled] {
+  background-color: var(--dek-danger-darker);
+  border-color: var(--dek-danger-darkest);
+}
+.dekcheckbox.check-danger ul li:hover i {
+  color: var(--dek-danger-light)
+}
+.btn-select.dekselect-danger:hover {
+  border-color: var(--dek-danger-darkest);
+}
+.btn-select.dekselect-danger:hover .btn-select-arrow{
+  color: var(--dek-danger-darker);
+}
+.btn-select.dekselect-danger ul, .btn-select.dekselect-danger.active {
+  border-color: var(--dek-danger-darker);
+}
+.btn-select.dekselect-danger.active .btn-select-arrow {
+  color: var(--dek-danger-light);
+}
+.btn-select.dekselect-danger ul li:hover {
+  background-color: var(--dek-danger-darkest);
+}
+.selection-danger ::selection {
+  background: var(--dek-danger-darker);
+  color: #e4e4e4;
+}
+.selection-danger ::-moz-selection {
+  background: var(--dek-danger-darkest);
+  color: #e4e4e4;
+}
+
+
+
+
+
+
+
+
+.btn, .form-control, .card, .add-shadow, .btn-select ul {
+	box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.01), 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+}
+.no-shadow {
+  box-shadow: none;
+}
+
+
+

@@ -1,0 +1,52 @@
+/* 
+* Default theme variables for dek-style.css by dekitarpg@gmail.com
+* Users selected theme xxx.css file gets loaded on refresh/change theme.
+*/
+:root {
+    /*###################################
+    * 
+    * ■ Colors
+    * 
+    */
+    --dek-gen-version: "0.0.9";
+    --dek-text-color: #36393f;
+    --dek-body-color: #e4e4e4;
+    /* xxx-primary colors */
+    --dek-primary-darkest: #1e5474;
+    --dek-primary-darker: #2d7eae;
+    --dek-primary-normal: #328cc1;
+    --dek-primary-light: #84bada;
+    /* xxx-secondary colors */
+    --dek-secondary-darkest: #4c4c74;
+    --dek-secondary-darker: #7171af;
+    --dek-secondary-normal: #7e7ec2;
+    --dek-secondary-light: #b2b2da;
+    /* xxx-info colors */
+    --dek-info-darkest:#005861;
+    --dek-info-darker: #008492;
+    --dek-info-normal: #0093a2;
+    --dek-info-light:  #66bec7;
+    /* xxx-success colors */
+    --dek-success-darkest: #165946;
+    --dek-success-darker: #208569;
+    --dek-success-normal: #249475;
+    --dek-success-light: #7cbfac;
+    /* xxx-warning colors */
+    --dek-warning-darkest: #6d4431;
+    --dek-warning-darker: #a3674a;
+    --dek-warning-normal: #b57252;
+    --dek-warning-light: #d3aa97;
+    /* xxx-danger colors */
+    --dek-danger-darkest: #743e4a;
+    --dek-danger-darker: #ae5e6f;
+    --dek-danger-normal: #c1687b;
+    --dek-danger-light: #daa4b0;
+    /* popup modal colors */
+    --dek-modal-body-color: var(--dek-body-color);
+    --dek-modal-text-color: var(--dek-text-color);
+    --dek-modal-border-color: #36393f;
+    /* activity preview card colors */
+    --dek-card-body-color: white;
+    --dek-card-text-color: var(--dek-text-color);
+    --dek-card-header-color: #342040;
+}
