@@ -58,10 +58,6 @@ RPC Tool is a simple application that allows you to easily communicate with the 
 <a href="https://github.com/Dekita/Discord-RPC-Tool/releases/latest" target="new">
 Click Here To Download!!
 </a>
-or 
-[<img src="src/img/gumroad.png" class="img-fluid img-thumbnail" onerror="removeSRC(this)">](https://dekita.gumroad.com/l/rpc-tool)
-
-Please note: payment for download via Gumroad is completely optional. 
 
 Once downloaded extract and then run the installer.
 

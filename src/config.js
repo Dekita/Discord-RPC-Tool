@@ -4,7 +4,7 @@
 */
 module.exports = {
     // enable debugger (console window)
-    dev_mode: true, 
+    dev_mode: false, 
     
     // enable electron-reloader module:
     enable_reloader: false,
