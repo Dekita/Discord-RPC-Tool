@@ -705,8 +705,7 @@ class RPCActivity {
 /**
 * ■ Various Event Listeners:
 */
-
-function onDomLoaded() {
+async function onDomLoaded() {
     [   'app-image',
         'app-rpc-frequency', 
         'app-id',
@@ -739,20 +738,28 @@ function onDomLoaded() {
     });
     const link = getElement('theme-style-css');
     DekSelect.cache['appopts-theme-select'].addEventListener('change', async event => {
-        await app_config.set('gui-theme', event.target.value);
+        const theme = event.target.value;
+        await app_config.set('gui-theme', theme);
+        if (theme === 'custom') return loadCustomthemeFromStorage();
+        if (document.documentElement.style.cssText) {
+            document.documentElement.style.cssText = '';
+        }
         const theme_file = `themes/${event.target.value}.css`;
         link.setAttribute('href', theme_file);
         // link.setAttribute('loading', 'lazy');
-        console.log('set theme to:', theme_file);
     });
+    const theme = await app_config.get('gui-theme');
+    if (theme === 'custom') loadCustomthemeFromStorage();
     // const default_theme_path = link.getAttribute('href');
     // const theme = default_theme_path.match(/themes\/(.*).css/i)[1];
-
     // DekSelect.cache['appopts-theme-select'].setToID(2)
     app_id.addEventListener('change', ()=>{
         RPCGUI.validateAppData()
     });
 }
+
+
+
 document.addEventListener('click', e => {
     let href;  const tag = e.target.tagName.toUpperCase();
     if (tag === 'A') href = e.target.getAttribute('href');
@@ -841,13 +848,13 @@ document.addEventListener('DOMContentLoaded', async event => {
 dekita_rpc.renderer.on('updater', (event, type, info) => {
     switch (type) {
         case 'checking-for-updates':
-            RPCGUI.showAlert('Checking for latest updates...', 'success', true);
+            // RPCGUI.showAlert('Checking for latest updates...', 'success', true);
         break;
         case 'update-available':
             RPCGUI.showAlert('Update Found!', 'success', true);
         break;
         case 'update-not-available':
-            RPCGUI.showAlert('No Update Available!', 'warning', true);
+            // RPCGUI.showAlert('No Update Available!', 'warning', true);
         break;
         case 'download-progress':
             RPCGUI.showAlert('Downloading Update...', 'info', true);
@@ -857,10 +864,10 @@ dekita_rpc.renderer.on('updater', (event, type, info) => {
             setTimeout(()=>{ dekita_rpc.performApplicationUpdate() }, 2500);
         break;
         case 'before-quit-for-update':
-            RPCGUI.showAlert('App quitting to apply update! woah!')
+            RPCGUI.showAlert('Quitting to apply update! Woah!!')
         break;
         case 'error':
-            RPCGUI.showAlert('Update Error!');
+            // RPCGUI.showAlert('Update Error!');
             console.error(info);
         break;
     }

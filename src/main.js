@@ -20,6 +20,8 @@ const theme_files = fs.readdirSync(path.join(__dirname, 'themes'));
 const app_themes = theme_files.map(theme => {
     return theme.replace(__dirname).replace('.css','')
 });
+app_themes.push('custom');
+
 // DEKRPC stores the running app windows/tray:
 const DEKRPC = {tray:null, main:null, child:null};
 

@@ -105,4 +105,7 @@ input[type="color"]::-webkit-color-swatch {
 .small, small {
   font-size: .875em;
   line-height: 1.25em;
+  text-overflow: ellipsis;  
+  white-space: nowrap;
+  overflow-x: hidden;
 }

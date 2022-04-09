@@ -16,16 +16,20 @@ const queryAll = query => [...document.querySelectorAll(query)];
 /**
 * ■ Common Page Elements:
 */
+const modal_export_theme = new bootstrap.Modal(getElement('modal-export-theme'));
 const modal_card_modal = new bootstrap.Modal(getElement('modal-color-modal'));
+const export_theme_btn = getElement('export-theme-btn');
 const modal_card_btn = getElement('modal-card-btn');
 const copy_theme_btn = getElement('copy-theme-btn');
 const save_theme_btn = getElement('save-theme-btn');
+const save_custom_theme_btn = getElement('save-custom-theme-btn');
 const randomize_color_btn = getElement('randomize-color-btn');
 const randomize_icon = getElement('randomize-icon');
 const switch_bodytext_btn = getElement('switch-body-text-btn');
 
 const switch_colors_btn = getElement('switch-colors-btn');
 switch_colors_btn.classList.add('d-none');// for now...
+
 
 const checkboxes ={
     enable_calc: new DekCheckBox('calculate-enabled', value => {
@@ -105,6 +109,10 @@ async function copyCssToClipboard() {
 async function saveCssToFile() {
     dekita_rpc.saveFileForCSS(await copyCssToClipboard());
 }
+async function saveCssToCustom() {
+    localStorage.setItem('dek-theme', await copyCssToClipboard());
+}
+
 
 /**
 * ■ Colors:
@@ -218,7 +226,7 @@ async function onRandomizeTheme() {
     onColorMainChange('card-body', arrayToHex(alterLightness(body, 'decrease', 0.5)));
     onColorMainChange('card-text', arrayToHex(alterLightness(text, 'increase', 0.5)));
     onColorMainChange('card-header', arrayToHex(dark_accent));
-    const logik = 'test'; // still undecided on logik
+    const logik = 'test2'; // still undecided on logik
     switch (logik) {
         case 'test':
         onColorToneChange('primary', arrayToHex(main_color));
@@ -227,6 +235,15 @@ async function onRandomizeTheme() {
         onColorToneChange('success', arrayToHex(light_accent));
         onColorToneChange('warning', arrayToHex(alterHue(dark_accent, 120)));
         onColorToneChange('danger', arrayToHex(dark_accent));
+        break;
+
+        case 'test2':
+        onColorToneChange('primary', arrayToHex(alterHue(main_color, 0)));
+        onColorToneChange('secondary', arrayToHex(alterHue(main_color, 40)));
+        onColorToneChange('info', arrayToHex(alterHue(light_accent, 0)));
+        onColorToneChange('success', arrayToHex(alterHue(light_accent, 60)));
+        onColorToneChange('warning', arrayToHex(alterHue(dark_accent, 0)));
+        onColorToneChange('danger', arrayToHex(alterHue(dark_accent, 80)));
         break;
 
         default:
@@ -247,9 +264,12 @@ async function onRandomizeTheme() {
 * ■ Various Event Listeners:
 */
 randomize_color_btn.addEventListener('click', onRandomizeTheme);
-modal_card_btn.addEventListener('click', ()=>modal_card_modal.show());
+export_theme_btn.addEventListener('click',()=>modal_export_theme.show());
+modal_card_btn.addEventListener('click',()=>modal_card_modal.show());
+
 copy_theme_btn.addEventListener('click', copyCssToClipboard);
 save_theme_btn.addEventListener('click', saveCssToFile);
+save_custom_theme_btn.addEventListener('click', saveCssToCustom);
 switch_bodytext_btn.addEventListener('click', async()=>{
     // const body = getVariableFromCSS('--dek-body-color');
     // const text = getVariableFromCSS('--dek-text-color');
@@ -268,6 +288,9 @@ for (const color of Object.keys(color_inputs)) {
     });
 }
 document.addEventListener('DOMContentLoaded', async (event) => {
+    const theme = await app_config.get('gui-theme');
+    if (theme === 'custom') loadCustomthemeFromStorage();
+
     // initialize color inputs to current theme colors:
     for (const color of Object.keys(color_inputs)) {
         let css_value = '';

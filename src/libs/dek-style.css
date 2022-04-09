@@ -67,9 +67,9 @@ body, .theme-border, .btn, .form-control {
   transition: color 1s, background-color 1s, border-color 1s;
 }
 small {
+  text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
 }
 code {
   background-color: rgba(0, 0, 0, 0.05);

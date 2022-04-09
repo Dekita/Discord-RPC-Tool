@@ -49,7 +49,6 @@
         <span>SWITCH</span> <i class="fas fa-random"></i>
     </button>
 </div>
-
 <!-- Main Style Preview Area -->
 <div class="d-flex w-100 h-100 p-3 pb-2 mx-auto flex-column" style="overflow-y:auto;">
     <header class="mb-0">
@@ -59,10 +58,7 @@
             <strong class="text-danger">[BETA]</strong>
         </div>
         <nav class="nav nav-masthead justify-content-center float-md-end">
-            <a class="hover-secondary me-3" id="copy-theme-btn" data-bs-toggle="tooltip" title="Copy Theme">
-                <i class="far fa-2x fa-clipboard"></i><br><strong>COPY</strong>
-            </a>
-            <a class="hover-secondary me-3" id="save-theme-btn" data-bs-toggle="tooltip" title="Save Theme">
+            <a class="hover-secondary me-3" id="export-theme-btn" data-bs-toggle="tooltip" title="Export/Save Theme">
                 <i class="fas fa-2x fa-save"></i><br><strong>SAVE</strong>
             </a>
         </nav>
@@ -97,8 +93,10 @@
 <div class="modal-dialog modal-dialog-centered">
 <div class="modal-content theme-bg theme-border">
     <div class="modal-header theme-border">
-        <h5 class="modal-title">Additional Colors</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title"><strong>Additional Colors</strong></h5>
+        <button type="button" class="btn p-0 hover-dark no-shadow me-2 mt-1" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="left" title="Close">
+            <i class="far fa-2x fa-fw fa-window-close"></i>
+        </button>
     </div>
     <div class="modal-body">
         <div class="row">
@@ -148,6 +146,39 @@
                     </div>
                 </div>
     
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+<!-- MODEL & CARD COLOR SELECTION MODAL -->
+<div class="modal fade" tabindex="-1" id="modal-export-theme">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content theme-bg theme-border">
+    <div class="modal-header theme-border">
+        <h5 class="modal-title"><strong>Export Theme</strong></h5>
+        <button type="button" class="btn p-0 hover-dark no-shadow me-2 mt-1" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="left" title="Close">
+            <i class="far fa-2x fa-fw fa-window-close"></i>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col pe-1">
+                <a class="btn btn-primary w-100 px-1" id="copy-theme-btn" data-bs-toggle="tooltip" title="Copy theme css to clipboard">
+                    <i class="far fa-2x fa-fw fa-clipboard"></i><br><strong>COPY CSS</strong>
+                </a>
+            </div>
+            <div class="col px-1">
+                <a class="btn btn-info w-100 px-1" id="save-theme-btn" data-bs-toggle="tooltip" title="Save theme css to file">
+                    <i class="fas fa-2x fa-fw fa-file-export"></i></i><br><strong>SAVE FILE</strong>
+                </a>
+            </div>
+            <div class="col ps-1">
+                <a class="btn btn-secondary w-100 px-1" id="save-custom-theme-btn" data-bs-toggle="tooltip" title="Save css as custom theme">
+                    <i class="fas fa-2x fa-fw fa-save"></i><br><strong>SAVE</strong>
+                </a>
             </div>
         </div>
     </div>

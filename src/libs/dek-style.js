@@ -175,6 +175,8 @@ class DekSelect extends EventTarget {
     initialize(element) {
         this._element = element;//document.getElementById(id);
         this._id = this._element.id;
+        DekSelect.cache[this._id] = this;
+
         const klass_filter = klass => !['dekselect'].includes(klass);
         const classlist = [...this._element.classList].filter(klass_filter);
         this._element.classList.add('d-none');
@@ -250,14 +252,24 @@ class DekSelect extends EventTarget {
 
 DekSelect.cache = {};
 
+// helper function for loading theme data from local storage
+function loadCustomthemeFromStorage() {
+    // const css_sheet = document.getElementById('theme-style-css');
+    const css_properties = localStorage.getItem('dek-theme').split(';');
+    for (const property of css_properties) {
+        const trimmed = property.trim();
+        if (!trimmed.startsWith('--dek-')) continue;
+        const [prop, val] = trimmed.split(':');
+        document.documentElement.style.setProperty(prop, val);
+    }
+}
+
 /**
 * Events:
 */
 document.addEventListener('DOMContentLoaded', async event => {
     const selectors = document.getElementsByClassName('dekselect');
-    for (const element of [].slice.call(selectors)) {
-        DekSelect.cache[element.id] = new DekSelect(element);
-    };
+    for (const element of [...selectors]) new DekSelect(element);
 });
 // listen for, and intercept clicks out of dekselect areas
 // and then hide any area currently showing;
