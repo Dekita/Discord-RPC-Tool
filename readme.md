@@ -4,7 +4,7 @@
 - [How to install](#how-to-install) 
 - [What is Discord RPC Tool](#what-is-discord-rpc-tool) 
 - [RPC Tool Features](#rpc-tool-features) 
-- [Latest Changelog](#changelog-v0093) 
+- [Latest Changelog](#changelog-v0094) 
 - [Launching your first activity](#launching-your-first-activity) 
 - [Main Activity Customization](#main-activity-customization) 
 - [Activity Image Customization](#activity-image-customization) 
@@ -28,6 +28,14 @@ RPC Tool is a simple application that allows you to easily communicate with the 
 - Optional auto start activity on launch
 - Optional auto minimize app on launch
 - Optional auto launch app on system boot
+<hr class="mt-1">
+
+### Changelog (v0.0.94)
+- Bugfix for application images not being reloaded
+- Bugfix for additional activities not refreshing images
+- New button to refresh application details (at app id)
+- New button to use application icon as activity image in app
+- New buttons to pull details and summary from application data
 <hr class="mt-1">
 
 ### Changelog (v0.0.93)

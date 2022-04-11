@@ -19,7 +19,7 @@
             </a>
 
 
-            <a class="hover-secondary me-2" href="https://discord.gg/Gyb8r9Ghuu"  data-bs-toggle="tooltip" title="Support Server">
+            <a class="hover-secondary me-2" href="https://discord.gg/7dCZ3Q4eU3"  data-bs-toggle="tooltip" title="Support Server">
                 <i class="fab fa-2x fa-fw fa-discord"></i><br><strong>SUPPORT</strong>
             </a>
             <a class="hover-secondary me-2"  data-bs-toggle="tooltip" title="App Information" id="app-info-btn">
@@ -38,19 +38,39 @@
             <div class="col">
                 <div class="row mb-1">
                     <small class="text-start m-1">General</small>
-                    <div class="col pe-1" data-bs-toggle="tooltip" title="YOUR Discord Application ID">
-                        <input type="text" class="form-control form-control-sm form-secondary" id="app-id" placeholder="Discord Application ID">
+                    <div class="col pe-1">
+                        <div class="d-flex">
+                            <input type="text" class="form-control form-control-sm form-secondary" id="app-id" placeholder="Discord Application ID" data-bs-toggle="tooltip" title="YOUR Discord Application ID.">
+                            <button class="btn btn-sm no-shadow hover-secondary" id="force-refresh-data" data-bs-toggle="tooltip" title="Refresh application data from discord developer portal.">
+                                <i class="fas fa-fw fa-retweet"></i>
+                            </button>
+                        </div>
                     </div>
-                    <div class="col ps-1" data-bs-toggle="tooltip" title="Activity image (only used for this app)">
-                        <input type="text" class="form-control form-control-sm form-secondary" id="app-image" placeholder="img/icon.png">
+                    <div class="col ps-1">
+                        <div class="d-flex">
+                            <input type="text" class="form-control form-control-sm form-secondary" id="app-image" placeholder="img/icon.png" data-bs-toggle="tooltip" title="The activity image in the left sidebar. Only used in this app.">
+                            <button class="btn btn-sm no-shadow hover-secondary" id="force-app-icon" data-bs-toggle="tooltip" title="Pull activity image from dev portal application icon data.">
+                                <i class="fas fa-fw fa-angle-double-left"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div class="row mb-1">
-                    <div class="col pe-1" data-bs-toggle="tooltip" title="Activity text: Line 1">
-                        <input type="text" class="form-control form-control-sm form-secondary" id="app-details" placeholder="DiscordRPC by DekitaRPG">
+                    <div class="col pe-1">
+                        <div class="d-flex">
+                            <input type="text" class="form-control form-control-sm form-secondary" id="app-details" placeholder="DiscordRPC by DekitaRPG"  data-bs-toggle="tooltip" title="Activity text: Line 1">
+                            <button class="btn btn-sm no-shadow hover-secondary" id="force-app-details" data-bs-toggle="tooltip" title="Pull Text from dev portal application details.">
+                                <i class="fas fa-fw fa-angle-double-left"></i>
+                            </button>
+                        </div>
                     </div>
-                    <div class="col ps-1" data-bs-toggle="tooltip" title="Activity text: Line 2">
-                        <input type="text" class="form-control form-control-sm form-secondary" id="app-state" placeholder="{servers} Servers | {players} Players">
+                    <div class="col ps-1">
+                        <div class="d-flex">
+                            <input type="text" class="form-control form-control-sm form-secondary" id="app-state" placeholder="{servers} Servers | {players} Players"  data-bs-toggle="tooltip" title="Activity text: Line 2">
+                            <button class="btn btn-sm no-shadow hover-secondary" id="force-app-state" data-bs-toggle="tooltip" title="Pull Text from dev portal application summary.">
+                                <i class="fas fa-fw fa-angle-double-left"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div class="row mb-1">
@@ -263,7 +283,7 @@
                     </select>
                 </div>
                 <div class="col-3 pt-1 text-end">
-                    <a class="hover-secondary"  data-bs-toggle="tooltip" title="Theme Customization" id="app-themes-btn">
+                    <a class="hover-dark"  data-bs-toggle="tooltip" title="Theme Customization" id="app-themes-btn">
                         <i class="fas fa-paint-roller"></i> <strong>custom</strong>
                     </a>
                 </div>

@@ -288,6 +288,7 @@ for (const color of Object.keys(color_inputs)) {
     });
 }
 document.addEventListener('DOMContentLoaded', async (event) => {
+    loadCustomthemeFromStorage()
     const theme = await app_config.get('gui-theme');
     if (theme === 'custom') loadCustomthemeFromStorage();
 

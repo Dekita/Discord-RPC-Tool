@@ -10,7 +10,7 @@ const fs = require('fs');
 const path = require('path');
 const electron = require("electron");
 const getJSON = require('bent')('json');
-const DiscordRPC = require('discord-rpc');
+const RPCClient = require('discord-rpc').Client;
 let rpc, last_stats, stats={p:'??',s:'??',players:'??',servers:'??'};
 
 /**
@@ -50,7 +50,7 @@ class drpc {
     static async login(clientId, callback){
         try {
             if (rpc) rpc.destroy();
-            rpc = new DiscordRPC.Client({transport: 'ipc'});
+            rpc = new RPCClient({transport: 'ipc'});
             if (callback) rpc.once('ready', callback);
             await rpc.login({clientId});
             console.log('should be logged in!');

@@ -20,7 +20,8 @@ const theme_files = fs.readdirSync(path.join(__dirname, 'themes'));
 const app_themes = theme_files.map(theme => {
     return theme.replace(__dirname).replace('.css','')
 });
-app_themes.push('custom');
+// add custom theme to the theme menu:
+app_themes.push('custom'); 
 
 // DEKRPC stores the running app windows/tray:
 const DEKRPC = {tray:null, main:null, child:null};
@@ -43,6 +44,9 @@ const APP_NAME = (() => {
 const APP_VERSION = (() => {
     if (app.isPackaged) return app.getVersion();
     return require('../package.json').version;
+})();
+const APP_USER_AGENT = (()=>{
+    return `${APP_NAME} ${APP_VERSION} - dekitarpg.com`;
 })();
 
 // set default ejs data:
@@ -234,6 +238,7 @@ async function loadFileToWindow(page, windoe) {
     EJS.data('title',page !== 'app'?capitalize(page):'');
     EJS.data('themes', app_themes);
     EJS.data('page', page);
+    windoe.webContents.setUserAgent(APP_USER_AGENT); 
     if (windoe.isVisible()) windoe.reload();
     else windoe.loadFile(HTML_PATH);
 }
@@ -291,7 +296,7 @@ process.on('unhandledRejection', console.error);
 // Hot reloading
 if (config.enable_reloader) {
     require('electron-reloader')(module, {
-        watchRenderer: true,
         debug: config.dev_mode,
+        watchRenderer: true,
     });
 }

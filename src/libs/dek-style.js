@@ -110,7 +110,6 @@ class DekCheckBox {
         this.chinput.value = this.getLiNumVal(); 
         if (!this.ismulti && !this.idcheck){
             const checked_val = this.checkul.getElementsByClassName('checked')[0];
-            console.log('checked_val:', this.id, checked_val, this.chinput.value)
             const checked_span = checked_val.getElementsByTagName("span")[0];
             this.chinput.value = checked_span.innerHTML;
         };
@@ -125,7 +124,6 @@ class DekCheckBox {
         return this.ismulti ? value.reverse().join(',') : value;
     };
     setActive(index) {
-        console.log(this.id, 'setting active to:', index)
         this.updateSyblings();
         this.updateValue();
         this.updateIcon();
@@ -253,9 +251,9 @@ class DekSelect extends EventTarget {
 DekSelect.cache = {};
 
 // helper function for loading theme data from local storage
-function loadCustomthemeFromStorage() {
+function loadCustomthemeFromStorage(css_string) {
     // const css_sheet = document.getElementById('theme-style-css');
-    const css_properties = localStorage.getItem('dek-theme').split(';');
+    const css_properties = css_string || localStorage.getItem('dek-theme').split(';');
     for (const property of css_properties) {
         const trimmed = property.trim();
         if (!trimmed.startsWith('--dek-')) continue;
@@ -263,7 +261,6 @@ function loadCustomthemeFromStorage() {
         document.documentElement.style.setProperty(prop, val);
     }
 }
-
 /**
 * Events:
 */

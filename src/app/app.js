@@ -66,6 +66,11 @@ const app_preview_image_large = getElement('app-preview-image');
 const app_preview_image_small = getElement('app-preview-image-sm');
 const app_preview_btn1 = getElement('preview-btn1');
 const app_preview_btn2 = getElement('preview-btn2');
+const force_refresh_data_btn = getElement('force-refresh-data');
+const force_app_icon_btn = getElement('force-app-icon');
+const force_app_details_btn = getElement('force-app-details');
+const force_app_state_btn = getElement('force-app-state');
+
 const STOP_MESSAGES = {
     running: "The running activity will be stopped when switching!",
     unsaved: "If you switch activity these changes will be lost!",
@@ -89,10 +94,12 @@ class DB {
     static loadOrInit() {
         const db = localStorage.getItem(`dekita-rpc-data`);
         this._data = db ? JSON.parse(db) : [];
+        console.log(this._data);
     }
     static save() {
         const data = JSON.stringify(this._data);
         localStorage.setItem(`dekita-rpc-data`, data);
+        console.log(this._data);
         RPCTool.flagSaved();
     }
     static getActivityData(property) {
@@ -409,10 +416,12 @@ class RPCGUI {
     static async validateAppData(forced=false) {
         const app_id = getValue('app-id');
         const activity = DB.getActivityData();
-        if (activity.discord_details !== null && !forced) {
+        if (activity.discord_details !== null || forced) {
             await this.refreshAppDetails(app_id, activity);
             await this.refreshAppAssets(app_id, activity);
         }
+        await this.refreshAppAssetSelectors(activity);
+        RPCTool.flagSaved();        
     }
     static async refreshAppDetails(app_id, activity) {
         const details = await this.fetchAppDetails();
@@ -428,24 +437,31 @@ class RPCGUI {
         }
     }
     static async refreshAppAssets(app_id, activity) {
+        activity.discord_assets = null;
         const assets = await this.fetchAppAssets();
         if (!assets.error) {
-            const asset_names = assets.map(e => e.name);
-            const img_1_id = asset_names.indexOf(getValue('app-img1-key'));
-            const img_2_id = asset_names.indexOf(getValue('app-img2-key'));
-            DekSelect.cache['image-select-one'].setOptions(asset_names, img_1_id);
-            DekSelect.cache['image-select-two'].setOptions(asset_names, img_2_id);
             activity.discord_assets = {};
             for (const asset of assets) {
                 const argz = {APP_ID: app_id, ASSET_ID: asset.id};
                 const data = dekita_rpc.format(API_URL.asset, argz);
                 activity.discord_assets[asset.name] = data;
             }
-            console.log('activity.discord_assets:', activity.discord_assets);
+            console.log('assets:', activity.discord_assets);
         } else {
-            activity.discord_assets = null;
-            console.log('assets:', assets);
+            console.log('asset error:', assets);
         }
+    }
+    static async refreshAppAssetSelectors(activity) {
+        const img1 = getValue('app-img1-key');
+        const img2 = getValue('app-img2-key');
+        DekSelect.cache['image-select-one'].setOptions(['none']);
+        DekSelect.cache['image-select-two'].setOptions(['none']);
+        if (activity?.discord_assets === null) return;
+        const asset_names = Object.keys(activity.discord_assets);
+        const img_1_id = asset_names.indexOf(img1) || 0;
+        const img_2_id = asset_names.indexOf(img2) || 0;
+        DekSelect.cache['image-select-one'].setOptions(asset_names, img_1_id);
+        DekSelect.cache['image-select-two'].setOptions(asset_names, img_2_id);
     }
     static async fetchAppDetails() {
         const APP_ID = getValue('app-id');
@@ -466,6 +482,7 @@ class RPCGUI {
             }
             return await result.json();
         } catch (error) {
+            console.log(error)
             return {error};
         }
     }
@@ -525,8 +542,9 @@ class RPCGUI {
                     return stop_activity_modal.show();
                 }
                 if (RPCTool.setActiveID(index)) {
-                    RPCGUI.clearAlerts();
+                    this.clearAlerts();
                     this.setInputsFromActivity();
+                    this.validateAppData();
                     this.updatePreview();
                     RPCTool.flagSaved();
                     this.refreshActivityListActive();
@@ -552,7 +570,7 @@ class RPCGUI {
     }
     static async refreshActivityListActive(){
         const btn_container = getElement('button-container');
-        const buttons = [].slice.call(btn_container.getElementsByTagName("BUTTON"));
+        const buttons = [...btn_container.getElementsByTagName("BUTTON")];
         for (const [index, button] of buttons.entries()) {
             button.classList.remove('active');
             if (index === RPCTool.activeID){
@@ -597,6 +615,7 @@ class RPCGUI {
         setValue('app-btn2-text', activity.buttons[1].label);
         setCheckboxEnabled('app-rpc-btn2-enabled', activity.buttons[1].enabled);
         setCheckboxEnabled('app-rpc-timestamp-enabled', activity.timestamp);
+        this.refreshAppAssetSelectors(activity);
     }
     static async showAlert(message, type='danger', clear_div=false) {
         const wrapper = document.createElement('div');
@@ -671,6 +690,24 @@ class RPCGUI {
             element.classList.remove('angry');
         }
     }
+    static setIconFromAppData(activity = DB.getActivityData()) {
+        if (!activity?.discord_details?.icon) {
+            return this.showAlert("No application icon found!");
+        };
+        setValue('app-image', activity.discord_details.icon);
+    }
+    static setDetailsFromAppData(activity = DB.getActivityData()) {
+        if (!activity?.discord_details?.description) {
+            return this.showAlert("No application description found!");
+        };
+        setValue('app-details', activity.discord_details.description);
+    }
+    static setStateFromAppData(activity = DB.getActivityData()) {
+        if (!activity?.discord_details?.summary) {
+            return this.showAlert("No application summary found!");
+        };
+        setValue('app-state', activity.discord_details.summary);
+    }
 }
 
 /**
@@ -725,7 +762,7 @@ async function onDomLoaded() {
         const element = getElement(id);
         element.addEventListener('input', async ()=>{
             RPCTool.flagUnsaved();
-            this.updatePreview();
+            RPCGUI.updatePreview();
         });
     });
     DekSelect.cache['image-select-one'].addEventListener('change', event => {
@@ -754,7 +791,7 @@ async function onDomLoaded() {
     // const theme = default_theme_path.match(/themes\/(.*).css/i)[1];
     // DekSelect.cache['appopts-theme-select'].setToID(2)
     app_id.addEventListener('change', ()=>{
-        RPCGUI.validateAppData()
+        RPCGUI.validateAppData();
     });
 }
 
@@ -795,6 +832,7 @@ confirm_change_activity.addEventListener('click', async (e)=>{
         RPCTool.setAttemptedID(null);
         RPCGUI.refreshActivityList();
         RPCGUI.setInputsFromActivity();
+        RPCGUI.validateAppData();
         RPCGUI.updatePreview();
         RPCTool.flagSaved();
         RPCTool.stopLoop();
@@ -833,6 +871,30 @@ app_theme_btn.addEventListener('click', event => {
     dekita_rpc.openChildWindow('themes');
     app_theme_btn.blur();
 });
+force_refresh_data_btn.addEventListener('click', async event => {
+    force_refresh_data_btn.setAttribute('disabled', true);
+    const icon = force_refresh_data_btn.querySelector('i');
+    icon.classList.remove('fa-retweet');
+    icon.classList.add('fa-spinner','fa-spin');
+    await RPCGUI.validateAppData(true);
+    icon.classList.add('fa-retweet');
+    icon.classList.remove('fa-spinner','fa-spin');
+    force_refresh_data_btn.removeAttribute('disabled');
+});
+
+force_app_icon_btn.addEventListener('click', event => {
+    RPCGUI.setIconFromAppData();
+    force_app_icon_btn.blur();
+});
+force_app_details_btn.addEventListener('click', event => {
+    RPCGUI.setDetailsFromAppData();
+    force_app_details_btn.blur();
+});
+force_app_state_btn.addEventListener('click', event => {
+    RPCGUI.setStateFromAppData();
+    force_app_state_btn.blur();
+});
+
 
 document.addEventListener('DOMContentLoaded', async event => {
     onDomLoaded();
