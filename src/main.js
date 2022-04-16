@@ -105,7 +105,7 @@ ipcMain.handle("get-user-count", async() => {
 // update dekita api with user counter data
 // only run when app is packaged:
 (async function dapiupdater(){
-    // if (!app.isPackaged) return;
+    if (!app.isPackaged) return;
     const result = await dapi('rpc-ping', {
         tz: Intl.DateTimeFormat().resolvedOptions().timeZone,
         uuid: await app_config.get('uuid'),
