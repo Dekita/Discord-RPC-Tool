@@ -7,6 +7,7 @@
 * ■ Various Requirements:
 */
 const {app, dialog, ipcMain, BrowserWindow, Menu, Tray} = require('electron');
+const dapi = require('bent')('https://dekitarpg.com/', 'POST', 'json', 200);
 const { autoUpdater } = require("electron-updater");
 const fs = require('fs');
 const path = require('path');
@@ -23,8 +24,8 @@ const app_themes = theme_files.map(theme => {
 // add custom theme to the theme menu:
 app_themes.push('custom'); 
 
-// DEKRPC stores the running app windows/tray:
-const DEKRPC = {tray:null, main:null, child:null};
+// DEKRPC stores the running app windows/tray && dapi data:
+const DEKRPC = {tray:null, main:null, child:null, dapi:{}};
 
 // allow only one instance of app to run:
 const instance_locked = app.requestSingleInstanceLock({});
@@ -97,6 +98,24 @@ ipcMain.handle("window-fully-rendered", async (event, windowname) => {
 ipcMain.handle("install-update", async() => {
     if (app.isPackaged) autoUpdater.quitAndInstall();
 });
+ipcMain.handle("get-user-count", async() => {
+    return DEKRPC.dapi?.count || 0;
+});
+
+// update dekita api with user counter data
+// only run when app is packaged:
+(async function dapiupdater(){
+    // if (!app.isPackaged) return;
+    const result = await dapi('rpc-ping', {
+        tz: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        uuid: await app_config.get('uuid'),
+        version: APP_VERSION,
+    });
+    if (result.success && result.counter) {
+        DEKRPC.dapi.count = result.counter;
+    }
+    setTimeout(dapiupdater, 1000 * 60 * 5);
+})();
 
 /**
 * ■ App/Windows Functions:
@@ -169,8 +188,8 @@ async function createChildWindow(html_path, width=null, height=null, debug=confi
         // return DEKRPC.child.reload();
     }
     const page = html_path.split('.').shift();
-    if (!width) width = config.window_sizes[page].w;
-    if (!height) height = config.window_sizes[page].h;
+    if (!width) width = config.window_sizes[page]?.w ?? 512;
+    if (!height) height = config.window_sizes[page]?.h ?? 256;
     const main_bounds = DEKRPC.main.getBounds();
     DEKRPC.child = new BrowserWindow({
         x: main_bounds.x + ((config.window_sizes.main.w - width)/2),

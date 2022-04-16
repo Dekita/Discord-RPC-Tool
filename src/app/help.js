@@ -5,7 +5,7 @@
 document.addEventListener('DOMContentLoaded', async (event) => {
     const options = {delay: 150, trigger: 'hover', container: 'body'};
     const tooltips = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-    tooltips_list = tooltips.map(e => new bootstrap.Tooltip(e, options));
+    const tooltips_list = tooltips.map(e => new bootstrap.Tooltip(e, options));
     try {
         const converter = new showdown.Converter();
         // converter.setOption('tasklists', true);
@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', async (event) => {
         mark_area.innerHTML = converter.makeHtml(markdown);
         const links = [].slice.call(mark_area.querySelectorAll('a'));
         for (const link of links) {
+            if (link.querySelectorAll('img').length) continue;
             link.classList.add('hover-dark','hover-secondary')
             if (link.id.startsWith('how-to-install')) {
                 link.classList.add('d-none');
@@ -37,6 +38,6 @@ document.addEventListener('click', e => {
     }
 });
 
-function removeSRC(element) {
+window.removeSRC = function(element) {
     element.src = element.src.replace('/src','');
 }

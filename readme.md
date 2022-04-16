@@ -1,10 +1,20 @@
 [<img src="src/img/banner.png" class="img-fluid img-thumbnail mx-auto d-block" onerror="removeSRC(this)">](https://dekitarpg.com/rpc)
 
+<div class="d-flex mb-2">
+<div class="mx-auto d-block">
+    <img src="https://img.shields.io/github/downloads/Dekita/Discord-RPC-Tool/total?style=for-the-badge&logo=github" class="img-fluid img-thumbnail">
+    <a class="mx-2" href="https://discord.gg/7dCZ3Q4eU3" target="new">
+        <img src="https://img.shields.io/discord/956439276357308446?logo=discord&style=for-the-badge&logoColor=e4e4e4&label=Support%20Server" class="img-fluid img-thumbnail">
+    </a>
+    <img src="https://img.shields.io/github/stars/Dekita/Discord-RPC-Tool?style=for-the-badge&logo=apache%20spark&logoColor=e4e4e4" class="img-fluid img-thumbnail">
+</div>
+</div>
+
 ### Table of Contents
 - [How to install](#how-to-install) 
 - [What is Discord RPC Tool](#what-is-discord-rpc-tool) 
 - [RPC Tool Features](#rpc-tool-features) 
-- [Latest Changelog](#changelog-v0094) 
+- [Latest Changelog](#changelog-v0095) 
 - [Launching your first activity](#launching-your-first-activity) 
 - [Main Activity Customization](#main-activity-customization) 
 - [Activity Image Customization](#activity-image-customization) 
@@ -21,13 +31,33 @@ RPC Tool is a simple application that allows you to easily communicate with the 
 <hr class="mt-1">
 
 ### RPC Tool Features
-- Painless installation
-- Multiple activity profiles
-- Modern UI inspired by Discord
-- Optional minimize to system tray
-- Optional auto start activity on launch
-- Optional auto minimize app on launch
-- Optional auto launch app on system boot
+- Painless Installation
+- Multiple Activity Profiles
+- Modern UI Inspired by Discord
+- Multi Platform Support (win+linux)
+- Customizable Theme + Multiple Defaults 
+- Auto Detect App Name, Icon, Description, etc
+- Optional Minimize to System Tray
+- Optional Auto Start Activity on Launch
+- Optional Auto Minimize App on Launch
+- Optional Auto Launch App on System Boot
+- API Polling for Advanced Activities
+- Optional Activity Duration/Timer
+- System Notifications
+<hr class="mt-1">
+
+### Changelog (v0.0.95)
+- Bugfix for app id not properly registering
+- Activities can now be moved position using drag+drop
+- Theme menu moved changed from window to modal
+- New theme randomization types powered by colormind.io
+- Various theme customization gui improvements
+- Added replacers for time/date/locale/timezone/playtime
+- Fixed support server links and added to help guide
+- Seperated code chunks for future refactor
+- Added api polling for user counts
+- Scrollbar styling improvements
+- New 'toast' style alerts
 <hr class="mt-1">
 
 ### Changelog (v0.0.94)
@@ -61,12 +91,14 @@ RPC Tool is a simple application that allows you to easily communicate with the 
 - Updated preview display to use image assets
 <hr class="mt-1">
 
-### Coming Soon
+### Coming Soon / TODO
 - Change logic to allow for 'real-time' preview
-- Various improvements to the underlying code
+- Switch everything to es style modules 
 - Configurable auto-save option
 - More awesome themes
+- ...
 <hr class="mt-1">
+
 
 ### How to install 
 <a href="https://github.com/Dekita/Discord-RPC-Tool/releases/latest" target="new">
@@ -129,12 +161,13 @@ Text shown for the activity details and state (the first and second line of text
 Each activity can display upto two images, one large and one small. But before RPC Tool can display them properly, the image files must be uploaded onto the Discord developer portal's `Rich Presence => Art Assets` tab shown below. 
 <img src="src/img/discord-asset-page.png" class="img-fluid img-thumbnail mt-2" onerror="removeSRC(this)">
 
-| :exclamation: Refresh the Discord dev portal after adding images to make sure they are still there! |
+| :exclamation: Images may take a few minutes to show due to discords cache |
 |---|
 
-The image key that you enter on the developer portal should match the image key you enter into the RPC Tool application. Note that the key is also case sensitive! 
+The image key that you enter on the developer portal should match the image key you select in the RPC Tool application. After adding new images on the dev portal, click the `refresh application data` button in the RPC tool (next to the app id input) to refresh refresh image datas. If they arent showing, wait a few minutes, and try again. If still not showing, refresh the developer portal to make sure discord has saved them properly.
 
-Activity images can be freely disabled/enabled within the RPC Tool application, where you can also define the text displayed when hovering over the image.
+Make sure to also enable your image within the RPC Tool application. 
+
 <hr class="mt-1">
 
 ### Activity Button Customization
@@ -182,6 +215,18 @@ Assuming the example json above, along with the following activity text:
 
 Then the resulting text shown for the activity would be: 
 `3 Servers | 99 Players` 
+
+Additionally, there are a number of default replacers that you can use, without any api url, that will use app/system information. See below for more details;
+`{date}` - formatted date
+`{date-tz}` - formatted date with timezone
+`{time}` - formatted time
+`{time-tz}` - formatted time with timezone
+`{region}` - your estimated region
+`{timezone}` - your estimated timezone
+`{playtime}` - logical playtime text
+`{playtime-short}` - short playtime text
+`{rpc-website}` - rpc website url
+`{rpc-support}` - rpc support server url
 <hr class="mt-1">
 
 ### Important Notes
@@ -193,4 +238,3 @@ Then the resulting text shown for the activity would be:
 
 | :warning: Please report any bugs you find to the support server! |
 |---|
-

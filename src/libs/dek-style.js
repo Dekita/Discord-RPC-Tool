@@ -190,10 +190,10 @@ class DekSelect extends EventTarget {
         this._i = document.createElement('i');
         this._i.classList.add('fas', 'fa-fw', 'fa-arrow-down');
         this._arrow.append(this._i);
-        this._ul = document.createElement('ul');
-        this._ul.classList.add('thin-scroller', 'primary-scroller');
-        this._a.append(this._value, this._arrow, this._ul);
         
+        this._ul = document.createElement('ul');
+        this._ul.classList.add('thin-scroller');
+        this._a.append(this._value, this._arrow, this._ul);
         
         this._element.parentElement.insertBefore(this._a, this._element.nextSibling);
         
@@ -267,6 +267,9 @@ function loadCustomthemeFromStorage(css_string) {
 document.addEventListener('DOMContentLoaded', async event => {
     const selectors = document.getElementsByClassName('dekselect');
     for (const element of [...selectors]) new DekSelect(element);
+
+    // const checkers = document.getElementsByClassName('dekcheckbox');
+    // for (const element of [...checkers]) new DekCheckBox(element, (handler)=>{});
 });
 // listen for, and intercept clicks out of dekselect areas
 // and then hide any area currently showing;

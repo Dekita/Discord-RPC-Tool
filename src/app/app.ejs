@@ -3,33 +3,7 @@
     <button class="btn btn-lg btn-secondary fw-bold border-white bg-white px-5">+</button>
 </div>
 <div class="d-flex w-100 h-100 p-3 pb-2 mx-auto flex-column" style="overflow-y:auto;">
-    <header class="mb-0">
-        <div class="float-md-start pt-1">
-            <img src="img/logo.png" class="img-fluid">
-        </div>
-        <nav class="nav nav-masthead justify-content-center float-md-end">
-            <a class="hover-secondary me-2" href="https://www.patreon.com/DekitaRPG"  data-bs-toggle="tooltip" title="Support Development on Patreon">
-                <i class="fab fa-2x fa-fw fa-patreon"></i><br><strong>PATREON</strong>
-            </a>
-            <a class="hover-secondary me-2" href="https://github.com/dekita/discord-rpc-tool"  data-bs-toggle="tooltip" title="Project Github">
-                <i class="fab fa-2x fa-fw fa-github"></i><br><strong>GITHUB</strong>
-            </a>
-            <a class="hover-secondary me-2" href="https://dekitarpg.com" data-bs-toggle="tooltip" title="Visit Developer Website">
-                <i class="fas fa-2x fa-fw fa-globe"></i><br><strong>WEBSITE</strong>
-            </a>
-
-
-            <a class="hover-secondary me-2" href="https://discord.gg/7dCZ3Q4eU3"  data-bs-toggle="tooltip" title="Support Server">
-                <i class="fab fa-2x fa-fw fa-discord"></i><br><strong>SUPPORT</strong>
-            </a>
-            <a class="hover-secondary me-2"  data-bs-toggle="tooltip" title="App Information" id="app-info-btn">
-                <i class="fas fa-2x fa-fw fa-info-circle"></i><br><strong>INFO</strong>
-            </a>
-            <a class="hover-secondary"  data-bs-toggle="tooltip" title="Settings" id="app-settings-btn">
-                <i class="fas fa-2x fa-fw fa-cog"></i><br><strong>SETTINGS</strong>
-            </a>
-        </nav>
-    </header>
+    <%- include('./components/ejs/nav-header') %>
     <main class="px-0">
         <div class="row">
             <div class="w-100 pt-1 pb-0"><div id="alert-area"></div></div>
@@ -41,7 +15,7 @@
                     <div class="col pe-1">
                         <div class="d-flex">
                             <input type="text" class="form-control form-control-sm form-secondary" id="app-id" placeholder="Discord Application ID" data-bs-toggle="tooltip" title="YOUR Discord Application ID.">
-                            <button class="btn btn-sm no-shadow hover-secondary" id="force-refresh-data" data-bs-toggle="tooltip" title="Refresh application data from discord developer portal.">
+                            <button class="btn p-0 no-shadow hover-secondary ms-1" id="force-refresh-data" data-bs-toggle="tooltip" title="Refresh application data from discord developer portal.">
                                 <i class="fas fa-fw fa-retweet"></i>
                             </button>
                         </div>
@@ -49,7 +23,7 @@
                     <div class="col ps-1">
                         <div class="d-flex">
                             <input type="text" class="form-control form-control-sm form-secondary" id="app-image" placeholder="img/icon.png" data-bs-toggle="tooltip" title="The activity image in the left sidebar. Only used in this app.">
-                            <button class="btn btn-sm no-shadow hover-secondary" id="force-app-icon" data-bs-toggle="tooltip" title="Pull activity image from dev portal application icon data.">
+                            <button class="btn p-0 no-shadow hover-secondary ms-1" id="force-app-icon" data-bs-toggle="tooltip" title="Pull activity image from dev portal application icon data.">
                                 <i class="fas fa-fw fa-angle-double-left"></i>
                             </button>
                         </div>
@@ -59,7 +33,7 @@
                     <div class="col pe-1">
                         <div class="d-flex">
                             <input type="text" class="form-control form-control-sm form-secondary" id="app-details" placeholder="DiscordRPC by DekitaRPG"  data-bs-toggle="tooltip" title="Activity text: Line 1">
-                            <button class="btn btn-sm no-shadow hover-secondary" id="force-app-details" data-bs-toggle="tooltip" title="Pull Text from dev portal application details.">
+                            <button class="btn p-0 no-shadow hover-secondary ms-1" id="force-app-details" data-bs-toggle="tooltip" title="Pull Text from dev portal application details.">
                                 <i class="fas fa-fw fa-angle-double-left"></i>
                             </button>
                         </div>
@@ -67,7 +41,7 @@
                     <div class="col ps-1">
                         <div class="d-flex">
                             <input type="text" class="form-control form-control-sm form-secondary" id="app-state" placeholder="{servers} Servers | {players} Players"  data-bs-toggle="tooltip" title="Activity text: Line 2">
-                            <button class="btn btn-sm no-shadow hover-secondary" id="force-app-state" data-bs-toggle="tooltip" title="Pull Text from dev portal application summary.">
+                            <button class="btn p-0 no-shadow hover-secondary ms-1" id="force-app-state" data-bs-toggle="tooltip" title="Pull Text from dev portal application summary.">
                                 <i class="fas fa-fw fa-angle-double-left"></i>
                             </button>
                         </div>
@@ -212,6 +186,9 @@
                     </div>
                 </div>
             </div>
+            <div class="toast-container position-absolute bottom-0 end-0 p-3", id="main-toast-container">
+                <!-- programatically put bread in the toaster -->
+            </div>
         </div>
     </main>
     <footer class="mt-auto mb-0 text-white-50">
@@ -220,114 +197,8 @@
         </small>
     </footer>
 </div>
-<!-- STOP ACTIVITY CONFIRMATION MODAL -->
-<div class="modal fade" tabindex="-1" id="stop-activity-modal">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content theme-bg theme-border">
-        <div class="modal-header  theme-border">
-            <h5 class="modal-title" id="stop-activity-title"><strong>Caution</strong></h5>
-            <button type="button" class="btn p-0 hover-dark no-shadow me-2 mt-1" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="left" title="Close Confirmation">
-                <i class="far fa-2x fa-fw fa-window-close"></i>
-            </button>
-        </div>
-        <div class="modal-body">
-            <p id="stop-activity-message"></p>
-        </div>
-        <div class="modal-footer theme-border">
-            <button type="button" class="btn btn-danger" id="confirm-change-activity">Change Activity</button>
-            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancel Change</button>
-        </div>
-        </div>
-    </div>
-</div>
-<!-- DELETE ACTIVITY CONFIRMATION MODAL -->
-<div class="modal fade" tabindex="-1" id="delete-activity-modal">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content theme-bg theme-border">
-        <div class="modal-header theme-border">
-            <h5 class="modal-title"><strong>Confirm Deletion</strong></h5>
-            <button type="button" class="btn p-0 hover-dark no-shadow me-2 mt-1" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="left" title="Close Confirmation">
-                <i class="far fa-2x fa-fw fa-window-close"></i>
-            </button>
-        </div>
-        <div class="modal-body">
-            <p>Please confirm that you wish to delete this activity.</p>
-        </div>
-        <div class="modal-footer theme-border">
-            <button type="button" class="btn btn-danger" id="confirm-delete-activity">Confirm</button>
-            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancel</button>
-        </div>
-        </div>
-    </div>
-</div>
-<!-- APPLICATION SETTINGS MODAL -->
-<div class="modal fade" tabindex="-1" id="settings-modal">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content theme-bg theme-border">
-        <div class="modal-header theme-border p-4">
-            <h5 class="modal-title"><strong>App Settings</strong></h5>
-            <button type="button" class="btn p-0 hover-dark no-shadow me-2 mt-1" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="left" title="Close Settings">
-                <i class="far fa-2x fa-fw fa-window-close"></i>
-            </button>
-        </div>
-        <div class="modal-body text-start">
-            <div class="row px-5">
-                <div class="col-3">
-                    <strong>Theme:</strong>
-                </div>
-                <div class="col-6">
-                    <select class="dekselect dekselect-secondary" id="appopts-theme-select">
-                    <% for (const theme of themes) { %>
-                        <option><%= theme %></option>
-                    <% } %>
-                    </select>
-                </div>
-                <div class="col-3 pt-1 text-end">
-                    <a class="hover-dark"  data-bs-toggle="tooltip" title="Theme Customization" id="app-themes-btn">
-                        <i class="fas fa-paint-roller"></i> <strong>custom</strong>
-                    </a>
-                </div>
-            </div>
-            <div class="row pt-3 px-5">
-                <div class="col-3">
-                    <strong>System:</strong>
-                </div>
-                <div class="col-7">
-                    <div class="dekcheckbox check-dark multicheck" id="appopts-auto-boot">
-                        <ul class="mb-0"><li>Start after system boot</li></ul>
-                    </div>
-                    <div class="dekcheckbox check-dark multicheck" id="appopts-tiny-tray">
-                        <ul class="mb-0"><li>Minimize to system tray</li></ul>
-                    </div>
-                    <div class="dekcheckbox check-dark multicheck" id="appopts-auto-play">
-                        <ul class="mb-0"><li>Launch activity on load</li></ul>
-                    </div>
-                    <div class="dekcheckbox check-dark multicheck" id="appopts-auto-tiny">
-                        <ul class="mb-0"><li>Minimize on load</li></ul>
-                    </div>
-                </div>
-            </div>
 
-
-            <div class="row pt-2">
-                <div class="col d-none">
-                    <b>Colors</b>
-                    <div class="dekcheckbox check-dark idcheck" id="appopts-color">
-                        <ul class="mb-0">
-                            <li class="checked">Default</li>
-                            <li class="">Pastel</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer theme-border">
-            <small class="m-0"><b>
-                <a href="https://dekitarpg.com/" class="hover-dark">
-                    Created By @DekitaRPG
-                </a>
-            </b></small>
-        </div>
-        </div>
-    </div>
-</div>    
+<%- include('./components/ejs/modal-stop') %>
+<%- include('./components/ejs/modal-delete') %>
+<%- include('./components/ejs/modal-settings') %>
+<%- include('./components/ejs/modal-themes') %>

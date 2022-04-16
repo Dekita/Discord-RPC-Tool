@@ -1,37 +1,18 @@
 /**
-* system: Discord RPC Tool
-* author: dekitarpg@gmail.com
-*/
-
-/**
 * ■ Helper functions:
 */
-
-const getElement = id => document.getElementById(id);
-const getElementsByClass = n => document.getElementsByClassName(n);
-const getValue = id => getElement(id)?.value || '';
-const setValue = (id, v, e=getElement(id)) => e.value = v;
-const queryAll = query => [...document.querySelectorAll(query)];
+import { getElement } from "./helpers.js";
 
 /**
 * ■ Common Page Elements:
 */
-const modal_export_theme = new bootstrap.Modal(getElement('modal-export-theme'));
-const modal_card_modal = new bootstrap.Modal(getElement('modal-color-modal'));
-const export_theme_btn = getElement('export-theme-btn');
-const modal_card_btn = getElement('modal-card-btn');
 const copy_theme_btn = getElement('copy-theme-btn');
 const save_theme_btn = getElement('save-theme-btn');
-const save_custom_theme_btn = getElement('save-custom-theme-btn');
-const randomize_color_btn = getElement('randomize-color-btn');
 const randomize_icon = getElement('randomize-icon');
+const randomize_color_btn = getElement('randomize-color-btn');
 const switch_bodytext_btn = getElement('switch-body-text-btn');
-
-const switch_colors_btn = getElement('switch-colors-btn');
-switch_colors_btn.classList.add('d-none');// for now...
-
-
-const checkboxes ={
+const save_custom_theme_btn = getElement('save-custom-theme-btn');
+const checkboxes = {
     enable_calc: new DekCheckBox('calculate-enabled', value => {
         console.log('calculation enabled:', value[0] === '0');
     }),
@@ -60,7 +41,6 @@ const color_tones = [
     'success', 'warning', 'danger',
 ];
 
-
 /**
 * ■ CSS Related:
 */
@@ -76,6 +56,7 @@ const THEME_TEMPLATE = `
 const STYLES_ELEMENT = document.documentElement;
 // const STYLES_ELEMENT = getElement('theme-style-css');
 //const STYLES_ELEMENT = document.body;
+let randomize_type = null;
 
 function getVariableFromCSS(propname) {
     const style = getComputedStyle(STYLES_ELEMENT);
@@ -107,12 +88,11 @@ async function copyCssToClipboard() {
     return theme_css;
 }
 async function saveCssToFile() {
-    dekita_rpc.saveFileForCSS(await copyCssToClipboard());
+    dekita_rpc.saveFileForCSS(await createThemeCssString());
 }
 async function saveCssToCustom() {
-    localStorage.setItem('dek-theme', await copyCssToClipboard());
+    localStorage.setItem('dek-theme', await createThemeCssString());
 }
-
 
 /**
 * ■ Colors:
@@ -182,12 +162,17 @@ function onColorMainChange(property, hexcode) {
     setVariableToCSS(`--dek-${property}-color`, hexcode);
     color_inputs[property].value = hexcode;
 }
-
 // http://colormind.io/list/
 // => ["ui","default","flower_photography","game_of_thrones","metroid_fusion","pokemon_crystal"]
+async function fetchTypes() {
+    const url = "http://colormind.io/list/";
+    const result = await dekita_rpc.raceTimeout(fetch(url));
+    if (!result.ok || result.status !== 200) throw new Error("BAD FETCH REPLY!");
+    return (await result.json())?.result;
+}
 async function _unsafeMindPoll() {
     const url = "http://colormind.io/api/";
-    const options = {method: 'POST',body: JSON.stringify({model: "ui"})};
+    const options = {method: 'POST',body: JSON.stringify({model: randomize_type})};
     const result = await dekita_rpc.raceTimeout(fetch(url, options));
     if (!result.ok || result.status !== 200) throw new Error("BAD FETCH REPLY!");
     return (await result.json())?.result;
@@ -264,9 +249,6 @@ async function onRandomizeTheme() {
 * ■ Various Event Listeners:
 */
 randomize_color_btn.addEventListener('click', onRandomizeTheme);
-export_theme_btn.addEventListener('click',()=>modal_export_theme.show());
-modal_card_btn.addEventListener('click',()=>modal_card_modal.show());
-
 copy_theme_btn.addEventListener('click', copyCssToClipboard);
 save_theme_btn.addEventListener('click', saveCssToFile);
 save_custom_theme_btn.addEventListener('click', saveCssToCustom);
@@ -288,10 +270,15 @@ for (const color of Object.keys(color_inputs)) {
     });
 }
 document.addEventListener('DOMContentLoaded', async (event) => {
-    loadCustomthemeFromStorage()
-    const theme = await app_config.get('gui-theme');
-    if (theme === 'custom') loadCustomthemeFromStorage();
-
+    try { // setup randomization type selector
+        const selector = DekSelect.cache['randomize-type-select'];
+        selector.setOptions(await fetchTypes());
+        selector.addEventListener('change', event => {
+            randomize_type = event.target.value;
+        });
+    } catch (error) {
+        console.error(error)
+    };
     // initialize color inputs to current theme colors:
     for (const color of Object.keys(color_inputs)) {
         let css_value = '';
@@ -302,10 +289,4 @@ document.addEventListener('DOMContentLoaded', async (event) => {
         }
         color_inputs[color].value = css_value.trim();
     }
-    // setup tooltips:
-    const options = {delay: 0, trigger: 'hover', container: 'body', html: true};
-    const tooltips = queryAll('[data-bs-toggle="tooltip"]');
-    tooltips_list = tooltips.map(e => new bootstrap.Tooltip(e, options));
-    // app/child window wont show until ready event is received:  
-    dekita_rpc.sendReadyEvent('child');
 });

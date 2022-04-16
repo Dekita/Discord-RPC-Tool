@@ -33,7 +33,10 @@
         * @return 'key' property on the 'data' object
         */
         get(key){
-            return this.data[key] ?? this._defaults[key];
+            if (!this.data[key] && this._defaults[key]) {
+                return this.set(key, this._defaults[key]);
+            }
+            return this.data[key];
         }
         /**
         * {DataStore}.set(key, value)

@@ -1,0 +1,71 @@
+<!-- APPLICATION SETTINGS MODAL -->
+<div class="modal fade" tabindex="-1" id="settings-modal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content theme-bg theme-border">
+        <div class="modal-header theme-border p-4">
+            <h5 class="modal-title"><strong>App Settings</strong></h5>
+            <button type="button" class="btn p-0 hover-dark no-shadow me-2 mt-1" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="left" title="Close Settings">
+                <i class="far fa-2x fa-fw fa-window-close"></i>
+            </button>
+        </div>
+        <div class="modal-body text-start">
+            <div class="row px-5">
+                <div class="col-3">
+                    <strong>Theme:</strong>
+                </div>
+                <div class="col-6">
+                    <select class="dekselect dekselect-secondary" id="appopts-theme-select">
+                    <% for (const theme of themes) { %>
+                        <option><%= theme %></option>
+                    <% } %>
+                    </select>
+                </div>
+                <div class="col-3 pt-1 text-end">
+                    <div class="" data-bs-toggle="tooltip" title="Theme Customization">
+                        <button id="app-themes-btn" class="btn p-0 hover-dark" data-bs-target="#theme-modal" data-bs-toggle="modal" data-bs-dismiss="modal">
+                            <i class="fas fa-paint-roller"></i> <strong>custom</strong>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row pt-3 px-5">
+                <div class="col-3">
+                    <strong>System:</strong>
+                </div>
+                <div class="col-7">
+                    <div class="dekcheckbox check-dark multicheck" id="appopts-auto-boot">
+                        <ul class="mb-0"><li>Start after system boot</li></ul>
+                    </div>
+                    <div class="dekcheckbox check-dark multicheck" id="appopts-tiny-tray">
+                        <ul class="mb-0"><li>Minimize to system tray</li></ul>
+                    </div>
+                    <div class="dekcheckbox check-dark multicheck" id="appopts-auto-play">
+                        <ul class="mb-0"><li>Launch activity on load</li></ul>
+                    </div>
+                    <div class="dekcheckbox check-dark multicheck" id="appopts-auto-tiny">
+                        <ul class="mb-0"><li>Minimize on load</li></ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row pt-2">
+                <div class="col d-none">
+                    <b>Colors</b>
+                    <div class="dekcheckbox check-dark idcheck" id="appopts-color">
+                        <ul class="mb-0">
+                            <li class="checked">Default</li>
+                            <li class="">Pastel</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer theme-border">
+            <small class="m-0"><b>
+                <a href="https://dekitarpg.com/" class="hover-dark">
+                    Created By @DekitaRPG
+                </a>
+            </b></small>
+        </div>
+        </div>
+    </div>
+</div>    

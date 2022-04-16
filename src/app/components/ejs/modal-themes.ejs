@@ -1,0 +1,178 @@
+<!-- THEME CUSTOMIZER MODAL -->
+<div class="modal fade" tabindex="-1" id="theme-modal">
+<div class="modal-dialog modal-dialog-centered modal-fullscreen">
+<div class="modal-content">
+<div class="modal-header theme-border theme-bg p-4">
+    <h5 class="modal-title"><strong>Theme Customization</strong></h5>
+    <div class="text-right">
+        <button type="button" class="btn p-0 hover-dark no-shadow me-2 mt-1" id="copy-theme-btn" data-bs-toggle="tooltip" title="Copy theme css to clipboard">
+            <i class="far fa-2x fa-fw fa-clipboard"></i>
+        </button>
+        <button type="button" class="btn p-0 hover-dark no-shadow me-2 mt-1" id="save-theme-btn" data-bs-toggle="tooltip" title="Save theme css to file">
+            <i class="fas fa-2x fa-fw fa-file-export"></i>
+        </button>
+        <button type="button" class="btn p-0 hover-dark no-shadow me-2 mt-1" id="save-custom-theme-btn" data-bs-toggle="tooltip" title="Save css as custom theme">
+            <i class="fas fa-2x fa-fw fa-save"></i>
+        </button>
+        <div class="d-inline-block" data-bs-toggle="tooltip" data-bs-placement="left" title="Close Customization">
+            <button type="button" class="btn p-0 hover-dark no-shadow ms-5 mt-1" aria-label="Close" data-bs-target="#settings-modal" data-bs-toggle="modal" data-bs-dismiss="modal">
+                <i class="far fa-2x fa-fw fa-window-close"></i>
+            </button>
+        </div>
+    </div>
+</div> <!-- modal-header -->
+<div class="modal-body theme-bg overflow-y-auto">
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-danger w-100"  id="randomize-color-btn">
+                <i class="fas fa-2x fa-retweet" id="randomize-icon"></i><br><strong>RANDOM</strong>
+            </button>
+
+            <select class="dekselect dekselect-secondary my-2 w-100" id="randomize-type-select">
+                <option>large-image</option>
+            </select>
+        </div>
+        <div class="col">
+            <div class="row">
+                <strong>MAIN</strong>
+                <div class="col pe-1">
+                    <small>BODY</small>
+                    <input type="color" class="form-control form-control-color w-100 p-0 form-dark" id="color-input-body">
+                </div>
+                <div class="col ps-1">
+                    <small>TEXT</small>
+                    <input type="color" class="form-control form-control-color w-100 p-0 form-dark" id="color-input-text">
+                </div>
+                <button type="button" class="btn btn-sm w-100 hover-dark border-0 p-0 no-shadow" id="switch-body-text-btn">
+                    <span>FLIP</span> <i class="fas fa-random"></i>
+                </button>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row">
+                <strong>MODAL</strong>
+                <div class="col pe-1">
+                    <small>BODY</small>
+                    <input type="color" class="form-control form-control-color w-100 p-0 form-dark" id="modal-body-color" data-bs-toggle="tooltip" data-bs-placement="bottom" title="<strong>Modal Body</strong><br>Popup modal body color.">
+                </div>
+                <div class="col px-1">
+                    <small>BORDER</small>
+                    <input type="color" class="form-control form-control-color w-100 p-0 form-dark" id="modal-border-color" data-bs-toggle="tooltip" data-bs-placement="bottom" title="<strong>Modal Border</strong><br>Popup modal border color.">
+                </div>
+                <div class="col ps-1">
+                    <small>TEXT</small>
+                    <input type="color" class="form-control form-control-color w-100 p-0 form-dark" id="modal-text-color" data-bs-toggle="tooltip" data-bs-placement="bottom" title="<strong>Modal Text</strong><br>Popup modal text color.">
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row">
+                <strong>CARD</strong>
+                <div class="col pe-1">
+                    <small>BODY</small>
+                    <input type="color" class="form-control form-control-color w-100 p-0 form-dark" id="card-body-color" data-bs-toggle="tooltip" data-bs-placement="bottom" title="<strong>Card Body</strong><br>Preview card body color.">
+                </div>
+                <div class="col px-1">
+                    <small>HEADER</small>
+                    <input type="color" class="form-control form-control-color w-100 p-0 form-dark" id="card-header-color" data-bs-toggle="tooltip" data-bs-placement="bottom" title="<strong>Card Header</strong><br>Preview card header color.">
+                </div>
+                <div class="col ps-1">
+                    <small>TEXT</small>
+                    <input type="color" class="form-control form-control-color w-100 p-0 form-dark" id="card-text-color" data-bs-toggle="tooltip" data-bs-placement="bottom" title="<strong>Card Text</strong><br>Preview card text color.">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <div class="dekcheckbox check-dark multicheck" id="calculate-enabled" data-bs-toggle="tooltip" title="<strong>Auto Calculate</strong><br>When enabled colors will be calculated from primary color">
+                    <ul class="mb-0"><li class="checked">Calculate</li></ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="dekcheckbox check-dark multicheck" id="calculate-chroma" data-bs-toggle="tooltip" title="<strong>Chroma</strong><br>Enabled: Use HCL<br>Disabled: Use HSL<br><small class='text-danger'>requires auto calculate</small>">
+                    <ul class="mb-0"><li class="checked">Chroma</li></ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="row">
+                <strong>COLORS</strong>
+                <div class="col pe-1">
+                    <small>PRIMARY</small>
+                    <input type="color" class="form-control form-control-color w-100 p-0 form-dark" id="color-input-primary" data-bs-toggle="tooltip" title="<strong class='text-primary'>Primary</strong><br>Click to change primary color. Will also change other colors when 'calculate' is enabled!">
+                </div>
+                <div class="col px-1">
+                    <small>INFO</small>
+                    <input type="color" class="form-control form-control-color w-100 p-0 form-dark" id="color-input-info" data-bs-toggle="tooltip" title="<strong class='text-info'>Info</strong><br>Change info color.">
+                </div>
+                <div class="col ps-1">
+                    <small>WARNING</small>
+                    <input type="color" class="form-control form-control-color w-100 p-0 form-dark" id="color-input-warning" data-bs-toggle="tooltip" title="<strong class='text-warning'>Warning</strong><br>Change warning color.">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col pe-1">
+                    <small>SECONDARY</small>
+                    <input type="color" class="form-control form-control-color w-100 p-0 form-dark" id="color-input-secondary" data-bs-toggle="tooltip" title="<strong class='text-secondary'>Secondary</strong><br>Change secondary color.">
+                </div>
+                <div class="col px-1">
+                    <small>SUCCESS</small>
+                    <input type="color" class="form-control form-control-color w-100 p-0 form-dark" id="color-input-success" data-bs-toggle="tooltip" title="<strong class='text-success'>Success</strong><br>Change success color.">
+                </div>
+                <div class="col ps-1">
+                    <small>DANGER</small>
+                    <input type="color" class="form-control form-control-color w-100 p-0 form-dark" id="color-input-danger" data-bs-toggle="tooltip" title="<strong class='text-danger'>Danger</strong><br>Change danger color.">
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <small class="text-start m-1">Card Preview</small>
+            <div class="card theme-border mt-1" style="">
+                <div class="card-body text-start p-0">
+                    <div class="card-title p-3">
+                        <img src="img/icon.png" class="img-fluid img-thumbnail rounded-circle" style="height: 64px;">
+                    </div>
+                    <div class="px-2 pt-4 pb-2">
+                        <small class="card-text font-bold">I'm a card example!</small>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>
+    <hr class="my-2 mx-0">
+    <div class="row">
+        <h5 class="pt-2"><strong>Page Elements Preview</strong></h5>
+        <% for (const type of ['dark','primary','secondary','info','success','warning','danger']) { %>
+            <div class="col d-grid gap-1 p-1 pt-2 selection-<%= type %>">
+                <strong class="mb-0"><%- type %></strong>
+                <p class="mb-0 hover-<%= type %>">hover-<%= type %></p>
+                <p class="lead mb-0 text-<%= type %>"><%- type %> text</p>
+                <button type="button" class="btn btn-<%= type %>">btn-<%= type %></button>
+                <button type="button" class="btn btn-<%= type %>" disabled>btn-<%= type %></button>
+                <select class="dekselect dekselect-<%= type %>" id="dekselect-<%= type %>">
+                    <% for (let index = 1; index <= 5; index++) { %>
+                        <option><%- type %>-<%- index %></option>
+                    <% } %>
+                </select>
+                <input type="email" class="form-control form-<%= type %>" placeholder="form-<%= type %>">
+                <input type="email" class="form-control form-<%= type %>" placeholder="form-<%= type %> disabled" disabled>
+                <div class="alert alert-<%= type %> mb-0" role="alert">alert</div>
+                <span class="badge bg-<%= type %>">bg</span>
+                <span class="badge border border border-<%= type %>">border</span>
+                <span class="badge border border border-<%= type %>2">border2</span>
+            </div>
+        <% } %>
+    </div>
+</div> <!-- modal-mody -->
+<div class="modal-footer theme-border theme-bg ">
+    <small class="m-0"><b>
+        <a href="https://dekitarpg.com/" class="hover-dark">
+            Created By @DekitaRPG
+        </a>
+    </b></small>
+</div> <!-- modal-footer-->
+</div> <!-- modal-content -->
+</div> <!-- modal-dialog -->
+</div> <!-- modal -->

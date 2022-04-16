@@ -39,4 +39,8 @@
 	--dek-danger-darker: #6e516d;
 	--dek-danger-darkest: #4f334e;
 	--dek-danger-light: #c6a5c4;
+
+	--dek-area-default: var(--dek-lighter-1);
+	--dek-area-active: var(--dek-lighter-2);
+
 }

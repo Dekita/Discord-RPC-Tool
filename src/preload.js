@@ -10,6 +10,7 @@ const fs = require('fs');
 const path = require('path');
 const electron = require("electron");
 const getJSON = require('bent')('json');
+const {DateTime, Duration} = require("luxon");
 const RPCClient = require('discord-rpc').Client;
 let rpc, last_stats, stats={p:'??',s:'??',players:'??',servers:'??'};
 
@@ -35,8 +36,8 @@ class config {
 * such as opening external urls, and rpc communications
 */
 class drpc {
+    static uuid(){return require('crypto').randomUUID()}
     static get renderer(){ return electron.ipcRenderer}
-    static get colors(){ return require('color-convert')}
     static get chroma(){ return require('chroma-js')}
     static async getAppName(){ 
         return await this.renderer.invoke('get-name');
@@ -149,6 +150,75 @@ class drpc {
         const regstr = Object.keys(objekt).join("|");
         const regexp = new RegExp(regstr, "gi");
         return str.replace(regexp, matched => objekt[matched]);
+    }
+    static _durationTemplate(duration_ms) {
+        let forced = false;
+        const base_dur = Duration.fromMillis(duration_ms);
+        const shift_args = ['years', 'days', 'hours', 'minutes'];
+        const duration = base_dur.shiftTo(...shift_args).toObject();
+        return [duration, shift_args.filter(type => {
+            if (duration[type] > 0) forced = true;
+            return forced || type === 'minutes';
+        }).join(', ')];
+    }
+    static logicalDuration(duration_ms) {
+        const [duration, template] = this._durationTemplate(duration_ms);
+        const y = parseInt(duration.years);
+        const d = parseInt(duration.days);
+        const h = parseInt(duration.hours);
+        const m = parseInt(duration.minutes);
+        if (m < 1) return "less than a minute";
+        const formatted = this.format(template, {
+            years: `${y} year${y > 1 ? 's' : ''}`,
+            days: `${d} day${d > 1 ? 's' : ''}`,
+            hours: `${h} hour${h > 1 ? 's' : ''}`,
+            minutes: `${m} minute${m > 1 ? 's' : ''}`,
+            // seconds: `${parseInt(duration.seconds)}s`,
+        });
+        return formatted.split(',').slice(-2).join(',');;
+    };
+    static shortDuration(duration_ms) {
+        const [duration, template] = this._durationTemplate(duration_ms);
+        return this.format(template, {
+            years: `${parseInt(duration.years)}y`,
+            days: `${parseInt(duration.days)}d`,
+            hours: `${parseInt(duration.hours)}h`,
+            minutes: `${parseInt(duration.minutes)}m`,
+            // seconds: `${parseInt(duration.seconds)}s`,
+        });
+    };
+    // debounce some callback to only run every delay ms
+    static debounce(callbaque, delay = 1000) {
+        let timeout;
+        return (...args) => {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                callbaque(...args);
+            }, delay);
+        }
+    }
+    // throttle some callback to only run every delay ms
+    static throttle(callbaque, delay = 1000) {
+        let waiting = false;
+        let waiting_args;
+        const timeout = () => {
+            if (waiting_args === null) {
+                waiting = false;
+            } else {
+                callbaque(...waiting_args);
+                waiting_args = null;
+                setTimeout(timeout, delay);
+            }
+        }
+        return (...args) => {
+            if (waiting) {
+                waiting_args = args;
+                return;
+            }
+            waiting = true;
+            callbaque(...args);
+            setTimeout(timeout, delay);
+        }
     }
     // race some promise against a timeout.
     static raceTimeout(promise, timeout = 5000) {
