@@ -1,6 +1,6 @@
 {
     "name": "dekita-rpc-tool",
-    "version": "0.0.94",
+    "version": "0.0.95",
     "productName": "Discord RPC Tool",
     "description": "Discord RPC Tool written by DekitaRPG",
     "main": "src/main.js",
