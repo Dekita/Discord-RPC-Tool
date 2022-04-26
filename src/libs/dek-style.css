@@ -332,6 +332,10 @@ input[type=number] {
   color: var(--dek-text-color);
 }
 
+.sidebar-bg {
+  background-color: var(--dek-sidebar-color);
+}
+
 /** [xxx-dark] elements */
 .text-dark{color:inherit}
 .bg-dark{background-color: var(--dek-darker-2) !important}

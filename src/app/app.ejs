@@ -1,5 +1,5 @@
 
-<div class="h-100 px-2 thin-scroller darker-bg1" id="button-container" style="">
+<div class="h-100 px-2 thin-scroller sidebar-bg" id="button-container" >
     <button class="btn btn-lg btn-secondary fw-bold border-white bg-white px-5">+</button>
 </div>
 <div class="d-flex w-100 h-100 p-3 pb-2 mx-auto flex-column" style="overflow-y:auto;">
@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col">
                 <div class="row mb-1">
-                    <small class="text-start m-1">General</small>
+                    <small class="text-start h5 m-1 mb-2">General</small>
                     <div class="col pe-1">
                         <div class="d-flex">
                             <input type="text" class="form-control form-control-sm form-secondary" id="app-id" placeholder="Discord Application ID" data-bs-toggle="tooltip" title="YOUR Discord Application ID.">
@@ -29,6 +29,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="row mb-1">
                     <div class="col pe-1">
                         <div class="d-flex">
@@ -47,8 +48,9 @@
                         </div>
                     </div>
                 </div>
+                <hr class="mt-4">
                 <div class="row mb-1">
-                    <small class="text-start m-1">Images</small>
+                    <small class="text-start h5 m-1 mb-2">Images</small>
                     <div class="col pe-1 d-none"> <!-- removed display: todo: remove fully -->
                         <input type="text" class="form-control form-control-sm form-secondary" id="app-img1-key" placeholder="large-image">
                     </div>
@@ -66,6 +68,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="row mb-1">
                     <div class="col pe-1 d-none"> <!-- removed display: todo: remove fully -->
                         <input type="text" class="form-control form-control-sm form-secondary" id="app-img2-key" placeholder="small-image">
@@ -84,8 +87,9 @@
                         </div>
                     </div>
                 </div>
+                <hr class="mt-4">
                 <div class="row mb-1">
-                    <small class="text-start m-1">Buttons</small>
+                    <small class="text-start h5 m-1 mb-2">Buttons</small>
                     <div class="col pe-1" data-bs-toggle="tooltip" title="Text shown for Button 1">
                         <input type="text" class="form-control form-control-sm form-secondary" id="app-btn1-text" placeholder="Invite">
                     </div>
@@ -98,6 +102,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="row mb-1">
                     <div class="col pe-1" data-bs-toggle="tooltip" title="Text shown for Button 2">
                         <input type="text" class="form-control form-control-sm form-secondary" id="app-btn2-text" placeholder="Website">
@@ -111,8 +116,9 @@
                         </div>
                     </div>
                 </div>
+                <hr class="mt-4">
                 <div class="row mb-3">
-                    <small class="text-start m-1">Advanced</small>
+                    <small class="text-start h5 m-1 mb-2">Advanced</small>
                     <div class="col-4 pe-1" data-bs-toggle="tooltip" title="Custom URL to poll. Should return JSON data">
                         <input type="text" class="form-control form-control-sm form-secondary" id="app-api-url" placeholder="http://localhost/bot-stats">
                     </div>
@@ -128,31 +134,32 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="row my-2">
                     <div class="col pe-1">
-                        <button id="delete-activity" class="btn btn-danger fw-bold w-100">
+                        <button id="delete-activity" class="btnStyle w-100">
                             <i class="fas fa-trash-alt me-2"></i><span>Delete</span>
                         </button>
                     </div>
                     <div class="col px-1">
-                        <button id="developer-portal" class="btn btn-secondary fw-bold w-100">
+                        <button id="developer-portal" class="btnStyle w-100">
                             <i class="fab fa-discord me-2"></i><span>Dev Portal</span>
                         </button>
                     </div>
                     <div class="col px-1">
-                        <button id="save-activity" class="btn btn-primary fw-bold w-100">
+                        <button id="save-activity" class="btn btnStyle w-100">
                             <i class="fas fa-save me-2"></i><span>Save</span>
                         </button>
                     </div>
                     <div class="col ps-1">
-                        <button id="launch-activity" class="btn btn-success fw-bold w-100">
+                        <button id="launch-activity" class="btn btnStyle w-100">
                             <i class="fas fa-play me-2"></i><span>Launch</span>
                         </button>
                     </div>
                 </div>
             </div>
-            <div class="" style="width: 280px;">
-                <small class="text-start m-1">Preview</small>
+            <div class="" style="width: 280px;margin: auto;">
+                <big class="text-start m-1"><strong>Preview</strong></big>
                 <div class="card theme-border mt-1" style="">
                     <div class="card-body text-start p-0">
                         <div class="card-title p-3">
@@ -192,6 +199,21 @@
         </div>
     </main>
     <footer class="mt-auto mb-0 text-white-50">
+        <hr>
+        <div class="nav justify-content-center gap-3">
+            <a class="hover-dark hover-secondary" href="https://www.patreon.com/DekitaRPG"  data-bs-toggle="tooltip" title="Support Development on Patreon">
+                <i class="fab fa-1x fa-fw fa-patreon"></i><br><small><strong>PATREON</strong></small>
+            </a>
+            <a class="hover-dark hover-secondary" href="https://github.com/dekita/discord-rpc-tool"  data-bs-toggle="tooltip" title="Project Github">
+                <i class="fab fa-1x fa-fw fa-github"></i><br><small><strong>GITHUB</strong></small>
+            </a>
+            <a class="hover-dark hover-secondary" href="https://dekitarpg.com" data-bs-toggle="tooltip" title="Visit Developer Website">
+                <i class="fas fa-1x fa-fw fa-globe"></i><br><small><strong>WEBSITE</strong></small>
+            </a>
+            <a class="hover-dark hover-secondary" href="https://discord.gg/7dCZ3Q4eU3"  data-bs-toggle="tooltip" title="Support Server">
+                <i class="fab fa-1x fa-fw fa-discord"></i><br><small><strong>SUPPORT</strong></small>
+            </a>
+        </div>
         <small class="m-0" data-bs-toggle="tooltip" title="Click to visit the developers website">
             <b><a href="https://dekitarpg.com/" class="hover-secondary">By DekitaRPG</a></b>
         </small>

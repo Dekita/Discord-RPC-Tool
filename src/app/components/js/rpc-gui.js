@@ -308,14 +308,15 @@ export default class RPCGUI {
         const btn = document.createElement('button');
         btn.id = dekita_rpc.uuid();
         btn.setAttribute('draggable', true);
-        btn.classList.add('btn', 'btn-lg', 'btn-bg', 'fw-bold', 'mt-3', 'p-0', 'btn-58');
+        btn.classList.add('btn', 'btn-lg', 'btn-bg', 'fw-bold', 'mt-3', 'p-0', 'btn-58', 'sidebarClients');
         if (options.image) {
-            const image = document.createElement('img');
-            image.setAttribute('draggable', false);
-            image.src = options.image;
-            image.classList.add('img-fluid', 'rounded-circle');
+            btn.style.cssText = `background-image: url(${options.image})`;
+            //const image = document.createElement('img');
+            //image.setAttribute('draggable', false);
+            //image.src = options.image;
+            //image.classList.add('img-fluid', 'rounded-circle');
             // image.style.maxHeight = '64px';
-            btn.append(image);
+            //btn.append(image);
         } else {
             btn.innerHTML = options.html;
         }

@@ -7,7 +7,7 @@
 */
 :root {
 	--dek-gen-version: 0.0.92;
-	--dek-body-color: #b94148;
+	--dek-body-color: white;
 	--dek-text-color: #513e42;
 	--dek-modal-body-color: #97212f;
 	--dek-modal-text-color: #d6c7ca;
@@ -39,4 +39,6 @@
 	--dek-danger-darker: #796229;
 	--dek-danger-darkest: #544107;
 	--dek-danger-light: #e1c385;
+
+	--dek-sidebar-color: #e54050;
 }

@@ -43,4 +43,6 @@
 	--dek-area-default: var(--dek-lighter-1);
 	--dek-area-active: var(--dek-lighter-2);
 
+	--dek-sidebar-color: #1d1e32;
+
 }

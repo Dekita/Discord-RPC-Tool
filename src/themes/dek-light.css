@@ -10,7 +10,7 @@
     */
     --dek-gen-version: "0.0.9";
     --dek-text-color: #36393f;
-    --dek-body-color: #e4e4e4;
+    --dek-body-color: white;
     /* xxx-primary colors */
     --dek-primary-darkest: #1e5474;
     --dek-primary-darker: #2d7eae;
@@ -49,4 +49,6 @@
     --dek-card-body-color: white;
     --dek-card-text-color: var(--dek-text-color);
     --dek-card-header-color: #342040;
+
+    --dek-sidebar-color: #e4e4e4;
 }

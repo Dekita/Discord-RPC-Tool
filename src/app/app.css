@@ -28,7 +28,7 @@ body {
   color: #e4e4e4 !important;
 }
 .btn, .form-control, .card, .img-thumbnail, .modal-body {
-  transition: color 1s, background-color 1s, border-color 1s, box-shadow 0.5s, border-radius .5s;
+  transition: color 0.25s, background-color 0.25s, border-color 0.25s, box-shadow 0.25s, border-radius 0.25s;
 }
 .form-control.angry {
   border-color: #c1687b !important;
@@ -46,9 +46,12 @@ body {
 .btn-bg:hover,
 .btn-bg:active,
 .btn-bg.active {
-  border-radius: 20%;
   background-color: var(--dek-secondary-darkest) !important;
-  color: var(--dek-text-color);
+}
+
+.btn-bg:hover,
+.btn-bg.active {
+  border-radius: 25%;
 }
 
 .drag-border {
@@ -69,8 +72,8 @@ body {
 .modal-header,
 .modal-footer  {
   color: var(--dek-modal-text-color);
-  background-color: var(--dek-modal-body-color);
-  border-color: var(--dek-modal-border-color);
+  background-color: var(--dek-sidebar-color);
+  border: none;
 }
 .img-thumbnail {
   background-color: var(--dek-card-body-color);
@@ -118,4 +121,28 @@ input[type="color"]::-webkit-color-swatch {
   text-overflow: ellipsis;  
   white-space: nowrap;
   overflow-x: hidden;
+}
+
+
+.btnStyle {
+  background: #585a67;
+  border: none;
+  border-radius: 44px;
+  font-weight: normal;
+  padding: 12px 0;
+  color: white;
+}
+
+.sidebarBtn {
+  font-size: 26px;
+}
+
+.sidebarBtn:hover {
+  border-radius: 25%;
+}
+
+.sidebarClients {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }

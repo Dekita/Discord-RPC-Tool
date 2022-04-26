@@ -7,8 +7,8 @@
 */
 :root {
 	--dek-gen-version: 0.0.92;
-	--dek-body-color: #253927;
-	--dek-text-color: #d6d3bf;
+	--dek-body-color: #b2ff59;
+	--dek-text-color: black;
 	--dek-modal-body-color: #192d1c;
 	--dek-modal-text-color: #fffffa;
 	--dek-modal-border-color: #314533;
@@ -39,4 +39,6 @@
 	--dek-danger-darker: #396d37;
 	--dek-danger-darkest: #164b19;
 	--dek-danger-light: #96cd90;
+
+	--dek-sidebar-color: #00e676;
 }
