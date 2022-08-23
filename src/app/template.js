@@ -9,5 +9,5 @@ document.addEventListener('DOMContentLoaded', async (event) => {
     tooltips_list = tooltips.map(e => new bootstrap.Tooltip(e, options));
 
     // app/child window wont display until this event is received.  
-    dekita_rpc.sendReadyEvent('child');
+    dekita_rpc.sendReadyEvent('template');
 });

@@ -27,7 +27,14 @@ import {
     app_preview_btn1,
     app_preview_btn2,
     toast_container,
+    add_application_modal,
+    confirm_add_application_btn,
+    active_appname_label,
+    app_preview_name,
+    activity_list_group,
 } from "./elements.js";
+
+
 
 const checkBoxEnabled = id => RPCGUI.dekcheckboxes[id].enabled;
 const setCheckboxEnabled = async(id, enabled=false) => {
@@ -112,7 +119,7 @@ export default class RPCGUI {
     }
     static async validateAppData(forced=false) {
         const app_id = getValue('app-id');
-        const activity = DB.getActivityData();
+        const activity = DB.activity;
         if (activity.discord_details !== null || forced) {
             await this.refreshAppDetails(app_id, activity);
             await this.refreshAppAssets(app_id, activity);
@@ -149,16 +156,15 @@ export default class RPCGUI {
         }
     }
     static async refreshAppAssetSelectors(activity) {
-        const img1 = getValue('app-img1-key');
-        const img2 = getValue('app-img2-key');
+        const img1 = "";//getValue('app-img1-key');
+        const img2 = "";//getValue('app-img2-key');
         DekSelect.cache['image-select-one'].setOptions(['none']);
         DekSelect.cache['image-select-two'].setOptions(['none']);
         if (activity?.discord_assets === null) return;
         const asset_names = Object.keys(activity.discord_assets);
-        const img_1_id = asset_names.indexOf(img1) || 0;
-        const img_2_id = asset_names.indexOf(img2) || 0;
-        DekSelect.cache['image-select-one'].setOptions(asset_names, img_1_id);
-        DekSelect.cache['image-select-two'].setOptions(asset_names, img_2_id);
+        const assets = asset_names.sort((a, b) => a.localeCompare(b));
+        DekSelect.cache['image-select-one'].setOptions(assets, assets.indexOf(img1));
+        DekSelect.cache['image-select-two'].setOptions(assets, assets.indexOf(img2));
     }
     static async fetchAppDetails() {
         const APP_ID = getValue('app-id');
@@ -285,15 +291,19 @@ export default class RPCGUI {
             html: '<i class="fas fa-plus fa-fw"></i>',
         });
         add_new_btn.addEventListener('click', event => {
-            RPCTool.createNewActivity();
-            RPCTool.setActiveID(DB.length-1);
-            this.refreshActivityList();
-            this.setInputsFromActivity();
-            this.updatePreview();
-            RPCTool.flagSaved();
+            return add_application_modal.show();
         });
         btn_container.append(add_new_btn);
     }
+
+
+
+
+
+
+
+
+    
     static async refreshActivityListActive(){
         const btn_container = getElement('button-container');
         const buttons = [...btn_container.getElementsByTagName("BUTTON")];
@@ -322,8 +332,10 @@ export default class RPCGUI {
         return btn;
     }
     static async setInputsFromActivity() {
-        const activity = DB.getActivityData();
-        setValue('app-image', activity.image);
+        const activity = DB.activity;
+        active_appname_label.innerText = activity?.discord_details?.name || "App Name";
+
+        // setValue('app-image', activity.image);
         setValue('app-rpc-frequency', activity.rpc_freq);
         setValue('app-id', activity.app_id);
         setValue('app-api-url', activity.api_url);
@@ -331,10 +343,10 @@ export default class RPCGUI {
         setValue('app-api-url', activity.api_url);
         setValue('app-details', activity.details);
         setValue('app-state', activity.state);
-        setValue('app-img1-key', activity.images[0].key);
+        // setValue('app-img1-key', activity.images[0].key);
         setValue('app-img1-text', activity.images[0].text);
         setCheckboxEnabled('app-rpc-img1-enabled', activity.images[0].enabled);
-        setValue('app-img2-key', activity.images[1].key);
+        // setValue('app-img2-key', activity.images[1].key);
         setValue('app-img2-text', activity.images[1].text);
         setCheckboxEnabled('app-rpc-img2-enabled', activity.images[1].enabled);
         setValue('app-btn1-url', activity.buttons[0].url);
@@ -359,7 +371,7 @@ export default class RPCGUI {
         alert_notification_area.innerHTML = "";
     }
     static async updatePreview() {
-        const activity = DB.getActivityData();
+        const activity = DB.activity;
         const temp_stats = {'{p}':'??', '{players}':'??', '{s}':'??', '{servers}':'??'};
         app_preview_details.innerText = dekita_rpc.format(activity.details, temp_stats);
         app_preview_state.innerText = dekita_rpc.format(activity.state, temp_stats);
@@ -387,7 +399,7 @@ export default class RPCGUI {
             textrow.classList.add('ps-0');
         }
         if (activity.images[0].enabled) {
-            app_preview_image_large.src = activity.discord_assets[activity.images[0].key];
+            app_preview_image_large.src = activity.discord_assets?.[activity.images[0].key];
             app_preview_image_large.classList.remove('d-none');
             app_preview_image_large.classList.remove('img-48');
         } else {
@@ -395,19 +407,19 @@ export default class RPCGUI {
         }
         if (activity.images[1].enabled) {
             if (!activity.images[0].enabled) {
-                app_preview_image_large.src = activity.discord_assets[activity.images[1].key];
+                app_preview_image_large.src = activity.discord_assets?.[activity.images[1].key];
                 app_preview_image_large.classList.remove('d-none');
                 app_preview_image_large.classList.add('img-48');
                 app_preview_image_small.classList.add('d-none');
                 container.classList.add('fix-w');
             } else {
-                app_preview_image_small.src = activity.discord_assets[activity.images[1].key];
+                app_preview_image_small.src = activity.discord_assets?.[activity.images[1].key];
                 app_preview_image_small.classList.remove('d-none');
             }
         } else {
             app_preview_image_small.classList.add('d-none');
         }
-        getElement("app-preview-name").innerText = activity?.discord_details?.name || "App Name";
+        activity_preview.name.innerText = activity?.discord_details?.name || "App Name";
     }
     static async makeAngry(element_or_id) {
         if (!element_or_id.id) {
@@ -420,19 +432,19 @@ export default class RPCGUI {
             element.classList.remove('angry');
         }
     }
-    static setIconFromAppData(activity = DB.getActivityData()) {
+    static setIconFromAppData(activity = DB.activity) {
         if (!activity?.discord_details?.icon) {
             return this.showAlert("No application icon found!");
         };
         setValue('app-image', activity.discord_details.icon);
     }
-    static setDetailsFromAppData(activity = DB.getActivityData()) {
+    static setDetailsFromAppData(activity = DB.activity) {
         if (!activity?.discord_details?.description) {
             return this.showAlert("No application description found!");
         };
         setValue('app-details', activity.discord_details.description);
     }
-    static setStateFromAppData(activity = DB.getActivityData()) {
+    static setStateFromAppData(activity = DB.activity) {
         if (!activity?.discord_details?.summary) {
             return this.showAlert("No application summary found!");
         };
@@ -440,7 +452,7 @@ export default class RPCGUI {
     }
 
     static cookBread(type, toast_content, keep_open=false) {
-        const activity = DB.getActivityData();
+        const activity = DB.activity;
         const is_update = toast_content === 'Activity Updated!';
         const area = document.createElement('div');
         area.setAttribute('aria-live', 'assertive');
@@ -483,5 +495,10 @@ export default class RPCGUI {
         bs_toast.show();
         const delay = is_update ? (activity.rpc_freq+1)*1000 : 5000;
         setTimeout(()=>bs_toast.hide(), delay);
+    }
+
+    static async updateUserCounters() {
+        const element = getElement("user-counter-display");
+        element.innerText = await dekita_rpc.getUserCounter();
     }
 }

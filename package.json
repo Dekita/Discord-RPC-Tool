@@ -1,12 +1,12 @@
 {
     "name": "dekita-rpc-tool",
-    "version": "0.0.95",
+    "version": "0.0.96",
     "productName": "Discord RPC Tool",
     "description": "Discord RPC Tool written by DekitaRPG",
     "main": "src/main.js",
     "repository": "git@github.com:dekita/discord-rpc-tool",
     "scripts": {
-        "start": "electron src/main.js",
+        "start": "electron .",
         "build": "electron-builder",
         "pack": "electron-builder --dir",
         "release": "electron-builder --publish always"
@@ -22,15 +22,14 @@
         "chroma-js": "^2.4.2",
         "discord-rpc": "^4.0.1",
         "ejs-electron": "^2.1.1",
-        "electron-updater": "^4.6.5",
+        "electron-updater": "^5.0.1",
         "json-stringify-pretty-compact": "^3.0.0",
         "luxon": "^2.3.1",
         "node-gyp": "^9.0.0"
     },
     "devDependencies": {
-        "electron": "^17.2.0",
-        "electron-builder": "^22.14.13",
-        "electron-reloader": "^1.2.3"
+        "electron": "^18.0.4",
+        "electron-builder": "^23.0.3"
     },
     "build": {
         "appId": "com.dekitarpg.rpc",

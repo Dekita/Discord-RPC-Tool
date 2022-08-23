@@ -11,8 +11,10 @@ const path = require('path');
 const electron = require("electron");
 const getJSON = require('bent')('json');
 const {DateTime, Duration} = require("luxon");
-const RPCClient = require('discord-rpc').Client;
+const DiscordRPC = require('discord-rpc');
+const RPCClient = DiscordRPC.Client;
 let rpc, last_stats, stats={p:'??',s:'??',players:'??',servers:'??'};
+const EventEmitter = require('events');
 
 /**
 * ■ config module:
@@ -51,13 +53,14 @@ class drpc {
     static async login(clientId, callback){
         try {
             if (rpc) rpc.destroy();
+            DiscordRPC.register(clientId);
             rpc = new RPCClient({transport: 'ipc'});
-            if (callback) rpc.once('ready', callback);
+            if (callback) rpc.once('ready',()=>callback(null,rpc));
             await rpc.login({clientId});
             console.log('should be logged in!');
         } catch (error) {
             console.error('login error:', error);
-            callback(error);
+            callback(error, null);
         }
     }
     static async logout(){
@@ -100,6 +103,11 @@ class drpc {
     }
     static performApplicationUpdate() {
         this.renderer.invoke('install-update');
+    }
+    static async getUserCounter() {
+        const counter = await this.renderer.invoke('get-user-count');
+        const {locale} = Intl.DateTimeFormat().resolvedOptions();
+        return this.formatNumberCompact(counter, locale);
     }
     static async trySaveFile(filepath, data) {
         try {
@@ -161,6 +169,11 @@ class drpc {
             return forced || type === 'minutes';
         }).join(', ')];
     }
+    static durationMinutes(duration_ms) {
+        const base_dur = Duration.fromMillis(duration_ms);
+        const duration = base_dur.shiftTo('minutes').toObject();
+        return duration.minutes.toFixed(5);
+    }
     static logicalDuration(duration_ms) {
         const [duration, template] = this._durationTemplate(duration_ms);
         const y = parseInt(duration.years);
@@ -199,8 +212,8 @@ class drpc {
     }
     // throttle some callback to only run every delay ms
     static throttle(callbaque, delay = 1000) {
+        let waiting_args = null;
         let waiting = false;
-        let waiting_args;
         const timeout = () => {
             if (waiting_args === null) {
                 waiting = false;
@@ -220,11 +233,29 @@ class drpc {
             setTimeout(timeout, delay);
         }
     }
+    static formatNumber(number, region) {
+        const formatter = new Intl.NumberFormat(region)
+        return formatter.format(number)
+    }
+    static formatNumberCompact(number, region) {
+        const formatter = new Intl.NumberFormat(region, {notation:'compact'});
+        return formatter.format(number);
+    }
     // race some promise against a timeout.
     static raceTimeout(promise, timeout = 5000) {
         return Promise.race([promise, new Promise((_, reject) => {
             setTimeout(() => reject("timeout"), timeout);
         })]);
+    }
+
+    static async minimize(window_id) {
+        return await electron.ipcRenderer.invoke('app-action', window_id, 'minimize');
+    }
+    static async maximize(window_id) {
+        return await electron.ipcRenderer.invoke('app-action', window_id, 'maximize');
+    }
+    static async exit(window_id) {
+        return await electron.ipcRenderer.invoke('app-action', window_id, 'exit');
     }
 }
 
@@ -233,5 +264,8 @@ class drpc {
 * allows the classes defined above to be accessed
 * from within the applications renderer javascript.
 */
+// electron.contextBridge.exposeInMainWorld('dekita_rpc', drpc);
+// electron.contextBridge.exposeInMainWorld('app_config', config);
 window.dekita_rpc = drpc;
 window.app_config = config;
+window.app_events = new EventEmitter();

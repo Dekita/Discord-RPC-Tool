@@ -178,6 +178,9 @@ input[type=number] {
   border-top-left-radius: inherit;
   border-top-right-radius: inherit;
 }
+.toast {
+  width: 272px;
+}
 
 
 /*###################################

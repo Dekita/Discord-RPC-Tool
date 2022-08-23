@@ -1,0 +1,56 @@
+
+
+# Revolent: 
+usa, uk, australia, canada
+
+
+two year program where 
+
+
+# Culture: 
+Flexible
+
+# Awards:
+the job crowd - top company
+future stars of tech
+rising stars award
+67% women in the senior management team
+
+
+## board of directors: 
+james lloyd-townhend
+nabila salem
+ian clark
+jon flaherty
+lewis miller
+mark hill
+kashif naqshbandi
+
+
+# AWS:
+storage buckets (s3 - simple storage service)
+compute services (ec2 - elastic compute cloud) - virtual computer 
+messaging queue - send push notifications etc
+
+Elastic Load Balancing
+Cloud watch (collect metrics from instances)
+
+elastic beanstalk - easily deplot services such as ruby/node appllications
+
+
+lightsail - easily deploy basic services like wordpress sites without worrying abot the underlying infrastructure
+
+
+lambda - functinos as a service/serverless functions
+
+aurora (amazon custom sql 5x faster than sql)
+
+- title page
+- what is the cloud
+- what is aws (2xpage)
+- what about revolent
+- why I want revolent
+- why relovent wants me
+
+
+who, what, why, when, where

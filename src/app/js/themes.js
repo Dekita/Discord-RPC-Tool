@@ -2,6 +2,7 @@
 * ■ Helper functions:
 */
 import { getElement } from "./helpers.js";
+import { checkboxes } from "./elements.js";
 
 /**
 * ■ Common Page Elements:
@@ -12,14 +13,7 @@ const randomize_icon = getElement('randomize-icon');
 const randomize_color_btn = getElement('randomize-color-btn');
 const switch_bodytext_btn = getElement('switch-body-text-btn');
 const save_custom_theme_btn = getElement('save-custom-theme-btn');
-const checkboxes = {
-    enable_calc: new DekCheckBox('calculate-enabled', value => {
-        console.log('calculation enabled:', value[0] === '0');
-    }),
-    enable_chroma: new DekCheckBox('calculate-chroma', value => {
-        console.log('chroma enabled:', value[0] === '0');
-    }),
-};
+
 const color_inputs = {
     'body': getElement('color-input-body'),
     'text': getElement('color-input-text'),
@@ -272,10 +266,10 @@ for (const color of Object.keys(color_inputs)) {
 document.addEventListener('DOMContentLoaded', async (event) => {
     try { // setup randomization type selector
         const selector = DekSelect.cache['randomize-type-select'];
-        selector.setOptions(await fetchTypes());
         selector.addEventListener('change', event => {
             randomize_type = event.target.value;
         });
+        selector.setOptions(await fetchTypes(), 0);
     } catch (error) {
         console.error(error)
     };

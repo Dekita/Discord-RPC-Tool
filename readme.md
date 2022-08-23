@@ -1,4 +1,4 @@
-[<img src="src/img/banner.png" class="img-fluid img-thumbnail mx-auto d-block" onerror="removeSRC(this)">](https://dekitarpg.com/rpc)
+[<img src="src/img/banner.png" class="img-fluid img-thumbnail mx-auto d-block">](https://dekitarpg.com/rpc)
 
 <div class="d-flex mb-2">
 <div class="mx-auto d-block">
@@ -27,23 +27,38 @@
 ### What is Discord RPC Tool
 RPC Tool is a simple application that allows you to easily communicate with the Discord `Rich Presence Client`. RPC is a service that the Discord application installed on your machine enables. The RPC allows other applications, like this one, to communicate with the running Discord app. RPC Tool uses this feature to set the user currently logged into Discord's `Now Playing` activity.
 
-<img src="src/img/app.png" class="img-fluid img-thumbnail" onerror="removeSRC(this)">
+<img src="src/img/app.png" class="img-fluid img-thumbnail">
 <hr class="mt-1">
 
 ### RPC Tool Features
 - Painless Installation
-- Multiple Activity Profiles
+- System Notifications
 - Modern UI Inspired by Discord
 - Multi Platform Support (win+linux)
 - Customizable Theme + Multiple Defaults 
-- Auto Detect App Name, Icon, Description, etc
+- API Polling for Advanced Activities
 - Optional Minimize to System Tray
 - Optional Auto Start Activity on Launch
 - Optional Auto Minimize App on Launch
 - Optional Auto Launch App on System Boot
-- API Polling for Advanced Activities
 - Optional Activity Duration/Timer
-- System Notifications
+- Multiple Activity Profiles
+- Auto Detect App Name, Icon, Description, etc
+- Replace Activity Description with your; 
+time, date, region, timezone, playtime, and more...
+<hr class="mt-1">
+
+### Changelog (v0.0.96)
+- Switched renderer to es style modules 
+- Image keys now sorted alphabetically 
+- UI Redesign to be more like Discord
+- Applications and Activities are now split
+- Applications have unlimited Activity presets
+- Fixed bug with theme selector dropdown
+- Removed save button (data now autosaved)
+- Activity preview is now 'realtime' (upto 250ms delay)
+- App windows are now 'frameless' (with custom titlebar)
+- more...
 <hr class="mt-1">
 
 ### Changelog (v0.0.95)
@@ -54,7 +69,7 @@ RPC Tool is a simple application that allows you to easily communicate with the 
 - Various theme customization gui improvements
 - Added replacers for time/date/locale/timezone/playtime
 - Fixed support server links and added to help guide
-- Seperated code chunks for future refactor
+- Separated code chunks for future refactor
 - Added api polling for user counts
 - Scrollbar styling improvements
 - New 'toast' style alerts
@@ -93,7 +108,6 @@ RPC Tool is a simple application that allows you to easily communicate with the 
 
 ### Coming Soon / TODO
 - Change logic to allow for 'real-time' preview
-- Switch everything to es style modules 
 - Configurable auto-save option
 - More awesome themes
 - ...
@@ -133,11 +147,11 @@ While on the `General Information` tab, after naming your application, copy the 
 
 After entering your unique app id, press the `Save`, then `Launch` buttons. After a second or so, your user profile card on Discord should now look similar to this:
 
-<img src="src/img/discord-profile-card.png" class="img-fluid img-thumbnail mt-2" onerror="removeSRC(this)">
+<img src="src/img/discord-profile-card.png" class="img-fluid img-thumbnail mt-2">
 
 :exclamation: If the activity is not showing on your user profile card, make sure that you are not showing as invisible/offline, and that you have enabled `Activity Status` within the discord application's user settings. 
 
-<img src="src/img/discord-activity-status.png" class="img-fluid img-thumbnail mt-2" onerror="removeSRC(this)">
+<img src="src/img/discord-activity-status.png" class="img-fluid img-thumbnail mt-2">
 
 <hr class="mt-1">
 
@@ -159,7 +173,7 @@ Text shown for the activity details and state (the first and second line of text
 
 ### Activity Image Customization
 Each activity can display upto two images, one large and one small. But before RPC Tool can display them properly, the image files must be uploaded onto the Discord developer portal's `Rich Presence => Art Assets` tab shown below. 
-<img src="src/img/discord-asset-page.png" class="img-fluid img-thumbnail mt-2" onerror="removeSRC(this)">
+<img src="src/img/discord-asset-page.png" class="img-fluid img-thumbnail mt-2">
 
 | :exclamation: Images may take a few minutes to show due to discords cache |
 |---|

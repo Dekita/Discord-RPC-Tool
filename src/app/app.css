@@ -11,8 +11,9 @@ body {
   box-shadow: inset 0 0 5rem rgba(0, 0, 0, .25);
 }
 #button-container {
-  width:92px; 
+  width:78px; 
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .card {
@@ -72,6 +73,26 @@ body {
   background-color: var(--dek-modal-body-color);
   border-color: var(--dek-modal-border-color);
 }
+
+.list-group-dropdown {
+  background-color: var(--dek-darker-3);
+  /* border: 2px solid var(--dek-darker-4); */
+}
+.list-group-dropdown .list-group-item  {
+  color: var(--dek-text-color);
+  background-color: transparent;
+  cursor: pointer;
+}
+.list-group-dropdown .list-group-item:hover {
+  background-color: var(--dek-secondary-darker);
+}
+
+.list-group-item.active {
+  background-color: var(--dek-secondary-darker) !important;
+  border-color: transparent;
+  opacity: 1.0;
+}
+
 .img-thumbnail {
   background-color: var(--dek-card-body-color);
   border: none;

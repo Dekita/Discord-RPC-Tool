@@ -44,10 +44,14 @@ const DEKCHECKICONS = {
     radio:{ on: ["far","fa-times-circle"], off: ["far","fa-circle"] },
 };
 
-class DekCheckBox {
-    constructor(html_id, on_click_handler) {
-        this.id = html_id;
-        this.element = document.getElementById(this.id);
+class DekCheckBox extends EventTarget {
+    constructor(element, on_click_handler) {
+        super(); 
+
+        this.element = element;//document.getElementById(id);
+        this._id = this.element.id;
+        DekCheckBox.cache[this._id] = this;
+
         this.checkul = this.element.getElementsByTagName("UL")[0];
         this.chinput = this.element.getElementsByTagName("INPUT")[0];
         if (!this.chinput) this.chinput = document.createElement('input');
@@ -67,6 +71,7 @@ class DekCheckBox {
                 this.updateSyblings(li);
                 this.updateValue();
                 this.updateIcon(li);
+                this.dispatchEvent(new Event('click'));
                 if (this.handler) {
                     this.handler(this.getValue());
                 }
@@ -141,6 +146,10 @@ class DekCheckBox {
     }
     get enabled() {
         return this.ismulti && this.getValue()[0] === '0';
+    }
+    set enabled(boolean) {
+        if (!this.ismulti) return;
+        this.setActive(boolean ? 0 : null);
     }
 }
 
@@ -242,12 +251,19 @@ class DekSelect extends EventTarget {
         this._ul.append(item);
     }
     setToID(option_id) {
-        const elements = this._ul.querySelectorAll('li');
-        const item = [].slice.call(elements)[option_id];
-        if (item) this.set(item.innerText);
+        if (option_id < 0) option_id = 0; 
+        const elements = [...this._ul.querySelectorAll('li')];
+        if (elements[option_id]) this.set(elements[option_id].innerText);
+        console.log(`set to option ${option_id}`)
+    }
+    setToValue(value) {
+        const elements = [...this._ul.querySelectorAll('li')];
+        const id = elements.findIndex(item => item.innerText === value);
+        if (id >= 0) this.setToID(id);
     }
 }
 
+DekCheckBox.cache = {};
 DekSelect.cache = {};
 
 // helper function for loading theme data from local storage
@@ -268,9 +284,10 @@ document.addEventListener('DOMContentLoaded', async event => {
     const selectors = document.getElementsByClassName('dekselect');
     for (const element of [...selectors]) new DekSelect(element);
 
-    // const checkers = document.getElementsByClassName('dekcheckbox');
-    // for (const element of [...checkers]) new DekCheckBox(element, (handler)=>{});
+    const checkers = document.getElementsByClassName('dekcheckbox');
+    for (const element of [...checkers]) new DekCheckBox(element, (handler)=>{});
 });
+
 // listen for, and intercept clicks out of dekselect areas
 // and then hide any area currently showing;
 document.addEventListener('click', async event => {   

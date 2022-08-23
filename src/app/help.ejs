@@ -1,12 +1,15 @@
-<div class="d-flex w-100 h-100 p-0 mx-auto flex-column" style="overflow-y:auto;">
-    <main class="text-start" style="overflow-y: none;">
-        <div class="px-3 pt-3" id="mark-area">
-            <!-- markdown renders to here -->
-        </div>
-    </main>
-    <footer class="mt-auto mb-3 pt-2 text-white-50">
-        <small class="m-0"><b>
-            <a href="https://dekitarpg.com/" class="hover-secondary">By DekitaRPG</a>
-        </b></small>
-    </footer>
+<div class="w-100 h-100">
+    <%- include('./ejs/titlebar') %>
+    <div class="d-flex w-100 p-0 flex-column" style="overflow-y:auto; height: calc(100vh - 32px);">
+        <main class="text-start" style="overflow-y: none;">
+            <div class="px-3 pt-3" id="mark-area">
+                <!-- markdown renders to here -->
+            </div>
+        </main>
+        <footer class="mt-auto mb-3 pt-2 text-white-50">
+            <small class="m-0"><b>
+                <a href="https://dekitarpg.com/" class="hover-secondary">By DekitaRPG</a>
+            </b></small>
+        </footer>
+    </div>
 </div>

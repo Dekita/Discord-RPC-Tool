@@ -31,7 +31,7 @@ export default class RPCTool {
         this._loop_handle = null;
         this._active_id = 0;
         this._attempted_activity = null;
-        await RPCGUI.refreshActivityList();
+        await RPCGUI.refreshApplicationList();
         await RPCGUI.setupDekcheckBoxes();
         await RPCGUI.setupTooltips();
         await RPCGUI.setInputsFromActivity();
@@ -83,15 +83,66 @@ export default class RPCTool {
     static setAttemptedID(id) {
         this._attempted_activity = id;
     }
-    static createNewActivity() {
-        return DB.createNewEntry();
+    static setupInitialApplications() {
+        DB.createApplication({// with Pokemon
+            app_id: "965114674750292058",
+            image: null,
+            activities: [
+                {
+                    name: "Snorlax",
+                    details: "Training: Snorlax Lv {minutes}",
+                    state: "",
+                    images: [
+                        {key: "pkmn-snorlax", text: "in the ball!", enabled: true},
+                        {key: "", text: "", enabled: false},
+                    ],
+                    buttons: [
+                        {url: "", label: "", enabled: false},
+                        {url: "", label: "", enabled: false},
+                    ],
+                    timestamp: false,
+                },
+                {
+                    name: "Abra",
+                    details: "Training: Snorlax Lv {minutes}",
+                    state: "",
+                    images: [
+                        {key: "pkmn-snorlax", text: "in the ball!", enabled: true},
+                        {key: "", text: "", enabled: false},
+                    ],
+                    buttons: [
+                        {url: "", label: "", enabled: false},
+                        {url: "", label: "", enabled: false},
+                    ],
+                    timestamp: false,
+                },
+                {
+                    name: "Pikachu",
+                    details: "Training: Snorlax Lv {minutes}",
+                    state: "",
+                    images: [
+                        {key: "pkmn-snorlax", text: "in the ball!", enabled: true},
+                        {key: "", text: "", enabled: false},
+                    ],
+                    buttons: [
+                        {url: "", label: "", enabled: false},
+                        {url: "", label: "", enabled: false},
+                    ],
+                    timestamp: false,
+                },
+                
+            ]
+        });
     }
+    // static createNewActivity() {
+    //     return DB.createNewEntry();
+    // }
     // checks valid config and throws errors if wrong
     static async validateConfiguration() {
         await RPCGUI.clearAnger();
         await RPCGUI.clearAlerts();
         const messages =[];
-        const activity = DB.getActivityData();
+        const activity = DB.activity;
         if (!dekita_rpc.seemsFlakey(activity.app_id)) {
             messages.push(`"${activity.app_id}" does not seem like a valid Discord Application ID!`);
             RPCGUI.makeAngry('app-id');
@@ -125,7 +176,7 @@ export default class RPCTool {
         return !messages.length;
     }
     static async updateActivity() {
-        const activity = DB.getActivityData();
+        const activity = DB.activity;
         const app_image = getValue('app-image');
         const rpc_frequency = parseInt(getValue('app-rpc-frequency'));
         const app_id = getValue('app-id');
@@ -213,6 +264,8 @@ export default class RPCTool {
         return_stats['{time}'] = date.toLocaleTimeString(lang, timestringopts);
         return_stats['{playtime-short}'] = dekita_rpc.shortDuration(this.runningMS);
         return_stats['{playtime}'] = dekita_rpc.logicalDuration(this.runningMS);
+        return_stats['{minutes-float}'] = dekita_rpc.durationMinutes(this.runningMS);
+        return_stats['{minutes}'] = Math.floor(return_stats['{minutes-float}']);
         return_stats['{region}'] = navigator.language;
         return_stats['{timezone}'] = timeZone;
         return_stats['{rpc-website}'] = "https://dekitarpg.com/rpc";
@@ -220,7 +273,7 @@ export default class RPCTool {
     }
     static async updateLoop(){
         const activity = {type:0};
-        const db_activity = DB.getActivityData();
+        const db_activity = DB.activity;
         const return_stats = await this.getReplacers(db_activity);
         activity.instance = db_activity.instance;
         if (!!db_activity.details) activity.details = dekita_rpc.format(db_activity.details, return_stats);
