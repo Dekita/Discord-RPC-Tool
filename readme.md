@@ -1,7 +1,7 @@
 [<img src="src/img/banner.png" class="img-fluid img-thumbnail mx-auto d-block">](https://dekitarpg.com/rpc)
 
-<div class="d-flex mb-2">
-<div class="mx-auto d-block">
+<div align="center" class="d-flex mb-2">
+<div align="center" class="mx-auto d-block">
     <img src="https://img.shields.io/github/downloads/Dekita/Discord-RPC-Tool/total?style=for-the-badge&logo=github" class="img-fluid img-thumbnail">
     <a class="mx-2" href="https://discord.gg/WyTdramBkm" target="new">
         <img src="https://img.shields.io/discord/956439276357308446?logo=discord&style=for-the-badge&logoColor=e4e4e4&label=Support%20Server" class="img-fluid img-thumbnail">
