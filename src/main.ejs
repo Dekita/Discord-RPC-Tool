@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Interface for discord rpc">
     <meta name="author" content="DekitaRPG (dekitarpg@gmail.com)">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' file:; script-src 'self' file:; style-src 'self' file: 'unsafe-inline'; img-src 'self' file: data: https:; font-src 'self' file: data:; connect-src https://discord.com https://colormind.io; object-src 'none'; base-uri 'none'; form-action 'none';">
     <title><%- appname %> <%- page === 'app' ? '' : title %> v<%- version %></title>
     <link rel="icon" href="img/icon.ico">
-    <script src="https://kit.fontawesome.com/b1dacf428a.js" crossorigin="anonymous"></script>
+    <link href="../node_modules/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
     <link href="libs/bootstrap-5.1.3.css" rel="stylesheet">
     <link href="themes/<%= theme %>.css" id="theme-style-css" rel="stylesheet">
     <link href="libs/dek-style.css" rel="stylesheet">
@@ -16,9 +17,11 @@
     <script src="libs/bootstrap-5.1.3.js" defer></script>
     <script src="libs/showdown-2.0.3.js" defer></script>
     <script src="libs/dek-style.js" defer></script>
+    <script src="shared/validate.js"></script>
+    <script src="app/js/bridge.js"></script>
     <script src="app/<%= page %>.js" type="module"></script>
 </head>
-<body class="d-flex h-100 text-center theme-bg">
+<body class="d-flex h-100 text-center theme-bg platform-<%= platform %>">
     <%- include(`app/${page}.ejs`); %> 
 </body>
 </html>

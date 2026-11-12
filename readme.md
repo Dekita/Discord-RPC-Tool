@@ -1,9 +1,9 @@
-[<img src="src/img/banner.png" class="img-fluid img-thumbnail mx-auto d-block" onerror="removeSRC(this)">](https://dekitarpg.com/rpc)
+[<img src="src/img/banner.png" class="img-fluid img-thumbnail mx-auto d-block">](https://dekitarpg.com/rpc)
 
 <div class="d-flex mb-2">
 <div class="mx-auto d-block">
     <img src="https://img.shields.io/github/downloads/Dekita/Discord-RPC-Tool/total?style=for-the-badge&logo=github" class="img-fluid img-thumbnail">
-    <a class="mx-2" href="https://discord.gg/7dCZ3Q4eU3" target="new">
+    <a class="mx-2" href="https://discord.gg/WyTdramBkm" target="new">
         <img src="https://img.shields.io/discord/956439276357308446?logo=discord&style=for-the-badge&logoColor=e4e4e4&label=Support%20Server" class="img-fluid img-thumbnail">
     </a>
     <img src="https://img.shields.io/github/stars/Dekita/Discord-RPC-Tool?style=for-the-badge&logo=apache%20spark&logoColor=e4e4e4" class="img-fluid img-thumbnail">
@@ -14,12 +14,15 @@
 - [How to install](#how-to-install) 
 - [What is Discord RPC Tool](#what-is-discord-rpc-tool) 
 - [RPC Tool Features](#rpc-tool-features) 
-- [Latest Changelog](#changelog-v0095) 
+- [Latest Changelog](#changelog-v100) 
 - [Launching your first activity](#launching-your-first-activity) 
 - [Main Activity Customization](#main-activity-customization) 
 - [Activity Image Customization](#activity-image-customization) 
 - [Activity Button Customization](#activity-button-customization) 
+- [Themes](#themes)
+- [Backing Up Your Activities](#backing-up-your-activities)
 - [Advanced Activity Text](#advanced-activity-text) 
+- [Privacy](#privacy)
 - [Important Notes](#important-notes) 
 
 <hr class="mt-1">
@@ -27,23 +30,82 @@
 ### What is Discord RPC Tool
 RPC Tool is a simple application that allows you to easily communicate with the Discord `Rich Presence Client`. RPC is a service that the Discord application installed on your machine enables. The RPC allows other applications, like this one, to communicate with the running Discord app. RPC Tool uses this feature to set the user currently logged into Discord's `Now Playing` activity.
 
-<img src="src/img/app.png" class="img-fluid img-thumbnail" onerror="removeSRC(this)">
+<img src="src/img/app.png" class="img-fluid img-thumbnail">
 <hr class="mt-1">
 
 ### RPC Tool Features
-- Painless Installation
-- Multiple Activity Profiles
+- Painless Installation and Automatic Updates
 - Modern UI Inspired by Discord
+- Live Profile Preview
+- Multiple Applications, each with Unlimited Activities
+- Changes Saved Automatically
+- Export and Import Application Data
+- Automatic Reconnect if Discord Restarts
+- System Notifications
 - Multi Platform Support (win+linux)
-- Customizable Theme + Multiple Defaults 
-- Auto Detect App Name, Icon, Description, etc
+- 10 Themes, plus your own with the Color Customizer
+- API Polling for Advanced Activities
 - Optional Minimize to System Tray
 - Optional Auto Start Activity on Launch
 - Optional Auto Minimize App on Launch
 - Optional Auto Launch App on System Boot
-- API Polling for Advanced Activities
-- Optional Activity Duration/Timer
-- System Notifications
+- Optional Activity Elapsed Time
+- Auto Detect App Name, Icon, Description, etc
+- Replace Activity Text with your;
+time, date, region, timezone, playtime, and more...
+<hr class="mt-1">
+
+### Changelog (v1.0.0)
+Version 1.0 also includes the changes from v0.0.96, which was never released.
+
+###### New Look
+- Redesigned interface inspired by Discord, with a frameless window and custom titlebar
+- Activity editor grouped into Text, Images, Buttons and Advanced sections
+- Toggle switches replace checkboxes, switched off images and buttons fade out
+- Big `Launch activity` button that shows how long you have been live
+- Status pill next to the activity name: Ready, Connecting, Live on Discord
+- Preview now looks like a current Discord profile, and updates as you type
+- Image picker shows thumbnails of your application's art assets
+- App icons show their name on hover, and a green dot while live
+- Welcome guide on first launch, reopen it with the info button
+- New toast notifications that stack in the corner and close themselves
+- Smoother animations throughout
+
+###### Applications and Activities
+- Activity type: show Listening to, Watching or Competing in, instead of Playing
+- Applications and activities are now split, each application has unlimited activities
+- Activity menu (cog icon) to rename, duplicate or delete activities
+- Asks before switching activity while one is live
+- Export and import application data as a JSON file
+- Changes are saved automatically (save button removed)
+- Data now saved to a file in your app data folder, older data is moved over automatically
+- Image keys now sorted alphabetically
+
+###### Themes
+- Pick themes from color tiles in Settings
+- Themes renamed to describe how they look, your choice is carried over
+- Every theme reworked so text is easy to read, burnt-orange and nature4 removed
+- New color customizer: changes show on the app straight away, with a readability check
+- Custom themes now save every color, so they look the same whichever theme you start from
+
+###### Connection and Updates
+- Reconnects automatically if Discord restarts or the connection drops
+- Asks before restarting to install an update, otherwise installs when the app closes
+
+###### Fixes
+- Fixed the auto updater not reporting its progress
+- Fixed settings that are off or zero being reset to their defaults
+- Fixed the RPC update frequency setting being ignored
+- Fixed reloading the main window showing the help page
+- Fixed the theme selector dropdown
+- Support server link updated
+
+###### Under the Hood
+- Updated to Electron 45, with the renderer sandboxed and isolated for security
+- Discord connection moved to the main process
+- Renderer switched to ES style modules
+- Icons bundled with the app, so they show without an internet connection
+- Error log moved to the app's logs folder, and kept to a sensible size
 <hr class="mt-1">
 
 ### Changelog (v0.0.95)
@@ -54,7 +116,7 @@ RPC Tool is a simple application that allows you to easily communicate with the 
 - Various theme customization gui improvements
 - Added replacers for time/date/locale/timezone/playtime
 - Fixed support server links and added to help guide
-- Seperated code chunks for future refactor
+- Separated code chunks for future refactor
 - Added api polling for user counts
 - Scrollbar styling improvements
 - New 'toast' style alerts
@@ -92,9 +154,6 @@ RPC Tool is a simple application that allows you to easily communicate with the 
 <hr class="mt-1">
 
 ### Coming Soon / TODO
-- Change logic to allow for 'real-time' preview
-- Switch everything to es style modules 
-- Configurable auto-save option
 - More awesome themes
 - ...
 <hr class="mt-1">
@@ -112,7 +171,7 @@ Discord RPC Tool is now installed on your pc.
 <hr class="mt-1">
 
 ### How to install (development)
-| :exclamation: Node.js is required for development |
+| :exclamation: Node.js (v22 or newer) and Yarn are required for development |
 |---|
 
 ```
@@ -122,22 +181,29 @@ git clone https://github.com/Dekita/Discord-RPC-Tool.git
 cd Discord-RPC-Tool
 ```
 ```
-npm i; npm start
+yarn install
+```
+```
+yarn start
 ```
 <hr class="mt-1">
 
 ### Launching your first activity
-Once the application is installed and running on your machine, click on the purple `Dev Portal` button. This will open the discord developer portal. Once logged into the dev portal, create a new application and name it whatever you want. This is the name that will be shown for your activity.
+The first time you open RPC Tool, a short welcome guide walks you through the three steps below. You can reopen it at any time with the info button in the top right.
 
-While on the `General Information` tab, after naming your application, copy the  `Application ID` and paste it into the `Discord Application ID` input field in RPC Tool's general configuration area.
+<img src="src/img/app-welcome.png" class="img-fluid img-thumbnail mt-2">
 
-After entering your unique app id, press the `Save`, then `Launch` buttons. After a second or so, your user profile card on Discord should now look similar to this:
+Once the application is installed and running on your machine, click on the `Discord` icon button next to `Launch activity`. This will open the discord developer portal. Once logged into the dev portal, create a new application and name it whatever you want. This is the name that will be shown for your activity.
 
-<img src="src/img/discord-profile-card.png" class="img-fluid img-thumbnail mt-2" onerror="removeSRC(this)">
+While on the `General Information` tab, after naming your application, copy the `Application ID`. In RPC Tool, click the `+` button below the application icons on the left, paste the id, then click `Add application`.
+
+Your changes are saved automatically. When you are ready, press `Launch activity`. After a second or so, your user profile card on Discord should now look similar to this:
+
+<img src="src/img/discord-profile-card.png" class="img-fluid img-thumbnail mt-2">
 
 :exclamation: If the activity is not showing on your user profile card, make sure that you are not showing as invisible/offline, and that you have enabled `Activity Status` within the discord application's user settings. 
 
-<img src="src/img/discord-activity-status.png" class="img-fluid img-thumbnail mt-2" onerror="removeSRC(this)">
+<img src="src/img/discord-activity-status.png" class="img-fluid img-thumbnail mt-2">
 
 <hr class="mt-1">
 
@@ -145,28 +211,30 @@ After entering your unique app id, press the `Save`, then `Launch` buttons. Afte
 Once you have launched your first activity, you are ready to begin properly customizing things. See the details below for each customizable option.
 <hr class="mt-1">
 
-###### Application ID 
-Should be set to your discord application id. You can get this from the Discord developer portal after you create your application.
+###### Application ID
+Each application icon on the left is one of your discord applications, added by its application id. You can get this from the Discord developer portal after you create your application. Each application can have as many activities as you like, listed next to the icons.
 <hr class="mt-1">
 
-###### Activity Image [default=`src/img/icon.png`]
-This used only for the RPC Tool application. The selected image is used only for the Activity icon within the application interface. 
+###### Activities
+Click the cog next to an activity to rename, duplicate, or delete it. Activities can be reordered by dragging them.
 <hr class="mt-1">
 
 ###### Activity Text: Line 1 + 2
-Text shown for the activity details and state (the first and second line of text shown below your app name on your profile card). 
+Text shown for the activity details and state (the first and second line of text shown below your app name on your profile card). The wand button next to each line fills it in from your application's description or summary on the developer portal. 
 <hr class="mt-1">
 
 ### Activity Image Customization
 Each activity can display upto two images, one large and one small. But before RPC Tool can display them properly, the image files must be uploaded onto the Discord developer portal's `Rich Presence => Art Assets` tab shown below. 
-<img src="src/img/discord-asset-page.png" class="img-fluid img-thumbnail mt-2" onerror="removeSRC(this)">
+<img src="src/img/discord-asset-page.png" class="img-fluid img-thumbnail mt-2">
 
 | :exclamation: Images may take a few minutes to show due to discords cache |
 |---|
 
-The image key that you enter on the developer portal should match the image key you select in the RPC Tool application. After adding new images on the dev portal, click the `refresh application data` button in the RPC tool (next to the app id input) to refresh refresh image datas. If they arent showing, wait a few minutes, and try again. If still not showing, refresh the developer portal to make sure discord has saved them properly.
+The image key that you enter on the developer portal should match the image key you select in the RPC Tool application. After adding new images on the dev portal, open the application menu (the arrows next to the application name) and click `Refresh from Discord` to reload the images. If they arent showing, wait a few minutes, and try again. If still not showing, refresh the developer portal to make sure discord has saved them properly.
 
-Make sure to also enable your image within the RPC Tool application. 
+Make sure to also switch your image on within the RPC Tool application. Hovering an image shows its hover text on Discord. 
+
+<img src="src/img/app-image-picker.png" class="img-fluid img-thumbnail mt-2">
 
 <hr class="mt-1">
 
@@ -188,15 +256,40 @@ Set this to a url that returns valid json data, then you can use the returned js
 <hr class="mt-1">
 
 ###### API Update Frequency [default=`300`]
-The frequency in seconds for how often the application should poll the `Custom API URL` for its json data.
+The frequency in seconds for how often the application should poll the `Custom API URL` for its json data. The minimum is `60`.
 <hr class="mt-1">
 
 ###### RPC Update Frequency [default=`15`]
-The frequency in seconds for how often the application should send data to the Discord Rich Presence Client.
+The frequency in seconds for how often the application should send data to the Discord Rich Presence Client. The minimum is `15`.
 <hr class="mt-1">
 
-###### Activity Timestamps
-Shows the duration that the current activity has been active.
+###### Activity Type
+Changes how the activity is introduced on your profile: `Playing`, `Listening`, `Watching` or `Competing`. Choose it with the `Type` dropdown in the Text section.
+
+<img src="src/img/app-activity-type.png" class="img-fluid img-thumbnail mt-2">
+<hr class="mt-1">
+
+###### Show Elapsed Time
+Shows how long the current activity has been active, eg: `12:47 elapsed`. Turn it on with the switch at the top of the Text section.
+<hr class="mt-1">
+
+### Themes
+Open `Settings` (the cog in the top right) and click a theme tile to switch themes.
+
+<img src="src/img/app-settings.png" class="img-fluid img-thumbnail mt-2">
+
+There are light and dark themes to choose from:
+
+<img src="src/img/app-theme-light.png" class="img-fluid img-thumbnail mt-2">
+<img src="src/img/app-theme-violet.png" class="img-fluid img-thumbnail mt-2">
+
+Click `Customize colors` to make your own: start from any theme, change its colors, and the app updates as you go. Press `Save as my theme` to keep it, or `Discard` to go back.
+
+<img src="src/img/app-theme-customizer.png" class="img-fluid img-thumbnail mt-2">
+<hr class="mt-1">
+
+### Backing Up Your Activities
+Your applications and activities are saved automatically. To back one up or share it, open the application menu (the arrows next to the application name) and click `Export App Data`. Use `Import App Data` to load it again.
 <hr class="mt-1">
 
 ### Advanced Activity Text
@@ -225,15 +318,26 @@ Additionally, there are a number of default replacers that you can use, without 
 `{timezone}` - your estimated timezone
 `{playtime}` - logical playtime text
 `{playtime-short}` - short playtime text
+`{minutes}` - whole minutes since launch
+`{minutes-float}` - minutes since launch, with decimals
 `{rpc-website}` - rpc website url
 `{rpc-support}` - rpc support server url
+<hr class="mt-1">
+
+### Privacy
+The `Users Today` counter in the bottom corner is powered by a small ping to dekitarpg.com. While the installed app is open, it sends the following when it starts, and again every few minutes:
+- a random ID created the first time the app runs (it is not linked to you or your Discord account)
+- your timezone
+- the app version
+
+Nothing about your applications, activities or Discord account is sent. The app also contacts Discord (application names, icons and art assets), GitHub (update checks), colormind.io (theme randomizer), and any Stats API URL you add to an activity.
 <hr class="mt-1">
 
 ### Important Notes
 | :exclamation: Your own activity buttons do not work for you, only other users! |
 |---|
 
-| :exclamation: Always save after making changes or they wont take effect! |
+| :exclamation: Your activity will not show if Discord's `Activity Status` setting is off, or you appear offline |
 |---|
 
 | :warning: Please report any bugs you find to the support server! |

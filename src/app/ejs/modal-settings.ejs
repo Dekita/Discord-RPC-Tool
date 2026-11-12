@@ -1,0 +1,80 @@
+<!-- APPLICATION SETTINGS MODAL -->
+<div class="modal fade" tabindex="-1" id="settings-modal">
+    <div class="modal-dialog modal-dialog-centered settings-dialog">
+        <div class="modal-content theme-bg theme-border">
+        <div class="modal-header theme-border">
+            <h5 class="modal-title"><strong><i class="fas fa-cog me-2 opacity-75"></i>Settings</strong></h5>
+            <button type="button" class="btn modal-close" data-bs-dismiss="modal" aria-label="Close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body text-start px-4">
+            <div class="settings-section-head">
+                <span class="settings-section">Theme</span>
+                <button type="button" class="btn btn-ghost btn-sm" id="app-themes-btn">
+                    <i class="fas fa-paint-roller me-1"></i>Customize colors
+                </button>
+            </div>
+            <div class="theme-tiles" id="theme-tiles">
+                <% for (const theme of themes) { if (theme === 'custom') continue; const swatch = theme_swatches[theme] || {}; %>
+                <button type="button" class="theme-tile" data-theme="<%= theme %>" aria-label="<%= theme %> theme">
+                    <span class="theme-tile-swatch" style="background: <%= swatch.body %>; color: <%= swatch.text %>;">
+                        <b>Aa</b>
+                        <span class="theme-tile-dots">
+                            <i style="background: <%= swatch.primary %>;"></i>
+                            <i style="background: <%= swatch.secondary %>;"></i>
+                            <i style="background: <%= swatch.success %>;"></i>
+                        </span>
+                    </span>
+                    <span class="theme-tile-name"><%= theme.replace('-', ' ') %></span>
+                </button>
+                <% } %>
+                <!-- swatch filled in from the saved custom theme, see app.js -->
+                <button type="button" class="theme-tile custom" data-theme="custom" aria-label="My theme">
+                    <span class="theme-tile-swatch">
+                        <b>Aa</b>
+                        <span class="theme-tile-dots"><i></i><i></i><i></i></span>
+                        <i class="fas fa-paint-roller theme-tile-create"></i>
+                    </span>
+                    <span class="theme-tile-name">my theme</span>
+                </button>
+            </div>
+
+            <div class="settings-section mt-4">System</div>
+            <div class="settings-switches">
+                <div class="dekcheckbox check-dark multicheck" id="appopts-auto-boot">
+                    <ul class="mb-0"><li>Start after system boot</li></ul>
+                </div>
+                <div class="dekcheckbox check-dark multicheck" id="appopts-tiny-tray">
+                    <ul class="mb-0"><li>Minimize to system tray</li></ul>
+                </div>
+                <div class="dekcheckbox check-dark multicheck" id="appopts-auto-play">
+                    <ul class="mb-0"><li>Launch activity on load</li></ul>
+                </div>
+                <div class="dekcheckbox check-dark multicheck" id="appopts-auto-tiny">
+                    <ul class="mb-0"><li>Minimize on load</li></ul>
+                </div>
+            </div>
+            <div class="d-none">
+                <b>Colors</b>
+                <div class="dekcheckbox check-dark idcheck" id="appopts-color">
+                    <ul class="mb-0">
+                        <li class="checked">Default</li>
+                        <li class="">Pastel</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer theme-border justify-content-between">
+            <button type="button" class="btn btn-ghost" id="show-welcome-btn" data-bs-dismiss="modal">
+                <i class="fas fa-fw fa-info-circle me-1"></i>Getting started
+            </button>
+            <small class="m-0"><b>
+                <a href="https://dekitarpg.com/" class="hover-dark">
+                    Created By @DekitaRPG
+                </a>
+            </b></small>
+        </div>
+        </div>
+    </div>
+</div>

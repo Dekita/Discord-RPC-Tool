@@ -1,0 +1,31 @@
+<!-- NEW APPLICATION MODAL -->
+<div class="modal fade" tabindex="-1" id="new-application-modal">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content theme-bg theme-border">
+    <div class="modal-header theme-border">
+        <h5 class="modal-title"><strong>Add an application</strong></h5>
+        <button type="button" class="btn modal-close" data-bs-dismiss="modal" aria-label="Close">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <div class="modal-body text-start px-4">
+        <label class="modal-label" for="app-app-id">Application ID</label>
+        <input type="text" class="form-control form-control-lg form-secondary" id="app-app-id" placeholder="eg: 929044058737868891" spellcheck="false">
+        <p class="modal-help">
+            <i class="fas fa-info-circle me-1"></i>
+            Open the Developer Portal, pick your application, then copy the <b>Application ID</b> from its General Information page.
+            <a class="hover-dark app-info-btn"><u>Need more help?</u></a>
+        </p>
+    </div>
+    <div class="modal-footer theme-border">
+        <button class="btn btn-ghost developer-portal-btn me-auto">
+            <i class="fab fa-discord me-2"></i>Developer Portal<i class="fas fa-external-link-alt ms-2 small opacity-50"></i>
+        </button>
+        <button type="button" class="btn btn-ghost" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-success px-4" id="confirm-new-application-btn">
+            <i class="fas fa-plus me-2"></i>Add application
+        </button>
+    </div>
+</div>
+</div>
+</div>

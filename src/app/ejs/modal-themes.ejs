@@ -1,0 +1,109 @@
+<!-- THEME CUSTOMIZER: a drawer on the right, so the app itself is the live preview -->
+<div class="modal fade drawer-modal" tabindex="-1" id="theme-modal" data-bs-backdrop="false">
+<div class="modal-dialog drawer-dialog">
+<div class="modal-content">
+<div class="modal-header theme-border">
+    <h5 class="modal-title"><strong><i class="fas fa-paint-roller me-2 opacity-75"></i>Customize colors</strong></h5>
+    <button type="button" class="btn modal-close" data-bs-dismiss="modal" aria-label="Close">
+        <i class="fas fa-times"></i>
+    </button>
+</div>
+<div class="modal-body text-start thin-scroller">
+    <p class="drawer-intro">Changes show on the app straight away. Save them as <b>my theme</b> to keep them.</p>
+
+    <div class="drawer-section">
+        <div class="settings-section">1. Start from</div>
+        <div class="theme-tiles theme-tiles-sm">
+            <% for (const theme of themes) { if (theme === 'custom') continue; const swatch = theme_swatches[theme] || {}; %>
+            <button type="button" class="theme-tile" data-base-theme="<%= theme %>" title="<%= theme.replace('-', ' ') %>" aria-label="Start from <%= theme %>">
+                <span class="theme-tile-swatch" style="background: <%= swatch.body %>; color: <%= swatch.text %>;">
+                    <b>Aa</b>
+                    <span class="theme-tile-dots">
+                        <i style="background: <%= swatch.primary %>;"></i>
+                        <i style="background: <%= swatch.secondary %>;"></i>
+                        <i style="background: <%= swatch.success %>;"></i>
+                    </span>
+                </span>
+            </button>
+            <% } %>
+        </div>
+        <div class="randomize-row">
+            <button class="btn btn-primary" id="randomize-color-btn">
+                <i class="fas fa-dice me-2" id="randomize-icon"></i>Surprise me
+            </button>
+            <div class="min-w-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Style of random colors, from colormind.io">
+                <select class="dekselect dekselect-secondary" id="randomize-type-select">
+                    <option>ui</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="drawer-section">
+        <div class="settings-section">2. Background and text</div>
+        <div class="color-group">
+            <div class="color-group-head">
+                <span>Main</span>
+                <span class="contrast-pill" id="contrast-main"></span>
+            </div>
+            <label class="color-row"><span>Background</span><input type="color" id="color-input-body"></label>
+            <label class="color-row"><span>Text</span><input type="color" id="color-input-text"></label>
+            <button type="button" class="btn btn-ghost btn-sm w-100" id="switch-body-text-btn">
+                <i class="fas fa-exchange-alt me-1"></i>Swap background and text
+            </button>
+        </div>
+        <div class="color-group">
+            <div class="color-group-head">
+                <span>Popups</span>
+                <span class="contrast-pill" id="contrast-modal"></span>
+            </div>
+            <label class="color-row"><span>Background</span><input type="color" id="modal-body-color"></label>
+            <label class="color-row"><span>Border</span><input type="color" id="modal-border-color"></label>
+            <label class="color-row"><span>Text</span><input type="color" id="modal-text-color"></label>
+        </div>
+        <div class="color-group">
+            <div class="color-group-head">
+                <span>Profile preview</span>
+                <span class="contrast-pill" id="contrast-card"></span>
+            </div>
+            <label class="color-row"><span>Banner</span><input type="color" id="card-header-color"></label>
+            <label class="color-row"><span>Background</span><input type="color" id="card-body-color"></label>
+            <label class="color-row"><span>Text</span><input type="color" id="card-text-color"></label>
+        </div>
+    </div>
+
+    <div class="drawer-section">
+        <div class="settings-section">3. Accents</div>
+        <div class="color-group">
+            <label class="color-row"><span>Primary</span><input type="color" id="color-input-primary"></label>
+            <div class="dekcheckbox check-dark multicheck mt-1" id="calculate-enabled" data-bs-toggle="tooltip" title="When on, changing the primary color also picks matching accent colors">
+                <ul class="mb-0"><li class="checked">Match other accents to primary</li></ul>
+            </div>
+            <div class="dekcheckbox check-dark multicheck mt-1" id="calculate-chroma" data-bs-toggle="tooltip" title="On: HCL, keeps brightness even across hues. Off: HSL">
+                <ul class="mb-0"><li class="checked">Even brightness (HCL)</li></ul>
+            </div>
+        </div>
+        <div class="color-group">
+            <label class="color-row"><span>Secondary <small>Dev Portal</small></span><input type="color" id="color-input-secondary"></label>
+            <label class="color-row"><span>Success <small>Launch</small></span><input type="color" id="color-input-success"></label>
+            <label class="color-row"><span>Danger <small>Delete, Stop</small></span><input type="color" id="color-input-danger"></label>
+            <label class="color-row"><span>Warning <small>Connecting</small></span><input type="color" id="color-input-warning"></label>
+            <label class="color-row"><span>Info</span><input type="color" id="color-input-info"></label>
+        </div>
+    </div>
+</div>
+<div class="modal-footer theme-border">
+    <button type="button" class="btn btn-ghost icon-btn" id="copy-theme-btn" data-bs-toggle="tooltip" title="Copy theme css to clipboard">
+        <i class="far fa-fw fa-clipboard"></i>
+    </button>
+    <button type="button" class="btn btn-ghost icon-btn" id="save-theme-btn" data-bs-toggle="tooltip" title="Export theme css to a file">
+        <i class="fas fa-fw fa-file-export"></i>
+    </button>
+    <button type="button" class="btn btn-ghost ms-auto" id="discard-theme-btn">Discard</button>
+    <button type="button" class="btn btn-success" id="save-custom-theme-btn">
+        <i class="fas fa-save me-2"></i>Save as my theme
+    </button>
+</div>
+</div> <!-- modal-content -->
+</div> <!-- modal-dialog -->
+</div> <!-- modal -->

@@ -1,0 +1,97 @@
+<!-- WELCOME / GETTING STARTED MODAL -->
+<!-- shown on first launch, can be reopened from the settings modal -->
+<div class="modal fade" tabindex="-1" id="welcome-modal" data-bs-backdrop="static">
+<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable welcome-dialog">
+<div class="modal-content theme-bg theme-border">
+    <div class="modal-header theme-border px-4 py-3">
+        <div class="d-flex align-items-center text-start">
+            <img src="img/rpc-icon.png" class="welcome-logo me-3" draggable="false">
+            <div>
+                <h5 class="modal-title mb-0"><strong>Welcome to <%- appname %></strong></h5>
+                <small class="opacity-75">Show a custom activity on your Discord profile in three steps.</small>
+            </div>
+        </div>
+        <button type="button" class="btn modal-close" data-bs-dismiss="modal" aria-label="Close">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <div class="modal-body text-start px-4">
+        <div class="row g-3">
+            <div class="col-4">
+                <div class="welcome-step h-100">
+                    <div class="d-flex align-items-center mb-2">
+                        <span class="welcome-step-number">1</span>
+                        <strong>Choose an application</strong>
+                    </div>
+                    <p class="mb-2">
+                        The icons on the far left are Discord applications.
+                        The application name is the game name shown on your profile.
+                    </p>
+                    <p class="mb-0">
+                        Example applications are included to try out. To use your own,
+                        create one on the <a class="hover-primary welcome-link" data-welcome="dev-portal">Developer Portal</a>
+                        and add its ID with the <i class="fas fa-plus fa-fw"></i> button.
+                    </p>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="welcome-step h-100">
+                    <div class="d-flex align-items-center mb-2">
+                        <span class="welcome-step-number">2</span>
+                        <strong>Customize the activity</strong>
+                    </div>
+                    <p class="mb-2">
+                        Set two lines of text, up to two images from your application's
+                        art assets, and up to two link buttons.
+                    </p>
+                    <p class="mb-0">
+                        The preview on the right shows how it will look.
+                        Changes are saved automatically.
+                    </p>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="welcome-step h-100">
+                    <div class="d-flex align-items-center mb-2">
+                        <span class="welcome-step-number">3</span>
+                        <strong>Launch it</strong>
+                    </div>
+                    <p class="mb-2">
+                        Make sure the Discord desktop app is open, then press
+                        <span class="text-nowrap"><span class="welcome-kbd"><i class="fas fa-play fa-fw"></i> Launch activity</span>.</span>
+                    </p>
+                    <p class="mb-0">
+                        Your activity updates while the tool runs, and it
+                        reconnects automatically if Discord restarts.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="welcome-tips mt-3">
+            <strong class="d-block mb-1"><i class="fas fa-magic fa-fw me-1"></i>Dynamic text</strong>
+            <span class="me-1">Add these to your activity text and they update automatically:</span>
+            <span class="welcome-chip" data-bs-toggle="tooltip" title="Time since launch, eg: 1 hour, 5 minutes">{playtime}</span>
+            <span class="welcome-chip" data-bs-toggle="tooltip" title="Time since launch, eg: 1h, 5m">{playtime-short}</span>
+            <span class="welcome-chip" data-bs-toggle="tooltip" title="Whole minutes since launch">{minutes}</span>
+            <span class="welcome-chip" data-bs-toggle="tooltip" title="Your local time">{time}</span>
+            <span class="welcome-chip" data-bs-toggle="tooltip" title="Your local date">{date}</span>
+            <span class="welcome-chip" data-bs-toggle="tooltip" title="Your timezone">{timezone}</span>
+            <span class="welcome-chip" data-bs-toggle="tooltip" title="Any value returned by your Stats API URL, eg: {players}">{your-api-value}</span>
+        </div>
+    </div>
+    <div class="modal-footer theme-border px-4 justify-content-between">
+        <div class="dekcheckbox check-dark multicheck" id="appopts-show-welcome">
+            <ul class="mb-0"><li>Show this on startup</li></ul>
+        </div>
+        <div class="d-flex gap-2">
+            <button type="button" class="btn btn-secondary" data-welcome="help">
+                <i class="fas fa-book-open fa-fw me-1"></i>Full Guide
+            </button>
+            <button type="button" class="btn btn-success" data-bs-dismiss="modal">
+                <i class="fas fa-check fa-fw me-1"></i>Get Started
+            </button>
+        </div>
+    </div>
+</div>
+</div>
+</div>
