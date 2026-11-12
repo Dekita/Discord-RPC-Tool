@@ -38,6 +38,7 @@ RPC Tool is a simple application that allows you to easily communicate with the 
 - Modern UI Inspired by Discord
 - Live Profile Preview
 - Multiple Applications, each with Unlimited Activities
+- Activity Types: Playing, Listening, Watching or Competing
 - Changes Saved Automatically
 - Export and Import Application Data
 - Automatic Reconnect if Discord Restarts
@@ -79,6 +80,7 @@ Version 1.0 also includes the changes from v0.0.96, which was never released.
 - Export and import application data as a JSON file
 - Changes are saved automatically (save button removed)
 - Data now saved to a file in your app data folder, older data is moved over automatically
+- A backup of your data is kept, and used automatically if the saved file is ever damaged
 - Image keys now sorted alphabetically
 
 ###### Themes
@@ -87,6 +89,7 @@ Version 1.0 also includes the changes from v0.0.96, which was never released.
 - Every theme reworked so text is easy to read, burnt-orange and nature4 removed
 - New color customizer: changes show on the app straight away, with a readability check
 - Custom themes now save every color, so they look the same whichever theme you start from
+- The guide window uses your theme too, and changes with it
 
 ###### Connection and Updates
 - Reconnects automatically if Discord restarts or the connection drops
@@ -98,6 +101,7 @@ Version 1.0 also includes the changes from v0.0.96, which was never released.
 - Fixed the RPC update frequency setting being ignored
 - Fixed reloading the main window showing the help page
 - Fixed the theme selector dropdown
+- Fixed `{playtime}` leaving out the largest unit, eg: the day in `1 day, 1 hour`
 - Support server link updated
 
 ###### Under the Hood
@@ -106,6 +110,8 @@ Version 1.0 also includes the changes from v0.0.96, which was never released.
 - Renderer switched to ES style modules
 - Icons bundled with the app, so they show without an internet connection
 - Error log moved to the app's logs folder, and kept to a sensible size
+- Automated tests added for saving data, the activity lists and input checks
+- New [Privacy](#privacy) section explaining what the usage counter sends
 <hr class="mt-1">
 
 ### Changelog (v0.0.95)
