@@ -1,28 +1,17 @@
-<div class="position-absolute d-none w-100 p-2"id="current-app-config-dropdown" style="z-index: 9;">
+<!-- ACTIVITY CONTEXT MENU: opened from the cog on each activity list item -->
+<div class="context-menu d-none" id="activity-context-menu">
     <ul class="list-group list-group-dropdown">
-        <li class="list-group-item d-flex hover-dark" id="btn-rename-activity">
-            <div class="text-start w-100">
-                <span>Rename Activity</span>
-            </div>
-            <div class="text-end">
-                <i class="fas fa-fw fa-sync-alt"></i>
-            </div>
+        <li class="list-group-item d-flex hover-dark" data-activity-action="rename">
+            <div class="text-start w-100"><span>Rename</span></div>
+            <div class="text-end"><i class="fas fa-fw fa-pen"></i></div>
         </li>
-        <li class="list-group-item d-flex hover-dark" id="btn-export-activity">
-            <div class="text-start w-100">
-                <span>Export Activity</span>
-            </div>
-            <div class="text-end">
-                <i class="fas fa-fw fa-external-link-square-alt"></i>
-            </div>
+        <li class="list-group-item d-flex hover-dark" data-activity-action="duplicate">
+            <div class="text-start w-100"><span>Duplicate</span></div>
+            <div class="text-end"><i class="fas fa-fw fa-clone"></i></div>
         </li>
-        <li class="list-group-item d-flex hover-dark" id="btn-delete-activity">
-            <div class="text-start w-100">
-                <span>Delete Activity</span>
-            </div>
-            <div class="text-end">
-                <i class="fas fa-fw fa-trash"></i>
-            </div>
+        <li class="list-group-item d-flex hover-danger" data-activity-action="delete">
+            <div class="text-start w-100"><span>Delete</span></div>
+            <div class="text-end"><i class="fas fa-fw fa-trash-alt"></i></div>
         </li>
     </ul>
 </div>

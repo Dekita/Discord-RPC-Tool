@@ -7,7 +7,7 @@
 */
 :root {
 	--dek-gen-version: 0.0.92;
-	--dek-body-color: #c98140;
+	--dek-body-color: #83481a;
 	--dek-text-color: #d3dad4;
 	--dek-modal-body-color: #9d5b1b;
 	--dek-modal-text-color: #ffffff;
@@ -19,18 +19,18 @@
 	--dek-primary-darker: #332f54;
 	--dek-primary-darkest: #232043;
 	--dek-primary-light: #605a82;
-	--dek-secondary-normal: #849fa5;
-	--dek-secondary-darker: #5c767c;
-	--dek-secondary-darkest: #364f54;
-	--dek-secondary-light: #c9e5eb;
-	--dek-info-normal: #9b98aa;
-	--dek-info-darker: #726f80;
-	--dek-info-darkest: #4c4959;
-	--dek-info-light: #e1def1;
-	--dek-success-normal: #5f3c24;
-	--dek-success-darker: #4d2c15;
-	--dek-success-darkest: #3b1c01;
-	--dek-success-light: #7d563d;
+	--dek-secondary-normal: #5e787e;
+	--dek-secondary-darker: #415a60;
+	--dek-secondary-darkest: #253e43;
+	--dek-secondary-light: #90abb1;
+	--dek-info-normal: #747283;
+	--dek-info-darker: #565464;
+	--dek-info-darkest: #3a3847;
+	--dek-info-light: #a7a4b7;
+	--dek-success-normal: #254c30;
+	--dek-success-darker: #143b21;
+	--dek-success-darkest: #032b12;
+	--dek-success-light: #40684a;
 	--dek-warning-normal: #492d49;
 	--dek-warning-darker: #3c213c;
 	--dek-warning-darkest: #2f152f;

@@ -16,18 +16,6 @@ export async function popNotification(title, body, icon='img/icon.png') {
     //! todo: add more functionality
 
     const note = new Notification(title, {body, icon});
-    note.addEventListener('click', async () => {
-        console.log('clicked notificator!');
-    });
-    note.addEventListener('close', async () => {
-        console.log('closed notificator!');
-    });
-    note.addEventListener('error', async (error) => {
-        console.log('notificator error:', error);
-    });
-    note.addEventListener('show', async () => {
-        console.log('notificator shown!');
-    });
-    // RPCGUI.showAlert(body, 'danger', true);
-    setTimeout(note.close(), 10 * 1000);
+    note.addEventListener('error', error => console.error('notification error:', error));
+    setTimeout(() => note.close(), 10 * 1000);
 }

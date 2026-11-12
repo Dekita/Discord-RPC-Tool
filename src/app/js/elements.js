@@ -9,36 +9,35 @@ import { getElement,
     getValue,setValue,
     getText,setText,
     getImage,setImage,
-    getHTML,setHTML,
 } from "./helpers.js";
 
-const replacer = (prefix, prop) => `${prefix}-${prop.replace(/\_/g,'-')}`;
+const replacer = (prefix, prop) => `${prefix}-${prop.replace(/_/g,'-')}`;
 
 function registerInput(object, propname, label='app') {
     const element_id = replacer(label, propname);
     Object.defineProperty(object, propname, {
-        set(v){return setValue(element_id,v)},
+        set(v){setValue(element_id,v)},
         get() {return getValue(element_id)},
     });
 }
 function registerLabel(object, propname, label='label') {
     const element_id = replacer(label, propname);
     Object.defineProperty(object, propname, {
-        set(t){return setText(element_id,t)},
+        set(t){setText(element_id,t)},
         get() {return getText(element_id)},
     });
 }
 function registerImage(object, propname, label='image') {
     const element_id = replacer(label, propname);
     Object.defineProperty(object, propname, {
-        set(t){return setImage(element_id,t)},
+        set(t){setImage(element_id,t)},
         get() {return getImage(element_id)},
     });
 }
 
 /**
 * inputs:
-* defines all input areas. 
+* defines all input areas.
 * each inputs propery has a get and set method
 */
 export const  inputs = {};
@@ -72,6 +71,7 @@ export const checkboxes = {
     get auto_tiny(){return DekCheckBox.cache['appopts-auto-tiny']},
     get auto_play(){return DekCheckBox.cache['appopts-auto-play']},
     get auto_boot(){return DekCheckBox.cache['appopts-auto-boot']},
+    get show_welcome(){return DekCheckBox.cache['appopts-show-welcome']},
     get enable_calc(){return DekCheckBox.cache['calculate-enabled']},
     get enable_chroma(){return DekCheckBox.cache['calculate-chroma']},
 }
@@ -85,7 +85,7 @@ Object.freeze(checkboxes);
 export const selectors = {
     get image1(){return DekSelect.cache['image-select-one']},
     get image2(){return DekSelect.cache['image-select-two']},
-    get theme() {return DekSelect.cache['appopts-theme-select']},
+    get type(){return DekSelect.cache['activity-type-select']},
 }
 Object.freeze(selectors);
 
@@ -99,19 +99,20 @@ export const buttons = {
     app_info_btns: queryAll('.app-info-btn'),
 
     delete_application: getElement('btn-delete-application'),
-    export_activity: getElement('btn-export-application'),
+    export_application: getElement('btn-export-application'),
+    import_application: getElement('btn-import-application'),
 
-    delete_activity: getElement('btn-delete-activity'),
-    delete_activity: getElement('btn-export-activity'),
-    
-    force_refresh_data: getElement('force-refresh-data'),
-    force_app_icon: getElement('force-app-icon'),
+    delete_activity: getElement('delete-activity'),
+    restart_for_update: getElement('restart-for-update-btn'),
+    app_themes: getElement('app-themes-btn'),
+    show_welcome: getElement('show-welcome-btn'),
+
     force_app_details: getElement('force-app-details'),
     force_app_state: getElement('force-app-state'),
     confirm_change_activity: getElement('confirm-change-activity'),
+    cancel_change_activity: getElement('cancel-change-activity'),
     confirm_delete_activity: getElement('confirm-delete-activity'),
     app_settings: getElement('app-settings-btn'),
-    save_activity: getElement('save-activity'),
     launch_activity: getElement('launch-activity'),
     current_app_config: getElement("current-app-config"),
     confirm_add_application: getElement('confirm-new-application-btn'),
@@ -128,9 +129,10 @@ export const areas = {
     applications_btn_container: getElement('button-container'),
     current_app_config_dropdown: getElement("current-app-config-dropdown"),
     activity_list_group: getElement('activity-list-group'),
-    alert_notification_area: getElement('alert-area'),
     toast_container: getElement('main-toast-container'),
-    current_app_config_dropdown: getElement("current-app-config-dropdown"),
+    status_pill: getElement('activity-status-pill'),
+    activity_menu: getElement('activity-context-menu'),
+    theme_tiles: getElement('theme-tiles'),
 }
 Object.freeze(areas);
 
@@ -146,6 +148,10 @@ export const modals = {
     settings_element: getElement('settings-modal'),
 
     edit_activity: getModal('edit-activity-modal'),
+    edit_activity_element: getElement('edit-activity-modal'),
+    update: getModal('update-modal'),
+    welcome: getModal('welcome-modal'),
+    themes: getModal('theme-modal'),
 }
 Object.freeze(modals);
 
@@ -160,6 +166,8 @@ registerLabel(labels, 'active_activity_name');
 registerLabel(labels, 'user_count');
 registerLabel(labels, 'stop_activity_message');
 registerLabel(labels, 'stop_activity_title');
+registerLabel(labels, 'delete_modal_message');
+registerLabel(labels, 'delete_modal_title');
 Object.freeze(labels);
 
 /**
@@ -176,6 +184,10 @@ export const activity_preview = {
     image2: getElement('app-preview-image-sm'),
     button1: getElement('preview-btn1'),
     button2: getElement('preview-btn2'),
+    elapsed: getElement('app-preview-elapsed'),
+    elapsed_time: document.querySelector('#app-preview-elapsed span'),
+    live_badge: getElement('preview-live-badge'),
+    type_label: getElement('app-preview-type'),
 }
 Object.freeze(activity_preview);
 

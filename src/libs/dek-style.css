@@ -242,6 +242,8 @@ input[type=number] {
   border-color: transparent;
   width: calc(100% - 34px);
   opacity: 1.0;
+  /* a disabled input swallows clicks, let them reach the select instead */
+  pointer-events: none;
 }
 .btn-select .btn-select-value:hover {
   background-color: transparent;

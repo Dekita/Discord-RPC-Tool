@@ -9,8 +9,8 @@
     * 
     */
     --dek-gen-version: "0.0.9";
-    --dek-text-color: #e4e4e4;
-    --dek-body-color: #36393f;
+    --dek-text-color: #36393f;
+    --dek-body-color: #e4e4e4;
     /* xxx-primary colors */
     --dek-primary-darkest: #1e5474;
     --dek-primary-darker: #2d7eae;
@@ -42,11 +42,14 @@
     --dek-danger-normal: #c1687b;
     --dek-danger-light: #daa4b0;
     /* popup modal colors */
-    --dek-modal-body-color: #18191c;
+    --dek-modal-body-color: var(--dek-body-color);
     --dek-modal-text-color: var(--dek-text-color);
     --dek-modal-border-color: #36393f;
     /* activity preview card colors */
-    --dek-card-body-color: #18191c;
+    --dek-card-body-color: white;
     --dek-card-text-color: var(--dek-text-color);
     --dek-card-header-color: #342040;
+	--dek-shade-1: 5%;
+	--dek-shade-2: 9%;
+	--dek-shade-3: 14%;
 }

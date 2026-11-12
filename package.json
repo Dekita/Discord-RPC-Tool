@@ -1,6 +1,6 @@
 {
     "name": "dekita-rpc-tool",
-    "version": "0.0.96",
+    "version": "1.0.0",
     "productName": "Discord RPC Tool",
     "description": "Discord RPC Tool written by DekitaRPG",
     "main": "src/main.js",
@@ -9,7 +9,9 @@
         "start": "electron .",
         "build": "electron-builder",
         "pack": "electron-builder --dir",
-        "release": "electron-builder --publish always"
+        "release": "electron-builder --publish always",
+        "test": "node --test \"tests/*.test.js\"",
+        "lint": "eslint ."
     },
     "keywords": [],
     "author": {
@@ -18,24 +20,41 @@
     },
     "license": "SEE LICENSE IN LICENSE",
     "dependencies": {
-        "bent": "^7.3.12",
-        "chroma-js": "^2.4.2",
+        "@fortawesome/fontawesome-free": "5.15.4",
+        "chroma-js": "3.2.0",
         "discord-rpc": "^4.0.1",
-        "ejs-electron": "^2.1.1",
-        "electron-updater": "^5.0.1",
+        "ejs-electron": "^3.0.0",
+        "electron-updater": "^6.8.11",
         "json-stringify-pretty-compact": "^3.0.0",
-        "luxon": "^2.3.1",
-        "node-gyp": "^9.0.0"
+        "luxon": "^3.7.2"
     },
     "devDependencies": {
-        "electron": "^18.0.4",
-        "electron-builder": "^23.0.3"
+        "@eslint/js": "^9.39.5",
+        "electron": "^45.2.3",
+        "electron-builder": "^26.18.0",
+        "eslint": "^9.39.5",
+        "globals": "^15.15.0"
     },
     "build": {
         "appId": "com.dekitarpg.rpc",
         "productName": "Discord RPC Tool",
         "directories": {
             "output": "build"
+        },
+        "files": [
+            "src/**/*",
+            "!node_modules/@fortawesome/fontawesome-free/{js,svgs,sprites,less,scss,metadata}${/*}",
+            "readme.md",
+            "LICENSE",
+            "package.json"
+        ],
+        "npmRebuild": false,
+        "electronFuses": {
+            "runAsNode": false,
+            "enableNodeOptionsEnvironmentVariable": false,
+            "enableNodeCliInspectArguments": false,
+            "enableEmbeddedAsarIntegrityValidation": true,
+            "onlyLoadAppFromAsar": true
         },
         "win": {
             "target": "nsis",

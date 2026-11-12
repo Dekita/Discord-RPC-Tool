@@ -45,9 +45,26 @@ class TitlebarActions {
     }
 }
 
-// function sets event listeners for titlebar buttons and then
-// triggers the ready event for the given window id. 
+// links open in the system browser, never inside the app window
+function onClickDocument(event) {
+    const link = event.target.closest('a[href]');
+    const href = link?.getAttribute('href');
+    if (!href || href.startsWith('#')) return;
+    event.preventDefault();
+    if (/^https?:\/\//i.test(href)) dekita_rpc.openExternal(href);
+}
+
+// function sets event listeners for titlebar buttons and links and
+// then triggers the ready event for the given window id. 
 export default function(window_id) {
+    document.addEventListener('click', onClickDocument);
+    // windows draws no frame border while maximized, see app.css
+    const syncMaximized = () => {
+        const maximized = outerWidth >= screen.availWidth && outerHeight >= screen.availHeight;
+        document.body.classList.toggle('window-maximized', maximized);
+    };
+    window.addEventListener('resize', syncMaximized);
+    syncMaximized();
     TitlebarActions.register(window_id, 'mini', 'onMinimize');
     TitlebarActions.register(window_id, 'maxi', 'onMaximize');
     TitlebarActions.register(window_id, 'exit', 'onExit');

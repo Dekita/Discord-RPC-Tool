@@ -9,23 +9,23 @@
     * 
     */
     --dek-gen-version: "0.0.9";
-    --dek-text-color: #36393f;
-    --dek-body-color: #e4e4e4;
+    --dek-text-color: #e4e4e4;
+    --dek-body-color: #36393f;
     /* xxx-primary colors */
-    --dek-primary-darkest: #1e5474;
-    --dek-primary-darker: #2d7eae;
-    --dek-primary-normal: #328cc1;
-    --dek-primary-light: #84bada;
+    --dek-primary-darkest: #004574;
+    --dek-primary-darker: #006396;
+    --dek-primary-normal: #2584b9;
+    --dek-primary-light: #6dbbf4;
     /* xxx-secondary colors */
-    --dek-secondary-darkest: #4c4c74;
-    --dek-secondary-darker: #7171af;
-    --dek-secondary-normal: #7e7ec2;
-    --dek-secondary-light: #b2b2da;
+    --dek-secondary-darkest: #323875;
+    --dek-secondary-darker: #545697;
+    --dek-secondary-normal: #7676ba;
+    --dek-secondary-light: #afacf5;
     /* xxx-info colors */
-    --dek-info-darkest:#005861;
-    --dek-info-darker: #008492;
-    --dek-info-normal: #0093a2;
-    --dek-info-light:  #66bec7;
+    --dek-info-darkest:#004856;
+    --dek-info-darker: #006776;
+    --dek-info-normal: #008897;
+    --dek-info-light:  #59c0cf;
     /* xxx-success colors */
     --dek-success-darkest: #165946;
     --dek-success-darker: #208569;
@@ -42,11 +42,11 @@
     --dek-danger-normal: #c1687b;
     --dek-danger-light: #daa4b0;
     /* popup modal colors */
-    --dek-modal-body-color: var(--dek-body-color);
+    --dek-modal-body-color: #18191c;
     --dek-modal-text-color: var(--dek-text-color);
     --dek-modal-border-color: #36393f;
     /* activity preview card colors */
-    --dek-card-body-color: white;
+    --dek-card-body-color: #18191c;
     --dek-card-text-color: var(--dek-text-color);
     --dek-card-header-color: #342040;
 }

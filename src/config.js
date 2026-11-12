@@ -11,20 +11,22 @@
 const {randomUUID} = require('crypto');
 const {join} = require('path');
 
+const {app} = require('electron');
+
 // export the configuration:
 module.exports = {
     /**
     * dev_mode: 
     * flag to be used in development only!
     */
-    dev_mode: true,
+    dev_mode: !app.isPackaged,
 
     /**
     * show_debug: 
     * shows debug menu (javascript console) 
     * devmode must also be true for this to work <3
     */
-    show_debug: true,
+    show_debug: !app.isPackaged,
 
     /**
     * single_instance:
@@ -41,7 +43,7 @@ module.exports = {
 
     /**
     * app_icon:
-    * defines the ico and pong files for the app icon
+    * defines the ico and png files for the app icon
     */
     app_icon: {
         ico: join(__dirname, './img/rpc-icon.ico'),
@@ -68,15 +70,16 @@ module.exports = {
     * these proeprties can be get/set from global.app_settings.
     */
      data_store: {
+        'show-welcome': true,
         'auto-boot': false,
         'auto-play': false,
         'auto-tiny': false,
         'tiny-tray': true,
-        'gui-theme': 'dek-dark',
+        'gui-theme': 'slate-dark',
         'gui-color': 'pastel',
         // creates a random uuid on first boot,
         // that uuid is then used afterwords
-        'uuid': require('crypto').randomUUID(),
+        'uuid': randomUUID(),
     },
 
     /**
@@ -87,9 +90,11 @@ module.exports = {
         // window id
         main: {
             // size for window
-            size: {w: 1024,h: 540},
+            size: {w: 1208, h: 608},
+            // smallest size the window can be resized to
+            min: {w: 1208, h: 608},
             // the ejs template for this window
-            page: join(__dirname, './main.ejs'),
+            page: join(__dirname, './main-window.ejs'),
             // the preload file to load for this window
             load: join(__dirname, './preload.js'),
             // various options for the window behaviour
@@ -106,8 +111,8 @@ module.exports = {
             }
         },
         help: {
-            size: {w: 640, h: 420},
-            page: join(__dirname, './main.ejs'),
+            size: {w: 694, h: 420},
+            page: join(__dirname, './help-window.ejs'),
             load: join(__dirname, './preload.js'),
             opts: {
                 fullscreen: false,

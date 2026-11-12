@@ -1,36 +1,29 @@
-<!-- NEW APPLICATION CONFIRMATION MODAL -->
+<!-- NEW APPLICATION MODAL -->
 <div class="modal fade" tabindex="-1" id="new-application-modal">
 <div class="modal-dialog modal-dialog-centered">
 <div class="modal-content theme-bg theme-border">
-    <div class="modal-header  theme-border">
-        <h5 class="modal-title"><strong>Add New Application</strong></h5>
-        <button type="button" class="btn p-0 hover-dark no-shadow me-2 mt-1" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="tooltip" data-bs-placement="left" title="Close">
-            <i class="far fa-2x fa-fw fa-window-close"></i>
+    <div class="modal-header theme-border">
+        <h5 class="modal-title"><strong>Add an application</strong></h5>
+        <button type="button" class="btn modal-close" data-bs-dismiss="modal" aria-label="Close">
+            <i class="fas fa-times"></i>
         </button>
     </div>
-    <div class="modal-body">
-        <div class="row">
-            <div class="col-6 offset-3">
-                <input type="text" class="form-control form-control-sm form-secondary" id="app-app-id" placeholder="Discord Application ID">
-            </div>
-        </div>
-        <p class="px-2 mt-2 mb-0">
-            You can find your application id on the Discord developer portal. 
-            Dont know how? 
-            <a class="hover-dark app-info-btn">
-                <span>Click here to view the help guide!!</span>
-            </a>  
+    <div class="modal-body text-start px-4">
+        <label class="modal-label" for="app-app-id">Application ID</label>
+        <input type="text" class="form-control form-control-lg form-secondary" id="app-app-id" placeholder="eg: 929044058737868891" spellcheck="false">
+        <p class="modal-help">
+            <i class="fas fa-info-circle me-1"></i>
+            Open the Developer Portal, pick your application, then copy the <b>Application ID</b> from its General Information page.
+            <a class="hover-dark app-info-btn"><u>Need more help?</u></a>
         </p>
     </div>
     <div class="modal-footer theme-border">
-        <button class="btn btn-secondary col developer-portal-btn">
-            <span>Dev Portal</span>
-        </button>      
-        <button type="button" class="btn btn-danger col" data-bs-dismiss="modal">
-            <span>Cancel</span>
+        <button class="btn btn-ghost developer-portal-btn me-auto">
+            <i class="fab fa-discord me-2"></i>Developer Portal<i class="fas fa-external-link-alt ms-2 small opacity-50"></i>
         </button>
-        <button type="button" class="btn btn-success col" id="confirm-new-application-btn">
-            <span>Confirm</span>
+        <button type="button" class="btn btn-ghost" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-success px-4" id="confirm-new-application-btn">
+            <i class="fas fa-plus me-2"></i>Add application
         </button>
     </div>
 </div>

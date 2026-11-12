@@ -5,6 +5,23 @@ export const API_URLS = {
     rpc: `https://discord.com/api/oauth2/applications/APP_ID/rpc`,
 }
 
+// activity types discord accepts from rpc apps, name => type id.
+// streaming (1) and custom status (4) cannot be set this way
+export const ACTIVITY_TYPES = {
+    Playing: 0,
+    Listening: 2,
+    Watching: 3,
+    Competing: 5,
+}
+
+// label shown above the activity on a profile, APP is the application name
+export const ACTIVITY_TYPE_LABELS = {
+    0: "PLAYING A GAME",
+    2: "LISTENING TO APP",
+    3: "WATCHING APP",
+    5: "COMPETING IN APP",
+}
+
 export const DEFAULT_IMAGE_TEXTS = {
     image1: "Download Discord RPC Tool to create your very own customized activities!",
     image2: "Download Discord RPC Tool today at dekitarpg.com/rpc",
@@ -12,7 +29,7 @@ export const DEFAULT_IMAGE_TEXTS = {
 
 export const DEFAULT_BUTTON_DATA = {
     btn1: {label: "Website", url: "https://dekitarpg.com/rpc"},
-    btn2: {label: "Support", url: "https://discord.gg/7dCZ3Q4eU3"},
+    btn2: {label: "Support", url: "https://discord.gg/WyTdramBkm"},
 }
 
 
@@ -95,27 +112,6 @@ export const DEFAULT_APPLICATIONS = [
         activities: [
             {
                 name: "Radout",
-                details: "Pretty rad so far...",
-                state: "Scorching Beasts for {playtime-short}",
-                images: [
-                    {key: "69-2", text: "", enabled: true},
-                    {key: "", text: "", enabled: false},
-                ],
-                buttons: [
-                    {url: "https://dekitarpg.com/rpc", label: "Join Game", enabled: true},
-                    {url: "", label: "", enabled: false},
-                ],
-                timestamp: false,
-            },
-        ]
-    }, //   
-
-    {// Druglord
-        app_id: "918256300939431958",
-        icon: "https://cdn.discordapp.com/app-icons/918256300939431958/1f6db935aeda425e9c92726865c54484.png",
-        activities: [
-            {
-                name: "Druglord",
                 details: "Pretty rad so far...",
                 state: "Scorching Beasts for {playtime-short}",
                 images: [

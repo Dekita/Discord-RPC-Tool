@@ -1,65 +1,64 @@
-<!-- Template ejs file for new pages/windows -->
-<!-- trigger by called dekita_rpc.openChildWindow('template') -->
-
 <style>
+    /* panel shades are mixed from the theme body color, themes can set
+    --dek-shade-color (eg: white for mid tone themes) and --dek-shade-1/2/3 */
     :root {
-        --dek-darker-2: #2f3136;
-        --dek-darker-3: #292b2f;
-        --dek-darker-4: #202225;
+        --dek-darker-2: color-mix(in srgb, var(--dek-body-color), var(--dek-shade-color, black) var(--dek-shade-1, 13%));
+        --dek-darker-3: color-mix(in srgb, var(--dek-body-color), var(--dek-shade-color, black) var(--dek-shade-2, 24%));
+        --dek-darker-4: color-mix(in srgb, var(--dek-body-color), var(--dek-shade-color, black) var(--dek-shade-3, 40%));
     }
 </style>
 
 <div class="w-100 h-100">
     <%- include('./ejs/titlebar') %>
-    <div class="d-flex" style="height: calc(100vh - 32px);">
+    <div class="d-flex" style="height: calc(100% - var(--dek-titlebar-height));">
     <!-- Side buttons: handled programatically -->
     <div class="darker-bg3 h-100 px-2" id="button-container"></div>
-        <div class="d-block w-100" style="">
-            <div class="d-flex w-100" style="height: 58px;">
-                <div class="darker-bg3 w-25" style="">
+        <div class="d-flex flex-column flex-grow-1 min-w-0">
+            <div class="d-flex w-100 flex-none" style="height: 58px;">
+                <div class="darker-bg3 side-panel">
                     <div class="d-flex darker-bg1 border-bottom border-dark2 w-100 h-100 p-3" style="border-top-left-radius: 15px;">
-                        <div class="w-75 text-start">
+                        <div class="flex-grow-1 min-w-0 text-start text-truncate">
                             <strong id="label-active-app-name">App Name</strong>
                         </div>
-                        <div class="w-25 text-end">
+                        <div class="text-end">
                             <i class="fas fa-fw hover-dark fa-angle-double-down" id="current-app-config"></i>
                         </div>
                     </div>
                 </div>
-                <div class="d-flex w-75 border-bottom border-dark2">
-                    <div class="w-50 text-start p-3">
-                        <i class="fas fa-fw fa-hashtag"></i>
+                <div class="d-flex flex-grow-1 min-w-0 border-bottom border-dark2">
+                    <div class="flex-grow-1 min-w-0 text-start text-truncate p-3">
+                        <i class="fas fa-fw fa-hashtag opacity-50"></i>
                         <strong id="label-active-activity-name">Activity Name</strong>
+                        <span class="status-pill" id="activity-status-pill"><i></i><span>Ready</span></span>
                     </div>
-                    <div class="w-50 text-end">
+                    <div class="text-end flex-none">
                         <%- include('./ejs/nav-header') %>
                     </div>
                 </div>
             </div>
 
-            <div class="d-flex w-100" style="height: calc(100vh - 90px);">
-                <div class="position-relative darker-bg1 w-25 h-100">
+            <div class="d-flex w-100 flex-grow-1 min-h-0">
+                <div class="position-relative darker-bg1 side-panel h-100">
                     <%- include('./ejs/app-menu') %>
+                    <%- include('./ejs/activity-menu') %>
 
                     <ul class="list-group list-group-flush" id="activity-list-group">
                         <!-- handled programatically in rpc-gui.js -->
                     </ul>
                     <div class="darker-bg2 position-absolute bottom-0 w-100" style="height: 56px;">
                         <div class="d-flex text-start px-2 pt-2">
-                            <div class="" style="width: 42px">
+                            <div class="flex-none" style="width: 42px">
                                 <img draggable="false" id="loggedin-avatar" src="https://cdn.discordapp.com/app-icons/929044058737868891/2a62e8dc06b6954c0e93ff48668335ff.png" class="img-fluid rounded-circle">
                             </div>
-                            <div class="d-grid px-2 pt-1">
-                                <small><strong class="" id="loggedin-username">UserName</strong></small>
-                                <small class="" id="loggedin-userdisc">#0690</small>
+                            <div class="d-grid px-2 pt-1 min-w-0">
+                                <small><strong class="" id="loggedin-username">Not connected</strong></small>
+                                <small class="opacity-75" id="loggedin-userdisc">Launch to connect</small>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="position-relative w-75" id="info-pane">
-                    <div class="container-fluid w-100 h-100">
-                        <%- include('./ejs/activity') %>
-                    </div>
+                <div class="position-relative flex-grow-1 min-w-0 h-100" id="info-pane">
+                    <%- include('./ejs/activity') %>
                 </div>
             </div>
         </div>
@@ -72,3 +71,5 @@
 <%- include('./ejs/modal-delete') %>
 <%- include('./ejs/modal-settings') %>
 <%- include('./ejs/modal-themes') %>
+<%- include('./ejs/modal-update') %>
+<%- include('./ejs/modal-welcome') %>
