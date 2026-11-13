@@ -10,9 +10,7 @@
         "build": "yarn build:windows && yarn build:linux",
         "build:windows": "electron-builder --win --publish never",
         "build:linux": "node scripts/build-linux.js",
-        "release": "yarn release:windows && yarn release:linux",
-        "release:windows": "electron-builder --win --publish always",
-        "release:linux": "node scripts/build-linux.js --publish",
+        "release": "yarn build && node scripts/release.js",
         "test": "node --test \"tests/*.test.js\"",
         "lint": "eslint ."
     },
