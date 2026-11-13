@@ -3,7 +3,7 @@
 <div align="center" class="d-flex mb-2">
 <div align="center" class="mx-auto d-block">
     <a href="https://github.com/Dekita/Discord-RPC-Tool/releases/latest" target="new"><img src="https://img.shields.io/github/downloads/Dekita/Discord-RPC-Tool/total?style=for-the-badge&logo=github&logoColor=e4e4e4&color=2e7d4f" class="img-fluid img-thumbnail"></a>
-    <a class="mx-2" href="https://discord.gg/WyTdramBkm" target="new"><img src="https://img.shields.io/discord/956439276357308446?logo=discord&style=for-the-badge&logoColor=e4e4e4&label=Support%20Server&color=382048" class="img-fluid img-thumbnail"></a>
+    <a class="mx-2" href="https://discord.gg/WyTdramBkm" target="new"><img src="https://img.shields.io/discord/1132980259596271657?logo=discord&style=for-the-badge&logoColor=e4e4e4&label=Support%20Server&color=382048" class="img-fluid img-thumbnail"></a>
     <a href="https://github.com/Dekita/Discord-RPC-Tool/stargazers" target="new"><img src="https://img.shields.io/github/stars/Dekita/Discord-RPC-Tool?style=for-the-badge&logo=apache%20spark&logoColor=e4e4e4&color=9a5b13" class="img-fluid img-thumbnail"></a>
 </div>
 </div>
