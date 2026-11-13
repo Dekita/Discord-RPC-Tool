@@ -157,11 +157,6 @@ Version 1.0 also includes the changes from v0.0.96, which was never released.
 - Updated preview display to use image assets
 <hr class="mt-1">
 
-### Coming Soon / TODO
-- More awesome themes
-- ...
-<hr class="mt-1">
-
 
 ### How to install 
 <a href="https://github.com/Dekita/Discord-RPC-Tool/releases/latest" target="new">
@@ -190,6 +185,25 @@ yarn install
 ```
 yarn start
 ```
+
+To build the installers yourself, the files are written to the `build` folder:
+
+Windows installer and Linux AppImage
+```
+yarn build
+```
+Windows installer only (run on Windows)
+```
+yarn build:windows
+```
+Linux AppImage only (needs [Docker](https://www.docker.com/) installed and running)
+```
+yarn build:linux
+```
+
+| :exclamation: The Linux AppImage cannot be built directly on Windows, so `yarn build:linux` builds it inside a Docker container. On Linux you can also build it without Docker using `npx electron-builder --linux --publish never` |
+|---|
+
 <hr class="mt-1">
 
 ### Launching your first activity

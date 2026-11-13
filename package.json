@@ -7,9 +7,12 @@
     "repository": "git@github.com:dekita/discord-rpc-tool",
     "scripts": {
         "start": "electron .",
-        "build": "electron-builder",
-        "pack": "electron-builder --dir",
-        "release": "electron-builder --publish always",
+        "build": "yarn build:windows && yarn build:linux",
+        "build:windows": "electron-builder --win --publish never",
+        "build:linux": "node scripts/build-linux.js",
+        "release": "yarn release:windows && yarn release:linux",
+        "release:windows": "electron-builder --win --publish always",
+        "release:linux": "node scripts/build-linux.js --publish",
         "test": "node --test \"tests/*.test.js\"",
         "lint": "eslint ."
     },

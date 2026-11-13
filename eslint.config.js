@@ -32,7 +32,7 @@ module.exports = [
     js.configs.recommended,
     {
         // main process, preload, config and tests: commonjs on node
-        files: ['src/main.js', 'src/config.js', 'src/preload.js', 'src/dek/**/*.js', 'src/shared/**/*.js', 'tests/**/*.js', 'eslint.config.js'],
+        files: ['src/main.js', 'src/config.js', 'src/preload.js', 'src/dek/**/*.js', 'src/shared/**/*.js', 'tests/**/*.js', 'scripts/**/*.js', 'eslint.config.js'],
         languageOptions: {
             sourceType: 'commonjs',
             ecmaVersion: 2024,
